@@ -18,7 +18,7 @@ export default class Button extends Component<ButtonProps> {
 
   get className() {
     const base =
-      "rounded-md drop-shadow-md text-lg flex justify-center items-center gap-3 font-medium";
+      "rounded-md drop-shadow-md text-md flex justify-center items-center gap-3 font-medium";
     return `${base} ${this.sizeClasses[this.props.size]}`;
   }
 

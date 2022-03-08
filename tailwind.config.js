@@ -5,6 +5,9 @@ module.exports = {
         fontFamily: {
             sans: ["Fredoka", "sans-serif"],
         },
+        fontSize: {
+            md: "1.0625rem",
+        },
     },
     plugins: [],
 };
