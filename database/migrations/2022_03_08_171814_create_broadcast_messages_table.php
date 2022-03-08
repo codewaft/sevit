@@ -8,10 +8,8 @@ return new class extends Migration {
     public function up()
     {
         Schema::create("broadcast_messages", function (Blueprint $table) {
-            $table->foreignId("contact_id")->constrained();
-            $table->string("message_id");
-            $table->enum("status", ["scheduled", "processed", "failed"]);
-            $table->timestampTz("processed_at");
+            $table->foreignId("broadcast_id")->constrained();
+            $table->foreignId("message_id")->constrained();
         });
     }
 

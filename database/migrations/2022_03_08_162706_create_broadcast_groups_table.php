@@ -8,7 +8,7 @@ return new class extends Migration {
     public function up()
     {
         Schema::create("broadcast_groups", function (Blueprint $table) {
-            $table->foreignId("brodcast_id")->constrained();
+            $table->foreignId("broadcast_id")->constrained();
             $table->foreignId("group_id")->constrained();
         });
     }
