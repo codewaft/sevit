@@ -16,8 +16,9 @@ export default class Icon extends Component<IconProps> {
   };
 
   get className() {
-    const cursor = this.props.onClick ? "cursor-pointer" : "";
-    return `${this.sizeClasses} ${this.props.name} ${cursor}`;
+    const { size, name, onClick } = this.props;
+    const cursor = onClick ? "cursor-pointer" : "";
+    return `${this.sizeClasses[size]} ${name} ${cursor}`;
   }
 
   render() {
