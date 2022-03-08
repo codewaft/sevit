@@ -10,7 +10,7 @@ return new class extends Migration {
         Schema::create("messages", function (Blueprint $table) {
             $table->id();
             $table->foreignId("contact_id")->constrained();
-            $table->string("message_id")->nullable();
+            $table->string("reference_id")->nullable();
             $table
                 ->enum("status", ["scheduled", "processed", "failed"])
                 ->default("scheduled");
