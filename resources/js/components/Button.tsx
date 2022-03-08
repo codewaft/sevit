@@ -7,6 +7,7 @@ type SizeClasses = Record<Size, string>;
 interface ButtonProps {
   size: Size;
   text: string;
+  icon: string;
   onClick: () => void;
 }
 
@@ -18,15 +19,15 @@ export default class Button extends Component<ButtonProps> {
 
   get className() {
     const base =
-      "rounded-md drop-shadow-md text-md flex justify-center items-center gap-3 font-medium";
+      "rounded-md drop-shadow-md flex justify-center items-center gap-3 font-medium";
     return `${base} ${this.sizeClasses[this.props.size]}`;
   }
 
   render() {
     return (
       <button className={this.className} onClick={this.props.onClick}>
-        <Icon size="regular" name="ri-admin-fill" />
-        {this.props.text}
+        <Icon size="regular" name={this.props.icon} />
+        <span className="text-md">{this.props.text}</span>
       </button>
     );
   }
