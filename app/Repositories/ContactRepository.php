@@ -13,6 +13,8 @@ class ContactRepository
 
     public function getPagination()
     {
-        return Contact::latest()->paginate();
+        return Contact::with("groups")
+            ->latest()
+            ->paginate();
     }
 }
