@@ -10,6 +10,7 @@ Route::middleware("auth:sanctum")->group(function () {
     Route::prefix("/groups")->group(function () {
         Route::get("/", [GroupController::class, "list"]);
         Route::get("/paginate", [GroupController::class, "paginate"]);
+        Route::get("/{id}", [GroupController::class, "read"]);
         Route::delete("/{id}", [GroupController::class, "delete"]);
     });
 });

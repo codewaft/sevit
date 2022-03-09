@@ -16,10 +16,15 @@ class GroupRepository
         return Group::latest()->paginate();
     }
 
+    public function getOne($id)
+    {
+        return Group::findOrFail($id);
+    }
+
     public function deleteOne($id)
     {
         $group = Group::findOrFail($id);
-        $group->delete();
+        $group = $group->delete();
         return $group;
     }
 }
