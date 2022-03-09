@@ -10,4 +10,14 @@ class Group extends Model
     use HasFactory;
 
     protected $fillable = ["title"];
+
+    public function contacts()
+    {
+        return $this->belongsToMany(Contact::class);
+    }
+
+    public function broadcasts()
+    {
+        return $this->belongsToMany(Broadcast::class);
+    }
 }

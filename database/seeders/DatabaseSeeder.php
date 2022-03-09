@@ -7,13 +7,16 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     *
-     * @return void
-     */
+    use WithoutModelEvents;
+
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        $this->call([
+            GroupSeeder::class,
+            ContactSeeder::class,
+            TemplateSeeder::class,
+            BroadcastSeeder::class,
+            MessageSeeder::class,
+        ]);
     }
 }

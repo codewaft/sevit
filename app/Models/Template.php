@@ -10,4 +10,9 @@ class Template extends Model
     use HasFactory;
 
     protected $fillable = ["title", "content"];
+
+    public function broadcasts()
+    {
+        return $this->hasMany(Broadcast::class);
+    }
 }
