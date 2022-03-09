@@ -20,8 +20,8 @@ class UserController extends Controller
     public function signIn(Request $request)
     {
         $rule = [
-            "username" => "required|exists:users,username",
-            "password" => "required",
+            "username" => "required|string|exists:users,username",
+            "password" => "required|string",
         ];
         $error = Validation::validate($request, $rule);
         if ($error) {
