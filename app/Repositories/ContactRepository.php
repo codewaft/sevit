@@ -10,4 +10,9 @@ class ContactRepository
     {
         return Contact::latest()->get();
     }
+
+    public function getPagination()
+    {
+        return Contact::latest()->paginate();
+    }
 }

@@ -21,4 +21,10 @@ class ContactController extends Controller
         $contacts = $this->contact->getAll();
         return Response::ok($contacts);
     }
+
+    public function paginate()
+    {
+        $pagination = $this->contact->getPagination();
+        return Response::ok($pagination);
+    }
 }
