@@ -30,6 +30,11 @@ class Response
         return self::response(compact("message"), 401);
     }
 
+    public static function unprocessable($message)
+    {
+        return self::response(compact("message"), 422);
+    }
+
     public static function serverError()
     {
         $message = "Something went wrong";
