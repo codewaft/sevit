@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use Throwable;
+
 class Response
 {
     protected static function response($data, $code)
@@ -35,9 +37,13 @@ class Response
         return self::response(compact("message"), 422);
     }
 
-    public static function serverError()
+    public static function serverError(Throwable $exception)
     {
-        $message = "Something went wrong";
-        return self::response(compact("message"), 500);
+        $data = [
+            "message" => "Something went wrong",
+            "exception" => $exception->getMessage(),
+            "trace" => $exception->getTrace(),
+        ];
+        return self::response($data, 500);
     }
 }

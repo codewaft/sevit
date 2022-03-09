@@ -21,8 +21,11 @@ class Handler extends ExceptionHandler
     {
         $this->reportable(function (Throwable $e) {});
 
-        $this->renderable(function (AuthenticationException $e, $request) {
-            return Response::unauthorized();
+        $this->renderable(function (Throwable $e, $request) {
+            if ($e instanceof AuthenticationException) {
+                return Response::unauthorized();
+            }
+            return Response::serverError($e);
         });
     }
 }

@@ -23,7 +23,19 @@ class GroupController extends Controller
 
     public function paginate()
     {
-        $groups = $this->group->getPagination();
+        $pagination = $this->group->getPagination();
+        return Response::ok($pagination);
+    }
+
+    public function read($id)
+    {
+        $groups = $this->group->getOne($id);
         return Response::ok($groups);
+    }
+
+    public function delete($id)
+    {
+        $group = $this->group->deleteOne($id);
+        return Response::ok($group);
     }
 }
