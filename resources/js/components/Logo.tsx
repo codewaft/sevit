@@ -1,13 +1,13 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 
 type Size = "small" | "medium";
 type SizeClasses = Record<Size, string>;
 
-interface LogoProps {
+interface Props {
   size: Size;
 }
 
-export default class Logo extends Component<LogoProps> {
+export default class Logo extends PureComponent<Props> {
   sizeClasses: SizeClasses = {
     small: "h-11",
     medium: "h-12",
