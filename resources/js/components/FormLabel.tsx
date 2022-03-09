@@ -1,10 +1,10 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 
-interface FormLabelProps {
+interface Props {
   text: string;
 }
 
-export default class FormLabel extends Component<FormLabelProps> {
+export default class FormLabel extends PureComponent<Props> {
   render() {
     return (
       <p className="mb-1.5 font-medium text-md text-slate-900">

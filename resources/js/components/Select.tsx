@@ -1,4 +1,4 @@
-import React, { ChangeEvent, Component } from "react";
+import React, { ChangeEvent, PureComponent } from "react";
 import FormLabel from "./FormLabel";
 
 export interface Option {
@@ -6,7 +6,7 @@ export interface Option {
   value: string;
 }
 
-interface SelectProps {
+interface Props {
   name: string;
   value: string;
   label: string;
@@ -15,8 +15,8 @@ interface SelectProps {
   onChange: (name: string, value: string) => void;
 }
 
-export default class Select extends Component<SelectProps> {
-  constructor(props: SelectProps) {
+export default class Select extends PureComponent<Props> {
+  constructor(props: Props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
   }

@@ -1,7 +1,7 @@
-import React, { ChangeEvent, Component } from "react";
+import React, { ChangeEvent, PureComponent } from "react";
 import FormLabel from "./FormLabel";
 
-interface TextareaProps {
+interface Props {
   name: string;
   value: string;
   label: string;
@@ -10,8 +10,8 @@ interface TextareaProps {
   onChange: (name: string, value: string) => void;
 }
 
-export default class Textarea extends Component<TextareaProps> {
-  constructor(props: TextareaProps) {
+export default class Textarea extends PureComponent<Props> {
+  constructor(props: Props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
   }

@@ -1,15 +1,15 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 
 type Size = "small" | "regular";
 type SizeClasses = Record<Size, string>;
 
-interface IconProps {
+interface Props {
   size: Size;
   name: string;
   onClick?: () => void;
 }
 
-export default class Icon extends Component<IconProps> {
+export default class Icon extends PureComponent<Props> {
   sizeClasses: SizeClasses = {
     small: "text-lg",
     regular: "text-2xl",

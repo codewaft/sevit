@@ -1,7 +1,7 @@
-import React, { ChangeEvent, Component } from "react";
+import React, { ChangeEvent, PureComponent } from "react";
 import FormLabel from "./FormLabel";
 
-interface InputProps {
+interface Props {
   name: string;
   value: string;
   type: string;
@@ -10,8 +10,8 @@ interface InputProps {
   onChange: (name: string, value: string) => void;
 }
 
-export default class Input extends Component<InputProps> {
-  constructor(props: InputProps) {
+export default class Input extends PureComponent<Props> {
+  constructor(props: Props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
   }
