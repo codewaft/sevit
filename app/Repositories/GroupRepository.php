@@ -16,6 +16,13 @@ class GroupRepository
         return Group::findOrFail($id);
     }
 
+    public function editOne($id, $data)
+    {
+        $group = Group::findOrFail($id);
+        $group->update($data);
+        return $group;
+    }
+
     public function deleteOne($id)
     {
         $group = Group::findOrFail($id);

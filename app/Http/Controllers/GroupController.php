@@ -25,14 +25,28 @@ class GroupController extends Controller
         if ($error) {
             return Response::unprocessable($error);
         }
-        $groupData = ["title" => $request->title];
-        $group = $this->group->createOne($groupData);
+        $data = ["title" => $request->title];
+        $group = $this->group->createOne($data);
         return Response::ok($group);
     }
 
     public function read($id)
     {
         $group = $this->group->getOne($id);
+        return Response::ok($group);
+    }
+
+    public function edit(Request $request, $id)
+    {
+        $rule = [
+            "title" => "required|string|max:255",
+        ];
+        $error = Validation::validate($request, $rule);
+        if ($error) {
+            return Response::unprocessable($error);
+        }
+        $data = ["title" => $request->title];
+        $group = $this->group->editOne($id, $data);
         return Response::ok($group);
     }
 
