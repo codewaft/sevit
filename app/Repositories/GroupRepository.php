@@ -6,14 +6,9 @@ use App\Models\Group;
 
 class GroupRepository
 {
-    public function getAll()
+    public function createOne($data)
     {
-        return Group::latest()->get();
-    }
-
-    public function getPagination()
-    {
-        return Group::latest()->paginate();
+        return Group::create($data);
     }
 
     public function getOne($id)
@@ -26,5 +21,15 @@ class GroupRepository
         $group = Group::findOrFail($id);
         $group = $group->delete();
         return $group;
+    }
+
+    public function getAll()
+    {
+        return Group::latest()->get();
+    }
+
+    public function getPagination()
+    {
+        return Group::latest()->paginate();
     }
 }
