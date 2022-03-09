@@ -22,6 +22,12 @@ class ContactController extends Controller
         return Response::ok($contact);
     }
 
+    public function delete($id)
+    {
+        $contact = $this->contact->deleteOne($id);
+        return Response::ok($contact);
+    }
+
     public function list()
     {
         $contacts = $this->contact->getAll();
