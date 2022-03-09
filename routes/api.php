@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\ContactController;
 
 Route::get("/sign-in", [UserController::class, "signIn"]);
 
@@ -14,5 +15,11 @@ Route::middleware("auth:sanctum")->group(function () {
         Route::delete("/{id}", [GroupController::class, "delete"]);
         Route::get("/", [GroupController::class, "list"]);
         Route::get("/paginate", [GroupController::class, "paginate"]);
+    });
+    Route::prefix("/contacts")->group(function () {
+        Route::get("/{id}", [ContactController::class, "read"]);
+        Route::delete("/{id}", [ContactController::class, "delete"]);
+        Route::get("/", [ContactController::class, "list"]);
+        Route::get("/paginate", [ContactController::class, "paginate"]);
     });
 });

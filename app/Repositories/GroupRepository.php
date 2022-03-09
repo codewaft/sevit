@@ -26,7 +26,7 @@ class GroupRepository
     public function deleteOne($id)
     {
         $group = Group::findOrFail($id);
-        $group = $group->delete();
+        $group->delete();
         return $group;
     }
 
