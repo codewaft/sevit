@@ -26,4 +26,10 @@ class GroupController extends Controller
         $groups = $this->group->getPagination();
         return Response::ok($groups);
     }
+
+    public function delete($id)
+    {
+        $groups = $this->group->deleteOne($id);
+        return Response::ok($groups);
+    }
 }

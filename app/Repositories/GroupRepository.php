@@ -15,4 +15,11 @@ class GroupRepository
     {
         return Group::latest()->paginate();
     }
+
+    public function deleteOne($id)
+    {
+        $group = Group::findOrFail($id);
+        $group->delete();
+        return $group;
+    }
 }
