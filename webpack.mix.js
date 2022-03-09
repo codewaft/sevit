@@ -13,7 +13,8 @@ const mix = require("laravel-mix");
 
 mix.ts("resources/js/app.ts", "public/js")
     .react()
-    .postCss("resources/css/app.css", "public/css", [require("tailwindcss")]);
+    .postCss("resources/css/app.css", "public/css", [require("tailwindcss")])
+    .copy("resources/images", "public/images");
 
 if (mix.inProduction()) {
     mix.version();
