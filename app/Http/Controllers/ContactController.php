@@ -16,6 +16,12 @@ class ContactController extends Controller
         $this->contact = $contact;
     }
 
+    public function read($id)
+    {
+        $contact = $this->contact->getOne($id);
+        return Response::ok($contact);
+    }
+
     public function list()
     {
         $contacts = $this->contact->getAll();
