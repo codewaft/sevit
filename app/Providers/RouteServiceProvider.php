@@ -10,43 +10,25 @@ use Illuminate\Support\Facades\Route;
 
 class RouteServiceProvider extends ServiceProvider
 {
-    /**
-     * The path to the "home" route for your application.
-     *
-     * This is used by Laravel authentication to redirect users after login.
-     *
-     * @var string
-     */
-    public const HOME = '/home';
+    public const HOME = "/home";
 
-    /**
-     * Define your route model bindings, pattern filters, etc.
-     *
-     * @return void
-     */
-    public function boot()
+    protected function configureRateLimiting()
     {
-        $this->configureRateLimiting();
-
-        $this->routes(function () {
-            Route::prefix('api')
-                ->middleware('api')
-                ->group(base_path('routes/api.php'));
-
-            Route::middleware('web')
-                ->group(base_path('routes/web.php'));
+        RateLimiter::for("api", function (Request $request) {
+            $key = $request->user() ? $request->user()->id : $request->ip();
+            return Limit::perMinute(60)->by($key);
         });
     }
 
-    /**
-     * Configure the rate limiters for the application.
-     *
-     * @return void
-     */
-    protected function configureRateLimiting()
+    public function boot()
     {
-        RateLimiter::for('api', function (Request $request) {
-            return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
+        $this->configureRateLimiting();
+        $this->routes(function () {
+            Route::prefix("api")
+                ->middleware("api")
+                ->group(base_path("routes/api.php"));
+            Route::middleware("web")->group(base_path("routes/web.php"));
         });
+        Route::pattern("id", "[0-9]+");
     }
 }
