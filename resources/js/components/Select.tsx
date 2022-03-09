@@ -44,7 +44,7 @@ export default class Select extends PureComponent<Props> {
       <div className="block w-full">
         <FormLabel text={this.props.label} />
         <select
-          className="h-12 w-full px-5 text-md rounded-md drop-shadow-md outline-none disabled:text-slate-400 invalid:text-slate-400 text-slate-900 mb-4 border-r-[20px] border-r-transparent"
+          className="h-12 w-full px-5 text-md rounded-md drop-shadow-md outline-none disabled:text-slate-400 invalid:text-slate-400 text-slate-900 mb-4 border-r-[20px] border-r-transparent bg-white"
           name={this.props.name}
           value={this.props.value}
           onChange={this.handleChange}
