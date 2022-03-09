@@ -15,9 +15,15 @@ class GroupController extends Controller
         $this->group = $group;
     }
 
+    public function list()
+    {
+        $groups = $this->group->getAll();
+        return Response::ok($groups);
+    }
+
     public function paginate()
     {
-        $groups = $this->group->getPaginate();
+        $groups = $this->group->getPagination();
         return Response::ok($groups);
     }
 }

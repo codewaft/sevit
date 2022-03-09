@@ -7,5 +7,8 @@ use App\Http\Controllers\GroupController;
 Route::get("/sign-in", [UserController::class, "signIn"]);
 
 Route::middleware("auth:sanctum")->group(function () {
-    Route::get("/groups/paginate", [GroupController::class, "paginate"]);
+    Route::prefix("/groups")->group(function () {
+        Route::get("/", [GroupController::class, "list"]);
+        Route::get("/paginate", [GroupController::class, "paginate"]);
+    });
 });
