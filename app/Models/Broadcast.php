@@ -9,6 +9,8 @@ class Broadcast extends Model
 {
     use HasFactory;
 
+    public static $status = ["scheduled", "processing", "completed"];
+
     protected $fillable = ["title", "status", "scheduled_at"];
 
     public function template()
@@ -23,6 +25,6 @@ class Broadcast extends Model
 
     public function messages()
     {
-        return $this->belongsToMany(Message::class);
+        return $this->hasMany(Message::class);
     }
 }
