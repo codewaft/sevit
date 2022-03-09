@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 
-type Size = "small" | "medium" | "regular";
+type Size = "small" | "medium" | "regular" | "large";
 type SizeClasses = Record<Size, string>;
 
 interface Props {
@@ -14,6 +14,7 @@ export default class Icon extends PureComponent<Props> {
     small: "text-sm",
     medium: "text-lg",
     regular: "text-2xl",
+    large: "text-3xl",
   };
 
   get className() {
