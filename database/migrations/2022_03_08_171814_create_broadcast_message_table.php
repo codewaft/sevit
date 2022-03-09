@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up()
     {
-        Schema::create("broadcast_messages", function (Blueprint $table) {
+        Schema::create("broadcast_message", function (Blueprint $table) {
             $table->foreignId("broadcast_id")->constrained();
             $table->foreignId("message_id")->constrained();
         });
@@ -15,6 +15,6 @@ return new class extends Migration {
 
     public function down()
     {
-        Schema::dropIfExists("broadcast_messages");
+        Schema::dropIfExists("broadcast_message");
     }
 };
