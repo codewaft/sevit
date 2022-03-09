@@ -33,7 +33,7 @@ export default class Label extends PureComponent<Props> {
 
   render() {
     return (
-      <div className={this.className}>
+      <div className={this.className} onClick={this.props.onClose}>
         {this.props.text}
         {this.close}
       </div>
