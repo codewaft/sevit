@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\Response;
-use App\Repositories\GroupRepository;
 use App\Services\Validation;
+use App\Repositories\GroupRepository;
 
 class GroupController extends Controller
 {
