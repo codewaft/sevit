@@ -15,6 +15,12 @@ class BroadcastController extends Controller
         $this->broadcast = $broadcast;
     }
 
+    public function read($id)
+    {
+        $broadcast = $this->broadcast->getOne($id);
+        return Response::ok($broadcast);
+    }
+
     public function paginate()
     {
         $pagination = $this->broadcast->getPagination();

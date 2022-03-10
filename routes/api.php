@@ -34,6 +34,7 @@ Route::middleware("auth:sanctum")->group(function () {
         Route::get("/paginate", [TemplateController::class, "paginate"]);
     });
     Route::prefix("/broadcasts")->group(function () {
+        Route::get("/{id}", [BroadcastController::class, "read"]);
         Route::get("/paginate", [BroadcastController::class, "paginate"]);
     });
 });
