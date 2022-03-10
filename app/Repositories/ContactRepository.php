@@ -42,11 +42,6 @@ class ContactRepository
         return $contact;
     }
 
-    public function getAll()
-    {
-        return Contact::latest()->get();
-    }
-
     public function getPagination()
     {
         return Contact::with("groups")

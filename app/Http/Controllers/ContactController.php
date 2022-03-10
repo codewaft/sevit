@@ -67,12 +67,6 @@ class ContactController extends Controller
         return Response::ok($contact);
     }
 
-    public function list()
-    {
-        $contacts = $this->contact->getAll();
-        return Response::ok($contacts);
-    }
-
     public function paginate()
     {
         $pagination = $this->contact->getPagination();
