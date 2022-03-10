@@ -40,6 +40,24 @@ class TemplateController extends Controller
         return Response::ok($template);
     }
 
+    public function edit(Request $request, $id)
+    {
+        $rule = [
+            "title" => "required|string|max:255",
+            "content" => "required|string|max:1600",
+        ];
+        $error = Validation::validate($request, $rule);
+        if ($error) {
+            return Response::unprocessable($error);
+        }
+        $data = [
+            "title" => $request->title,
+            "content" => $request->content,
+        ];
+        $template = $this->template->editOne($id, $data);
+        return Response::ok($template);
+    }
+
     public function delete($id)
     {
         $template = $this->template->deleteOne($id);

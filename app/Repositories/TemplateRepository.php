@@ -16,11 +16,18 @@ class TemplateRepository
         return Template::findOrFail($id);
     }
 
+    public function editOne($id, $data)
+    {
+        $template = Template::findOrFail($id);
+        $template->update($data);
+        return $template;
+    }
+
     public function deleteOne($id)
     {
-        $group = Template::findOrFail($id);
-        $group->delete();
-        return $group;
+        $template = Template::findOrFail($id);
+        $template->delete();
+        return $template;
     }
 
     public function getAll()

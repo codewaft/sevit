@@ -28,6 +28,7 @@ Route::middleware("auth:sanctum")->group(function () {
     Route::prefix("/templates")->group(function () {
         Route::post("/", [TemplateController::class, "create"]);
         Route::get("/{id}", [TemplateController::class, "read"]);
+        Route::patch("/{id}", [TemplateController::class, "edit"]);
         Route::delete("/{id}", [TemplateController::class, "delete"]);
         Route::get("/", [TemplateController::class, "list"]);
         Route::get("/paginate", [TemplateController::class, "paginate"]);
