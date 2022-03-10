@@ -17,7 +17,7 @@ class Contact extends Model
     protected function phone()
     {
         $removeWhitespaces = fn($phone) => Str::removeWhitespaces($phone);
-        return Attribute::make(get: $removeWhitespaces);
+        return Attribute::make(set: $removeWhitespaces);
     }
 
     public function groups()
