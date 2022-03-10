@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\TemplateController;
+use App\Http\Controllers\BroadcastController;
 
 Route::get("/sign-in", [UserController::class, "signIn"]);
 
@@ -32,5 +33,8 @@ Route::middleware("auth:sanctum")->group(function () {
         Route::delete("/{id}", [TemplateController::class, "delete"]);
         Route::get("/", [TemplateController::class, "list"]);
         Route::get("/paginate", [TemplateController::class, "paginate"]);
+    });
+    Route::prefix("/broadcasts")->group(function () {
+        Route::get("/paginate", [BroadcastController::class, "paginate"]);
     });
 });
