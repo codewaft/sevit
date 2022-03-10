@@ -37,9 +37,7 @@ class ContactController extends Controller
             return Response::badRequest($error);
         }
         $data = ["phone" => $request->phone];
-        $groupDataBuilder = fn($title) => ["title" => $title];
-        $groupData = collect($request->groups)->map($groupDataBuilder);
-        $contact = $this->contact->createOne($data, $groupData);
+        $contact = $this->contact->createOne($data, $request->groups);
         return Response::ok($contact);
     }
 
