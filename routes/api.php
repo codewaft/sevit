@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\TemplateController;
 
 Route::get("/sign-in", [UserController::class, "signIn"]);
 
@@ -23,5 +24,8 @@ Route::middleware("auth:sanctum")->group(function () {
         Route::delete("/{id}", [ContactController::class, "delete"]);
         Route::get("/", [ContactController::class, "list"]);
         Route::get("/paginate", [ContactController::class, "paginate"]);
+    });
+    Route::prefix("/templates")->group(function () {
+        Route::get("/", [TemplateController::class, "list"]);
     });
 });
