@@ -27,6 +27,7 @@ Route::middleware("auth:sanctum")->group(function () {
     });
     Route::prefix("/templates")->group(function () {
         Route::get("/{id}", [TemplateController::class, "read"]);
+        Route::delete("/{id}", [TemplateController::class, "delete"]);
         Route::get("/", [TemplateController::class, "list"]);
         Route::get("/paginate", [TemplateController::class, "paginate"]);
     });

@@ -21,6 +21,12 @@ class TemplateController extends Controller
         return Response::ok($template);
     }
 
+    public function delete($id)
+    {
+        $template = $this->template->deleteOne($id);
+        return Response::ok($template);
+    }
+
     public function list()
     {
         $templates = $this->template->getAll();

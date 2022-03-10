@@ -11,6 +11,13 @@ class TemplateRepository
         return Template::findOrFail($id);
     }
 
+    public function deleteOne($id)
+    {
+        $group = Template::findOrFail($id);
+        $group->delete();
+        return $group;
+    }
+
     public function getAll()
     {
         return Template::latest()->get();
