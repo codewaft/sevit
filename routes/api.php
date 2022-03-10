@@ -35,6 +35,7 @@ Route::middleware("auth:sanctum")->group(function () {
     });
     Route::prefix("/broadcasts")->group(function () {
         Route::get("/{id}", [BroadcastController::class, "read"]);
+        Route::delete("/{id}", [BroadcastController::class, "delete"]);
         Route::get("/paginate", [BroadcastController::class, "paginate"]);
     });
 });

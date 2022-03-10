@@ -21,6 +21,12 @@ class BroadcastController extends Controller
         return Response::ok($broadcast);
     }
 
+    public function delete($id)
+    {
+        $broadcast = $this->broadcast->deleteOne($id);
+        return Response::ok($broadcast);
+    }
+
     public function paginate()
     {
         $pagination = $this->broadcast->getPagination();
