@@ -26,6 +26,7 @@ Route::middleware("auth:sanctum")->group(function () {
         Route::get("/paginate", [ContactController::class, "paginate"]);
     });
     Route::prefix("/templates")->group(function () {
+        Route::get("/{id}", [TemplateController::class, "read"]);
         Route::get("/", [TemplateController::class, "list"]);
         Route::get("/paginate", [TemplateController::class, "paginate"]);
     });

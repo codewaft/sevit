@@ -15,6 +15,12 @@ class TemplateController extends Controller
         $this->template = $template;
     }
 
+    public function read($id)
+    {
+        $template = $this->template->getOne($id);
+        return Response::ok($template);
+    }
+
     public function list()
     {
         $templates = $this->template->getAll();
