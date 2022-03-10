@@ -8,11 +8,13 @@ class BroadcastRepository
 {
     public function getOne($id)
     {
-        return Broadcast::findOrFail($id);
+        return Broadcast::with(["template", "groups"])->findOrFail($id);
     }
 
     public function getPagination()
     {
-        return Broadcast::latest()->paginate();
+        return Broadcast::with(["template", "groups"])
+            ->latest()
+            ->paginate();
     }
 }
