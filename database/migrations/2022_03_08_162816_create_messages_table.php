@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->foreignId("contact_id")->constrained();
             $table->string("reference_id")->nullable();
             $table->enum("status", Message::$status)->default("scheduled");
-            $table->timestampTz("processed_at")->nullable();
+            $table->timestamp("processed_at")->nullable();
         });
     }
 

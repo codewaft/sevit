@@ -11,8 +11,8 @@ return new class extends Migration {
             $table->id();
             $table->string("title");
             $table->string("content", 1600);
-            $table->softDeletesTz();
-            $table->timestampsTz();
+            $table->softDeletes();
+            $table->timestamps();
         });
     }
 

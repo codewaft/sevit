@@ -13,9 +13,9 @@ return new class extends Migration {
             $table->foreignId("template_id")->constrained();
             $table->string("title");
             $table->enum("status", Broadcast::$status)->default("scheduled");
-            $table->timestampTz("scheduled_at");
-            $table->softDeletesTz();
-            $table->timestampsTz();
+            $table->timestamp("scheduled_at");
+            $table->softDeletes();
+            $table->timestamps();
         });
     }
 
