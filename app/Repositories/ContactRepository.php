@@ -3,13 +3,18 @@
 namespace App\Repositories;
 
 use App\Models\Contact;
+use App\Models\Group;
 
 class ContactRepository
 {
-    public function createOne($data, $groupData)
+    public function createOne($data, $groupTitles)
     {
         $contact = Contact::create($data);
-        $contact->groups()->createMany($groupData);
+        collect($groupTitles)->each(function ($title) use ($contact) {
+            $groupData = ["title" => $title];
+            $group = Group::firstOrCreate($groupData);
+            $group->contacts()->attach($contact);
+        });
         return Contact::with("groups")->findOrFail($contact->id);
     }
 
