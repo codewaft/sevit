@@ -6,6 +6,11 @@ use App\Models\Template;
 
 class TemplateRepository
 {
+    public function createOne($data)
+    {
+        return Template::create($data);
+    }
+
     public function getOne($id)
     {
         return Template::findOrFail($id);

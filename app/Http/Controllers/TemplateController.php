@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\Response;
+use App\Services\Validation;
 use App\Repositories\TemplateRepository;
 
 class TemplateController extends Controller
@@ -13,6 +14,24 @@ class TemplateController extends Controller
     public function __construct(TemplateRepository $template)
     {
         $this->template = $template;
+    }
+
+    public function create(Request $request)
+    {
+        $rule = [
+            "title" => "required|string|max:255",
+            "content" => "required|string|max:1600",
+        ];
+        $error = Validation::validate($request, $rule);
+        if ($error) {
+            return Response::unprocessable($error);
+        }
+        $data = [
+            "title" => $request->title,
+            "content" => $request->content,
+        ];
+        $template = $this->template->createOne($data);
+        return Response::ok($template);
     }
 
     public function read($id)
