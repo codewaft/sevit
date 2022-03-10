@@ -6,6 +6,13 @@ use App\Models\Contact;
 
 class ContactRepository
 {
+    public function createOne($data, $groupData)
+    {
+        $contact = Contact::create($data);
+        $contact->groups()->createMany($groupData);
+        return Contact::with("groups")->findOrFail($contact->id);
+    }
+
     public function getOne($id)
     {
         return Contact::with("groups")->findOrFail($id);

@@ -17,6 +17,7 @@ Route::middleware("auth:sanctum")->group(function () {
         Route::get("/paginate", [GroupController::class, "paginate"]);
     });
     Route::prefix("/contacts")->group(function () {
+        Route::post("/", [ContactController::class, "create"]);
         Route::get("/{id}", [ContactController::class, "read"]);
         Route::delete("/{id}", [ContactController::class, "delete"]);
         Route::get("/", [ContactController::class, "list"]);
