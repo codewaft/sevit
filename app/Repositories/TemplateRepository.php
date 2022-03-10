@@ -10,4 +10,9 @@ class TemplateRepository
     {
         return Template::latest()->get();
     }
+
+    public function getPagination()
+    {
+        return Template::latest()->paginate();
+    }
 }

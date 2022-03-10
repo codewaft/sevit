@@ -27,5 +27,6 @@ Route::middleware("auth:sanctum")->group(function () {
     });
     Route::prefix("/templates")->group(function () {
         Route::get("/", [TemplateController::class, "list"]);
+        Route::get("/paginate", [TemplateController::class, "paginate"]);
     });
 });

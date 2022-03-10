@@ -20,4 +20,10 @@ class TemplateController extends Controller
         $templates = $this->template->getAll();
         return Response::ok($templates);
     }
+
+    public function paginate()
+    {
+        $pagination = $this->template->getPagination();
+        return Response::ok($pagination);
+    }
 }
