@@ -47,6 +47,20 @@ class ContactController extends Controller
         return Response::ok($contact);
     }
 
+    public function edit(Request $request, $id)
+    {
+        $rule = [
+            "groups" => "required|array",
+            "groups.*" => "required|string|max:255",
+        ];
+        $error = Validation::validate($request, $rule);
+        if ($error) {
+            return Response::unprocessable($error);
+        }
+        $contact = $this->contact->editOne($id, $request->groups);
+        return Response::ok($contact);
+    }
+
     public function delete($id)
     {
         $contact = $this->contact->deleteOne($id);
