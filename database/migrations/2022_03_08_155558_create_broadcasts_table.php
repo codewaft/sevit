@@ -10,8 +10,8 @@ return new class extends Migration {
     {
         Schema::create("broadcasts", function (Blueprint $table) {
             $table->id();
-            $table->string("title");
             $table->foreignId("template_id")->constrained();
+            $table->string("title");
             $table->enum("status", Broadcast::$status)->default("scheduled");
             $table->timestampTz("scheduled_at");
             $table->softDeletesTz();
