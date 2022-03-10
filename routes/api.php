@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\TemplateController;
+use App\Http\Controllers\BroadcastController;
 
 Route::get("/sign-in", [UserController::class, "signIn"]);
 
@@ -19,8 +21,19 @@ Route::middleware("auth:sanctum")->group(function () {
     Route::prefix("/contacts")->group(function () {
         Route::post("/", [ContactController::class, "create"]);
         Route::get("/{id}", [ContactController::class, "read"]);
+        Route::patch("/{id}", [ContactController::class, "edit"]);
         Route::delete("/{id}", [ContactController::class, "delete"]);
-        Route::get("/", [ContactController::class, "list"]);
         Route::get("/paginate", [ContactController::class, "paginate"]);
+    });
+    Route::prefix("/templates")->group(function () {
+        Route::post("/", [TemplateController::class, "create"]);
+        Route::get("/{id}", [TemplateController::class, "read"]);
+        Route::patch("/{id}", [TemplateController::class, "edit"]);
+        Route::delete("/{id}", [TemplateController::class, "delete"]);
+        Route::get("/", [TemplateController::class, "list"]);
+        Route::get("/paginate", [TemplateController::class, "paginate"]);
+    });
+    Route::prefix("/broadcasts")->group(function () {
+        Route::get("/paginate", [BroadcastController::class, "paginate"]);
     });
 });

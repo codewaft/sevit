@@ -23,16 +23,23 @@ class ContactRepository
         return Contact::with("groups")->findOrFail($id);
     }
 
+    public function editOne($id, $groupTitles)
+    {
+        $contact = Contact::findOrFail($id);
+        $contact->groups()->detach();
+        collect($groupTitles)->each(function ($title) use ($contact) {
+            $groupData = ["title" => $title];
+            $group = Group::firstOrCreate($groupData);
+            $group->contacts()->attach($contact);
+        });
+        return Contact::with("groups")->findOrFail($contact->id);
+    }
+
     public function deleteOne($id)
     {
         $contact = Contact::findOrFail($id);
         $contact->delete();
         return $contact;
-    }
-
-    public function getAll()
-    {
-        return Contact::latest()->get();
     }
 
     public function getPagination()
