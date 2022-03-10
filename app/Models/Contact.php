@@ -13,6 +13,7 @@ class Contact extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = ["phone"];
+    protected $with = ["groups"];
 
     protected function phone()
     {

@@ -15,12 +15,12 @@ class ContactRepository
             $group = Group::firstOrCreate($groupData);
             $group->contacts()->attach($contact);
         });
-        return Contact::with("groups")->findOrFail($contact->id);
+        return Contact::findOrFail($contact->id);
     }
 
     public function getOne($id)
     {
-        return Contact::with("groups")->findOrFail($id);
+        return Contact::findOrFail($id);
     }
 
     public function editOne($id, $groupTitles)
@@ -32,7 +32,7 @@ class ContactRepository
             $group = Group::firstOrCreate($groupData);
             $group->contacts()->attach($contact);
         });
-        return Contact::with("groups")->findOrFail($contact->id);
+        return Contact::findOrFail($contact->id);
     }
 
     public function deleteOne($id)
@@ -44,8 +44,6 @@ class ContactRepository
 
     public function getPagination()
     {
-        return Contact::with("groups")
-            ->latest()
-            ->paginate();
+        return Contact::latest()->paginate();
     }
 }
