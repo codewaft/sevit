@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { find, includes, isEmpty, reject } from "lodash";
+import { find, findIndex, isEmpty, reject } from "lodash";
 import Select, { Option as SelectOption } from "./Select";
 import Label from "./Label";
 
@@ -50,7 +50,7 @@ export default class MultiSelect extends Component<Props, State> {
     const { selectedOptions } = this.state;
     return (
       !isEmpty(selectedOptions) && (
-        <div className="flex gap-2.5 mb-3">
+        <div className="flex flex-wrap gap-2.5 mb-3">
           {selectedOptions.map((option) => this.selectedOption(option))}
         </div>
       )
@@ -58,7 +58,10 @@ export default class MultiSelect extends Component<Props, State> {
   }
 
   pushOption(option: SelectOption) {
-    const isExisting = includes(this.state.selectedOptions, option);
+    const isExisting =
+      findIndex(this.state.selectedOptions, {
+        value: option.value,
+      }) !== -1;
     if (!isExisting) {
       this.setState((state: State) => {
         const selectedOptions = state.selectedOptions;

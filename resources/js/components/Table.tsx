@@ -34,12 +34,14 @@ export default class Table extends PureComponent {
         <Card color="white" className="overflow-x-auto">
           <table className={this.classes.table}>
             <thead className={this.classes.thead}>
-              <th className={this.classes.th}>Title</th>
-              <th className={this.classes.th}>Template</th>
-              <th className={this.classes.th}>Target</th>
-              <th className={this.classes.th}>Schedule</th>
-              <th className={this.classes.th}>Status</th>
-              <th className={this.classes.th}>Actions</th>
+              <tr>
+                <th className={this.classes.th}>Title</th>
+                <th className={this.classes.th}>Template</th>
+                <th className={this.classes.th}>Target</th>
+                <th className={this.classes.th}>Schedule</th>
+                <th className={this.classes.th}>Status</th>
+                <th className={this.classes.th}>Actions</th>
+              </tr>
             </thead>
             <tbody className={this.classes.tbody}>
               <tr className={this.classes.tr}>
