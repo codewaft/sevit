@@ -6,11 +6,9 @@ use App\Models\Broadcast;
 
 class BroadcastRepository
 {
-    public function createOne($data, $groupIds)
+    protected function getContactIdsFromBroadcast($broadcast)
     {
-        $broadcast = Broadcast::create($data);
-        $broadcast->groups()->sync($groupIds);
-        $contactIds = $broadcast
+        return $broadcast
             ->groups()
             ->with("contacts")
             ->get()
@@ -18,7 +16,14 @@ class BroadcastRepository
             ->flatten()
             ->pluck("id")
             ->unique();
-        $messageBuilder = fn($contactId) => ["contact_id" => $contactId];
+    }
+
+    public function createOne($data, $groupIds)
+    {
+        $broadcast = Broadcast::create($data);
+        $broadcast->groups()->sync($groupIds);
+        $contactIds = $this->getContactIdsFromBroadcast($broadcast);
+        $messageBuilder = fn($contact_id) => compact("contact_id");
         $messages = $contactIds->map($messageBuilder);
         $broadcast->messages()->createMany($messages);
         return $broadcast->fresh();
@@ -27,6 +32,18 @@ class BroadcastRepository
     public function getOne($id)
     {
         return Broadcast::findOrFail($id);
+    }
+
+    public function editOne($id, $data, $groupIds)
+    {
+        $broadcast = Broadcast::findOrFail($id);
+        $broadcast->groups()->sync($groupIds);
+        $contactIds = $this->getContactIdsFromBroadcast($broadcast);
+        $messageBuilder = fn($contact_id) => compact("contact_id");
+        $messages = $contactIds->map($messageBuilder);
+        $broadcast->messages()->delete();
+        $broadcast->messages()->createMany($messages);
+        return $broadcast->fresh();
     }
 
     public function deleteOne($id)
