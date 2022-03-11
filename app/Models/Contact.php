@@ -13,11 +13,12 @@ class Contact extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = ["phone"];
+    protected $with = ["groups"];
 
     protected function phone()
     {
         $removeWhitespaces = fn($phone) => Str::removeWhitespaces($phone);
-        return Attribute::make(get: $removeWhitespaces);
+        return Attribute::make(set: $removeWhitespaces);
     }
 
     public function groups()
