@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,8 +12,19 @@ class Message extends Model
 
     public static $status = ["scheduled", "processed", "failed"];
 
-    protected $fillable = ["reference_id", "status", "processed_at"];
+    protected $fillable = [
+        "contact_id",
+        "reference_id",
+        "status",
+        "processed_at",
+    ];
+    protected $with = ["contact"];
     public $timestamps = false;
+
+    protected function processed_at()
+    {
+        return Attribute::make(set: fn($value) => strtotime($value));
+    }
 
     public function contact()
     {

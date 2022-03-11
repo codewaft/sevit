@@ -46,4 +46,13 @@ class ContactRepository
     {
         return Contact::latest()->paginate();
     }
+
+    public function getAllPhonesForExport()
+    {
+        $phoneBuilder = fn($phone) => compact("phone");
+        return Contact::latest()
+            ->get("phone")
+            ->pluck("phone")
+            ->map($phoneBuilder);
+    }
 }

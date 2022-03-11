@@ -24,6 +24,7 @@ Route::middleware("auth:sanctum")->group(function () {
         Route::patch("/{id}", [ContactController::class, "edit"]);
         Route::delete("/{id}", [ContactController::class, "delete"]);
         Route::get("/paginate", [ContactController::class, "paginate"]);
+        Route::get("/export", [ContactController::class, "export"]);
     });
     Route::prefix("/templates")->group(function () {
         Route::post("/", [TemplateController::class, "create"]);
@@ -36,7 +37,12 @@ Route::middleware("auth:sanctum")->group(function () {
     Route::prefix("/broadcasts")->group(function () {
         Route::post("/", [BroadcastController::class, "create"]);
         Route::get("/{id}", [BroadcastController::class, "read"]);
+        Route::patch("/{id}", [BroadcastController::class, "edit"]);
         Route::delete("/{id}", [BroadcastController::class, "delete"]);
         Route::get("/paginate", [BroadcastController::class, "paginate"]);
+        Route::get("/{id}/messages/paginate", [
+            BroadcastController::class,
+            "paginateMessages",
+        ]);
     });
 });
