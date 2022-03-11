@@ -57,4 +57,10 @@ class BroadcastRepository
     {
         return Broadcast::latest()->paginate();
     }
+
+    public function getMessagePagination($id)
+    {
+        $broadcast = Broadcast::findOrFail($id);
+        return $broadcast->messages()->paginate();
+    }
 }

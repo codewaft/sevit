@@ -77,4 +77,10 @@ class BroadcastController extends Controller
         $pagination = $this->broadcast->getPagination();
         return Response::ok($pagination);
     }
+
+    public function paginateMessages($id)
+    {
+        $pagination = $this->broadcast->getMessagePagination($id);
+        return Response::ok($pagination);
+    }
 }

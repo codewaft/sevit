@@ -39,5 +39,9 @@ Route::middleware("auth:sanctum")->group(function () {
         Route::patch("/{id}", [BroadcastController::class, "edit"]);
         Route::delete("/{id}", [BroadcastController::class, "delete"]);
         Route::get("/paginate", [BroadcastController::class, "paginate"]);
+        Route::get("/{id}/messages/paginate", [
+            BroadcastController::class,
+            "paginateMessages",
+        ]);
     });
 });

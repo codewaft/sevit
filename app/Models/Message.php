@@ -18,6 +18,7 @@ class Message extends Model
         "status",
         "processed_at",
     ];
+    protected $with = ["contact"];
     public $timestamps = false;
 
     protected function processed_at()
