@@ -24,6 +24,7 @@ Route::middleware("auth:sanctum")->group(function () {
         Route::patch("/{id}", [ContactController::class, "edit"]);
         Route::delete("/{id}", [ContactController::class, "delete"]);
         Route::get("/paginate", [ContactController::class, "paginate"]);
+        Route::get("/export", [ContactController::class, "export"]);
     });
     Route::prefix("/templates")->group(function () {
         Route::post("/", [TemplateController::class, "create"]);

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Services\Response;
 use App\Services\Validation;
 use App\Services\Twillio;
+use App\Services\Csv;
 use App\Utils\Str;
 use App\Repositories\ContactRepository;
 
@@ -71,5 +72,12 @@ class ContactController extends Controller
     {
         $pagination = $this->contact->getPagination();
         return Response::ok($pagination);
+    }
+
+    public function export()
+    {
+        $phones = $this->contact->getAllPhonesForExport();
+        $csv = Csv::build($phones);
+        return Response::ok($csv);
     }
 }
