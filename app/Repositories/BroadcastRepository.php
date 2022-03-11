@@ -10,7 +10,18 @@ class BroadcastRepository
     {
         $broadcast = Broadcast::create($data);
         $broadcast->groups()->sync($groupIds);
-        return Broadcast::findOrFail($broadcast->id);
+        $contactIds = $broadcast
+            ->groups()
+            ->with("contacts")
+            ->get()
+            ->pluck("contacts")
+            ->flatten()
+            ->pluck("id")
+            ->unique();
+        $messageBuilder = fn($contactId) => ["contact_id" => $contactId];
+        $messages = $contactIds->map($messageBuilder);
+        $broadcast->messages()->createMany($messages);
+        return $broadcast->fresh();
     }
 
     public function getOne($id)
