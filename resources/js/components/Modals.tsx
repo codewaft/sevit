@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import Modal from "./Modal";
 import BroadcastCreate from "./BroadcastCreate";
 import Broadcast from "./Broadcast";
+import BroadcastEdit from "./BroadcastEdit";
 
 type ModalName =
   | "broadcastCreate"
@@ -17,7 +18,7 @@ type ModalName =
 
 export default class Modals extends PureComponent {
   get activeModal(): ModalName {
-    return "broadcast";
+    return "broadcastEdit";
   }
 
   modal() {
@@ -33,6 +34,12 @@ export default class Modals extends PureComponent {
         return (
           <Modal size="half">
             <Broadcast />
+          </Modal>
+        );
+      case "broadcastEdit":
+        return (
+          <Modal size="full" heading="Edit broadcast">
+            <BroadcastEdit />
           </Modal>
         );
     }
