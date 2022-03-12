@@ -23,7 +23,7 @@ export default class Label extends PureComponent<Props> {
   get className() {
     const { type, className, onClose } = this.props;
     const base =
-      "inline-flex items-center gap-1 text-sm text-slate-900 px-3 rounded-md";
+      "inline-flex items-center gap-1 text-sm text-slate-900 px-3 rounded-md h-fit";
     const cursor = onClose ? "cursor-pointer" : "";
     return `${base} ${cursor} ${this.typeClasses[type]} ${className}`;
   }

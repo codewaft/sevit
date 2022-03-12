@@ -3,6 +3,7 @@ import Modal from "./Modal";
 import BroadcastCreate from "./BroadcastCreate";
 import Broadcast from "./Broadcast";
 import BroadcastEdit from "./BroadcastEdit";
+import BroadcastMessages from "./BroadcastMessages";
 
 type ModalName =
   | "broadcastCreate"
@@ -18,7 +19,7 @@ type ModalName =
 
 export default class Modals extends PureComponent {
   get activeModal(): ModalName {
-    return "broadcastEdit";
+    return "broadcastmessages";
   }
 
   modal() {
@@ -34,6 +35,12 @@ export default class Modals extends PureComponent {
         return (
           <Modal size="half">
             <Broadcast />
+          </Modal>
+        );
+      case "broadcastmessages":
+        return (
+          <Modal size="full">
+            <BroadcastMessages />
           </Modal>
         );
       case "broadcastEdit":

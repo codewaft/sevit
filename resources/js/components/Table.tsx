@@ -20,7 +20,7 @@ export default class Table extends PureComponent {
     return (
       <div>
         <div className="flex justify-between mb-3 items-end">
-          <p className="-mb-1">{this.details}</p>
+          <p className="-mb-1 text-[15px] text-slate-600">{this.details}</p>
           <div className="inline-flex rounded-md bg-white drop-shadow-md">
             <div className="flex items-center justify-center h-10 w-10 cursor-pointer text-slate-600">
               <Icon size="regular" name="ri-arrow-left-s-line" />
