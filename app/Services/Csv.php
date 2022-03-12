@@ -2,16 +2,43 @@
 
 namespace App\Services;
 
+use Illuminate\Support\Str;
 use League\Csv\Reader;
 use League\Csv\Writer;
 
 class Csv
 {
-    public static function parse($file)
+    protected static function parseRows($file)
     {
         $filepath = $file->getPathName();
         $csv = Reader::createFromPath($filepath, "r");
-        return $csv->getRecords();
+        return collect(iterator_to_array($csv->getRecords()));
+    }
+
+    protected static function getHeader($rows)
+    {
+        $trim = fn($value) => trim($value);
+        $pairs = fn($value) => [Str::camel($value) => $value];
+        return collect($rows->first())
+            ->map($trim)
+            ->flatMap($pairs)
+            ->toArray();
+    }
+
+    protected static function getRecords($rows)
+    {
+        $rows->shift();
+        $trim = fn($value) => trim($value);
+        $trimRecord = fn($record) => collect($record)
+            ->map($trim)
+            ->toArray();
+        return collect($rows)->map($trimRecord);
+    }
+
+    public static function parse($file)
+    {
+        $rows = self::parseRows($file);
+        return [self::getHeader($rows), self::getRecords($rows)];
     }
 
     public static function build($data)

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Jobs\ImportContact;
 use App\Services\Response;
 use App\Services\Validation;
 use App\Services\Twillio;
@@ -72,6 +73,46 @@ class ContactController extends Controller
     {
         $pagination = $this->contact->getPagination();
         return Response::ok($pagination);
+    }
+
+    public function import(Request $request)
+    {
+        $rule = [
+            "contacts" => "required|file|mimes:csv,txt",
+        ];
+        $error = Validation::validate($request, $rule);
+        if ($error) {
+            return Response::unprocessable($error);
+        }
+        [$header, $contacts] = Csv::parse($request->contacts);
+        $headerRule = [
+            "phone" => "required|in:Phone",
+            "groups" => "required|in:Groups",
+        ];
+        $headerMessages = [
+            "phone.required" => "First coulmn should be 'Phone'",
+            "phone.in" => "First coulmn header should be 'Phone'",
+            "groups.required" => "Second coulmn should be 'Groups'",
+            "groups.in" => "Second coulmn header should be 'Groups'",
+        ];
+        $headerError = Validation::validate(
+            $header,
+            $headerRule,
+            $headerMessages
+        );
+        if ($headerError) {
+            return Response::unprocessable($headerError);
+        }
+        $queueDispatcher = function ($contact) {
+            [$phone, $groupStr] = $contact;
+            $trim = fn($value) => trim($value);
+            $groups = collect(explode(",", $groupStr))
+                ->map($trim)
+                ->toArray();
+            ImportContact::dispatch($phone, $groups);
+        };
+        $contacts->each($queueDispatcher);
+        return Response::ok($contacts);
     }
 
     public function export()
