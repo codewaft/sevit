@@ -3,7 +3,7 @@ import MenuItem, { items, Name as MenuItemName } from "./MenuItem";
 
 export default class Menu extends PureComponent {
   item(item: MenuItemName) {
-    return <MenuItem name={item} />;
+    return <MenuItem name={item} key={item} />;
   }
 
   get menuItems() {

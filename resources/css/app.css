@@ -2,4 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-@import 'remixicon/fonts/remixicon.css'
+@import 'remixicon/fonts/remixicon.css';
+
+*::-webkit-scrollbar {
+  width: 8px;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: theme('colors.slate.500');
+}

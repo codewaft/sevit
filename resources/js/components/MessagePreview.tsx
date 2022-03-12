@@ -9,7 +9,7 @@ export default class MessagePreview extends PureComponent<Props> {
     const { text } = this.props;
     return (
       text && (
-        <pre className="absolute top-20 bg-slate-100 inset-x-9 px-4 py-2.5 text-slate-900 text-[13px] rounded-lg max-h-64 overflow-auto whitespace-pre-wrap">
+        <pre className="absolute top-20 bg-slate-100 inset-x-9 px-4 py-2.5 text-slate-900 text-[13px] rounded-lg max-h-64 overflow-auto whitespace-pre-wrap font-sans">
           {text}
         </pre>
       )
