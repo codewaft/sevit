@@ -8,7 +8,7 @@ type SizeClasses = Record<Size, string>;
 
 interface Props {
   size: Size;
-  heading: string;
+  heading?: string;
 }
 
 export default class Modal extends PureComponent<Props> {
@@ -20,6 +20,17 @@ export default class Modal extends PureComponent<Props> {
   get className() {
     const sizeClass = this.sizeClasses[this.props.size];
     return `max-h-[calc(100%-2rem)] overflow-y-auto ${sizeClass}`;
+  }
+
+  get heading() {
+    const { heading } = this.props;
+    return (
+      heading && (
+        <div className="px-10 mb-5">
+          <Heading size="regular" text={heading} />
+        </div>
+      )
+    );
   }
 
   handleCloseClick() {}
@@ -36,9 +47,7 @@ export default class Modal extends PureComponent<Props> {
                 onClick={this.handleCloseClick}
               />
             </div>
-            <div className="px-10 mb-5">
-              <Heading size="regular" text={this.props.heading} />
-            </div>
+            {this.heading}
             {this.props.children}
           </Card>
         </div>

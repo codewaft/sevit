@@ -7,6 +7,7 @@ type TypeClasses = Record<Type, string>;
 interface Props {
   type: Type;
   text: string;
+  className?: string;
   onClose?: () => void;
 }
 
@@ -20,11 +21,11 @@ export default class Label extends PureComponent<Props> {
   };
 
   get className() {
-    const { type, onClose } = this.props;
+    const { type, className, onClose } = this.props;
     const base =
       "inline-flex items-center gap-1 text-sm text-slate-900 px-3 rounded-md";
     const cursor = onClose ? "cursor-pointer" : "";
-    return `${base} ${cursor} ${this.typeClasses[type]}`;
+    return `${base} ${cursor} ${this.typeClasses[type]} ${className}`;
   }
 
   get close() {

@@ -7,13 +7,13 @@ import MessagePreview from "./MessagePreview";
 import MultiSelect from "./MultiSelect";
 import Select, { Option as SelectOption } from "./Select";
 
-interface Template {
+export interface Template {
   id: number;
   title: string;
   content: string;
 }
 
-interface Group {
+export interface Group {
   id: number;
   title: string;
 }
