@@ -7,6 +7,7 @@ import BroadcastMessages from "./BroadcastMessages";
 import TemplateCreate from "./TemplateCreate";
 import TemplateEdit from "./TemplateEdit";
 import ContactCreate from "./ContactCreate";
+import ContactEdit from "./ContactEdit";
 
 type ModalName =
   | "broadcastCreate"
@@ -22,7 +23,7 @@ type ModalName =
 
 export default class Modals extends PureComponent {
   get activeModal(): ModalName {
-    return "contactCreate";
+    return "contactEdit";
   }
 
   modal() {
@@ -68,6 +69,12 @@ export default class Modals extends PureComponent {
         return (
           <Modal size="half" heading="Create contact">
             <ContactCreate />
+          </Modal>
+        );
+      case "contactEdit":
+        return (
+          <Modal size="half" heading="Edit contact">
+            <ContactEdit />
           </Modal>
         );
     }
