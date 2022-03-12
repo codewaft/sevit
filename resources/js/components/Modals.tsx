@@ -9,6 +9,7 @@ import TemplateEdit from "./TemplateEdit";
 import ContactCreate from "./ContactCreate";
 import ContactEdit from "./ContactEdit";
 import GroupCreate from "./GroupCreate";
+import GroupEdit from "./GroupEdit";
 
 type ModalName =
   | "broadcastCreate"
@@ -24,7 +25,7 @@ type ModalName =
 
 export default class Modals extends PureComponent {
   get activeModal(): ModalName {
-    return "groupCreate";
+    return "groupEdit";
   }
 
   modal() {
@@ -82,6 +83,12 @@ export default class Modals extends PureComponent {
         return (
           <Modal size="half" heading="Create group">
             <GroupCreate />
+          </Modal>
+        );
+      case "groupEdit":
+        return (
+          <Modal size="half" heading="Edit group">
+            <GroupEdit />
           </Modal>
         );
     }
