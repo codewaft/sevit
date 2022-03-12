@@ -6,6 +6,7 @@ type SizeClasses = Record<Size, string>;
 interface Props {
   size: Size;
   text: string;
+  className?: string;
 }
 
 export default class Heading extends PureComponent<Props> {
@@ -17,8 +18,9 @@ export default class Heading extends PureComponent<Props> {
   };
 
   get className() {
-    const sizeClass = this.sizeClasses[this.props.size];
-    return `font-medium text-slate-900 ${sizeClass}`;
+    const { size, className } = this.props;
+    const sizeClass = this.sizeClasses[size];
+    return `font-medium text-slate-900 ${sizeClass} ${className}`;
   }
 
   render() {
