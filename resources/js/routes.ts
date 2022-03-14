@@ -3,4 +3,5 @@ export default {
   broadcasts: "/broadcasts",
   templates: "/templates",
   contacts: "/contacts",
+  groups: "/groups",
 };
