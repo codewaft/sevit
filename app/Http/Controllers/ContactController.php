@@ -117,8 +117,9 @@ class ContactController extends Controller
 
     public function export()
     {
-        $phones = $this->contact->getAllPhonesForExport();
-        $csv = Csv::build($phones);
+        $contacts = $this->contact->getExport();
+        $headers = ["Phone", "Groups"];
+        $csv = Csv::build($headers, $contacts);
         return Response::ok($csv);
     }
 }

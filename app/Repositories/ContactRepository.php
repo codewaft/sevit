@@ -47,12 +47,14 @@ class ContactRepository
         return Contact::latest()->paginate();
     }
 
-    public function getAllPhonesForExport()
+    public function getExport()
     {
-        $phoneBuilder = fn($phone) => compact("phone");
+        $exportBuilder = fn($contact) => [
+            "phone" => $contact->phone,
+            "groups" => $contact->groups->pluck("title")->implode(","),
+        ];
         return Contact::latest()
-            ->get("phone")
-            ->pluck("phone")
-            ->map($phoneBuilder);
+            ->get()
+            ->map($exportBuilder);
     }
 }

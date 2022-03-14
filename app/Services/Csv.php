@@ -41,10 +41,11 @@ class Csv
         return [self::getHeader($rows), self::getRecords($rows)];
     }
 
-    public static function build($data)
+    public static function build($headers, $rows)
     {
         $csv = Writer::createFromString();
-        $csv->insertAll($data);
+        $csv->insertOne($headers);
+        $csv->insertAll($rows);
         return $csv->toString();
     }
 }
