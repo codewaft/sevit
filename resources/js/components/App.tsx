@@ -4,6 +4,9 @@ import routes from "../routes";
 import Panel from "./Panel";
 import SignIn from "../views/SignIn";
 import Broadcasts from "../views/Broadcasts";
+import Templates from "../views/Templates";
+import Contacts from "../views/Contacts";
+import Groups from "../views/Groups";
 
 export default class App extends Component {
   get authRoutes() {
@@ -16,6 +19,9 @@ export default class App extends Component {
           <Route path={routes.signIn} element={<SignIn />} />
           <Route path="/" element={<Panel />}>
             <Route path={routes.broadcasts} element={<Broadcasts />} />
+            <Route path={routes.templates} element={<Templates />} />
+            <Route path={routes.contacts} element={<Contacts />} />
+            <Route path={routes.groups} element={<Groups />} />
           </Route>
         </Routes>
       </Router>
