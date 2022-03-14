@@ -2,12 +2,15 @@
 
 namespace App\Jobs;
 
+use Throwable;
 use Exception;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Queue\Middleware\WithoutOverlapping;
+use Illuminate\Support\Facades\Log;
 use App\Services\Twillio;
 use App\Services\Validation;
 use App\Repositories\ContactRepository;
@@ -41,17 +44,26 @@ class ImportContact implements ShouldQueue
         return Validation::validate($data, $rule);
     }
 
+    public function middleware()
+    {
+        return [new WithoutOverlapping($this->phone)];
+    }
+
     public function handle()
     {
-        $dataError = $this->validateData();
-        if ($dataError) {
-            throw new Exception($dataError);
+        try {
+            $dataError = $this->validateData();
+            if ($dataError) {
+                throw new Exception($dataError);
+            }
+            $phoneError = Twillio::validatePhone($this->phone);
+            if ($phoneError) {
+                throw new Exception($phoneError);
+            }
+            $contactData = ["phone" => $this->phone];
+            $this->contact->createOne($contactData, $this->groups);
+        } catch (Throwable $e) {
+            Log::warning($e);
         }
-        $phoneError = Twillio::validatePhone($this->phone);
-        if ($phoneError) {
-            throw new Exception($phoneError);
-        }
-        $contactData = ["phone" => $this->phone];
-        $this->contact->createOne($contactData, $this->groups);
     }
 }
