@@ -1,15 +1,9 @@
 import React, { PureComponent } from "react";
-import { last, split, upperFirst } from "lodash";
 import Heading from "./Heading";
 import Logo from "./Logo";
 import User from "./User";
 
 export default class Header extends PureComponent {
-  get heading() {
-    const route = last(split(window.location.pathname, "/"));
-    return upperFirst(route);
-  }
-
   render() {
     return (
       <div className="drop-shadow-md bg-white">
@@ -19,7 +13,7 @@ export default class Header extends PureComponent {
               <Logo size="medium" />
             </div>
             <div className="col-span-9 flex justify-between items-center">
-              <Heading size="medium" text={this.heading} />
+              <Heading size="medium" text="Broadcasts" />
               <User username="johnsmith" />
             </div>
           </div>
