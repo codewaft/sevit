@@ -6,7 +6,7 @@ interface Props {}
 
 interface State {}
 
-export default class Broadcasts extends PureComponent<Props, State> {
+export default class Templates extends PureComponent<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {};
@@ -20,7 +20,7 @@ export default class Broadcasts extends PureComponent<Props, State> {
       <div>
         <Button
           size="small"
-          text="Create broadcast"
+          text="Create template"
           icon="ri-add-circle-line"
           onClick={this.handleCreateClick}
         />
