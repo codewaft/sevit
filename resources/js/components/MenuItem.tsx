@@ -1,6 +1,8 @@
 import React, { PureComponent } from "react";
 import { upperFirst } from "lodash";
 import Icon from "./Icon";
+import { NavLink } from "react-router-dom";
+import routes from "../routes";
 
 export const items = ["broadcasts", "templates", "contacts", "groups"] as const;
 export type Name = typeof items[number];
@@ -30,21 +32,35 @@ export default class MenuItem extends PureComponent<Props> {
     return upperFirst(this.props.name);
   }
 
-  get className() {
-    const base =
-      "flex gap-5 items-center rounded-l-md px-5 py-2 cursor-pointer text-[19px]";
-    const active = this.isActive()
-      ? "text-slate-900 bg-white font-medium drop-shadow-md"
-      : "text-white";
-    return `${base} ${active}`;
+  get route() {
+    return routes[this.props.name];
+  }
+
+  get baseClass() {
+    return "flex gap-5 items-center rounded-l-md px-5 py-2 cursor-pointer text-[19px]";
+  }
+
+  get activeClass() {
+    const active = "text-slate-900 bg-white font-medium drop-shadow-md";
+    return `${this.baseClass} ${active}`;
+  }
+
+  get commonClass() {
+    const common = "text-white";
+    return `${this.baseClass} ${common}`;
   }
 
   render() {
     return (
-      <div className={this.className}>
+      <NavLink
+        className={({ isActive }) =>
+          isActive ? this.activeClass : this.commonClass
+        }
+        to={this.route}
+      >
         <Icon size="large" name={this.icon} />
         {this.name}
-      </div>
+      </NavLink>
     );
   }
 }
