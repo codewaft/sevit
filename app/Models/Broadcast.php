@@ -11,15 +11,31 @@ class Broadcast extends Model
 {
     use HasFactory, SoftDeletes;
 
-    public static $status = ["scheduled", "processing", "completed"];
-
-    protected $fillable = ["template_id", "title", "status", "scheduled_at"];
+    protected $fillable = ["template_id", "title", "scheduled_at"];
     protected $with = ["template", "groups"];
     protected $casts = ["scheduled_at" => "datetime"];
+    protected $appends = ["status"];
 
-    protected function scheduled_at()
+    protected function scheduled_at(): Attribute
     {
         return Attribute::make(set: fn($value) => strtotime($value));
+    }
+
+    public function status(): Attribute
+    {
+        $existsMessages = fn($status) => $this->messages()
+            ->whereStatus($status)
+            ->exists();
+        $attribute = fn($status) => new Attribute(get: fn() => $status);
+        if ($existsMessages("processed") || $existsMessages("failed")) {
+            if ($existsMessages("scheduled")) {
+                return $attribute("processing");
+            } else {
+                return $attribute("completed");
+            }
+        } else {
+            return $attribute("scheduled");
+        }
     }
 
     public function template()
