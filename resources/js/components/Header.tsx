@@ -10,7 +10,7 @@ export default class Header extends PureComponent {
         <div className="container mx-auto">
           <div className="grid grid-cols-12 gap-7 py-2">
             <div className="col-span-3">
-              <Logo size="medium" />
+              <Logo />
             </div>
             <div className="col-span-9 flex justify-between items-center">
               <Heading size="medium" text="Broadcasts" />

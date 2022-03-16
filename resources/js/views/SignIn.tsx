@@ -38,7 +38,7 @@ export default class SignIn extends PureComponent<Props, State> {
             color="gray"
             className="px-10 pt-8 pb-10 w-1/3 max-h-[calc(100%-2rem)] overflow-y-auto"
           >
-            <Logo size="medium" />
+            <Logo />
             <Heading className="mt-8 mb-1" size="large" text="Sign in" />
             <p className="text-slate-600 text-md mb-6">
               Please sign in into StackSMS
