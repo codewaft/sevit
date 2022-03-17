@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import Icon from "./Icon";
 
-type Type = "primary" | "secondary" | "success" | "warning" | "danger";
+export type Type = "primary" | "secondary" | "success" | "warning" | "danger";
 type TypeClasses = Record<Type, string>;
 
 interface Props {
