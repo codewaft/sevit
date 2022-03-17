@@ -11,7 +11,6 @@ class BroadcastFactory extends Factory
     {
         return [
             "title" => $this->faker->sentence(6),
-            "status" => $this->faker->randomElement(Broadcast::$status),
             "scheduled_at" => $this->faker->dateTime(),
         ];
     }
