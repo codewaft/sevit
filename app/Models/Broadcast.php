@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Utils\ScheduleDate;
 
 class Broadcast extends Model
 {
@@ -13,12 +14,11 @@ class Broadcast extends Model
 
     protected $fillable = ["template_id", "title", "scheduled_at"];
     protected $with = ["template", "groups"];
-    protected $casts = ["scheduled_at" => "datetime"];
     protected $appends = ["status"];
 
-    protected function scheduled_at(): Attribute
+    protected function scheduledAt(): Attribute
     {
-        return Attribute::make(set: fn($value) => strtotime($value));
+        return Attribute::make(set: fn($value) => ScheduleDate::parse($value));
     }
 
     public function status(): Attribute
