@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import Icon from "./Icon";
 
-type Name = "view" | "messages" | "edit" | "delete";
+export type Name = "view" | "messages" | "edit" | "delete";
 type Icons = Record<Name, string>;
 
 interface Props {
