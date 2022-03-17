@@ -21,7 +21,7 @@ class Message extends Model
     protected $with = ["contact"];
     public $timestamps = false;
 
-    protected function processed_at()
+    protected function processedAt()
     {
         return Attribute::make(set: fn($value) => strtotime($value));
     }
