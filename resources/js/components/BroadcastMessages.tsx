@@ -8,6 +8,10 @@ interface Props {}
 interface State {}
 
 export default class BroadcastMessages extends PureComponent<Props, State> {
+  get tableHeaders() {
+    return ["ID", "Phone", "Status", "Processed at"];
+  }
+
   readBroadcast() {}
 
   componentDidMount() {
@@ -21,7 +25,7 @@ export default class BroadcastMessages extends PureComponent<Props, State> {
           <Heading size="regular" text="Summer offer" />
           <Label type="success" text="completed (185/190)" />
         </div>
-        <Table />
+        <Table headers={this.tableHeaders}></Table>
       </div>
     );
   }

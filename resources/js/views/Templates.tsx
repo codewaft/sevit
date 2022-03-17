@@ -13,6 +13,10 @@ export default class Templates extends PureComponent<Props, State> {
     this.handleCreateClick = this.handleCreateClick.bind(this);
   }
 
+  get tableHeaders() {
+    return ["Title", "Content", "Created at", "Updated at", "Actions"];
+  }
+
   handleCreateClick() {}
 
   render() {
@@ -24,7 +28,7 @@ export default class Templates extends PureComponent<Props, State> {
           icon="ri-add-circle-line"
           onClick={this.handleCreateClick}
         />
-        <Table />
+        <Table headers={this.tableHeaders}></Table>
       </div>
     );
   }
