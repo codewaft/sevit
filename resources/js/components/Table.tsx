@@ -2,18 +2,21 @@ import React, { PureComponent } from "react";
 import Card from "./Card";
 import Icon from "./Icon";
 
-export default class Table extends PureComponent {
-  classes = {
-    table: "table-auto w-full text-md",
-    thead: "text-slate-900",
-    th: "text-left px-1 first:pl-8 last:pr-8 py-3",
-    tbody: "text-slate-600",
-    tr: "border-t border-slate-200",
-    td: " px-1 first:pl-8 last:pr-8 py-3",
-  };
+interface Props {
+  headers: string[];
+}
 
+export default class Table extends PureComponent<Props> {
   get details() {
     return `Showing ${29} ${"broadcasts"} out of ${914}`;
+  }
+
+  get headers() {
+    return this.props.headers.map((header) => (
+      <th className="text-left px-1 first:pl-8 last:pr-8 py-3" key={header}>
+        {header}
+      </th>
+    ));
   }
 
   render() {
@@ -32,43 +35,11 @@ export default class Table extends PureComponent {
           </div>
         </div>
         <Card color="white" className="overflow-x-auto">
-          <table className={this.classes.table}>
-            <thead className={this.classes.thead}>
-              <tr>
-                <th className={this.classes.th}>Title</th>
-                <th className={this.classes.th}>Template</th>
-                <th className={this.classes.th}>Target</th>
-                <th className={this.classes.th}>Schedule</th>
-                <th className={this.classes.th}>Status</th>
-                <th className={this.classes.th}>Actions</th>
-              </tr>
+          <table className="table-auto w-full text-md">
+            <thead className="text-slate-900">
+              <tr>{this.headers}</tr>
             </thead>
-            <tbody className={this.classes.tbody}>
-              <tr className={this.classes.tr}>
-                <td className={this.classes.td}>Summer offer</td>
-                <td className={this.classes.td}>Summer offer 15% off</td>
-                <td className={this.classes.td}>all</td>
-                <td className={this.classes.td}>Mar, 10 2022 10:38 PM</td>
-                <td className={this.classes.td}>Scheduled</td>
-                <td className={this.classes.td}>View</td>
-              </tr>
-              <tr className={this.classes.tr}>
-                <td className={this.classes.td}>Summer offer</td>
-                <td className={this.classes.td}>Summer offer 15% off</td>
-                <td className={this.classes.td}>all</td>
-                <td className={this.classes.td}>Mar, 10 2022 10:38 PM</td>
-                <td className={this.classes.td}>Scheduled</td>
-                <td className={this.classes.td}>View</td>
-              </tr>
-              <tr className={this.classes.tr}>
-                <td className={this.classes.td}>Summer offer</td>
-                <td className={this.classes.td}>Summer offer 15% off</td>
-                <td className={this.classes.td}>all</td>
-                <td className={this.classes.td}>Mar, 10 2022 10:38 PM</td>
-                <td className={this.classes.td}>Scheduled</td>
-                <td className={this.classes.td}>View</td>
-              </tr>
-            </tbody>
+            <tbody className="text-slate-600">{this.props.children}</tbody>
           </table>
         </Card>
       </div>

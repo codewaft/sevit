@@ -15,6 +15,10 @@ export default class Contacts extends PureComponent<Props, State> {
     this.handleExportClick = this.handleExportClick.bind(this);
   }
 
+  get tableHeaders() {
+    return ["Phone", "Groups", "Created at", "Updated at", "Actions"];
+  }
+
   handleCreateClick() {}
   handleImportClick() {}
   handleExportClick() {}
@@ -42,7 +46,7 @@ export default class Contacts extends PureComponent<Props, State> {
             onClick={this.handleExportClick}
           />
         </div>
-        <Table />
+        <Table headers={this.tableHeaders}></Table>
       </div>
     );
   }
