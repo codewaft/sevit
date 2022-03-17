@@ -3,7 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\Broadcast;
+use App\Utils\ScheduleDate;
 
 class BroadcastFactory extends Factory
 {
@@ -11,7 +11,7 @@ class BroadcastFactory extends Factory
     {
         return [
             "title" => $this->faker->sentence(6),
-            "scheduled_at" => $this->faker->dateTime(),
+            "scheduled_at" => ScheduleDate::now(),
         ];
     }
 }

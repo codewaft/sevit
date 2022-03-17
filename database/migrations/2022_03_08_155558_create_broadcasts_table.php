@@ -12,7 +12,7 @@ return new class extends Migration {
             $table->id();
             $table->foreignId("template_id")->constrained();
             $table->string("title");
-            $table->timestamp("scheduled_at");
+            $table->string("scheduled_at");
             $table->softDeletes();
             $table->timestamps();
         });
