@@ -4,6 +4,7 @@ namespace App\Services;
 
 use Throwable;
 use Twilio\Rest\Client;
+use Illuminate\Support\Facades\Log;
 
 class Twillio
 {
@@ -22,7 +23,21 @@ class Twillio
                 ->fetch();
             return null;
         } catch (Throwable $e) {
+            Log::warning($e);
             return "Invalid phone number ${phone}";
         }
+    }
+
+    public static function sendMessage($phone, $body)
+    {
+        $options = [
+            "from" => env("TWILLIO_PHONE_NUMBER"),
+            "body" => $body,
+        ];
+        $message = self::client()->messages->create($phone, $options);
+        return [
+            "error" => "Error messaging to {$phone}: {$message->error_message}",
+            "id" => $message->sid,
+        ];
     }
 }

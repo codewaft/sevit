@@ -12,6 +12,7 @@ class Kernel extends ConsoleKernel
         $schedule
             ->command("queue:work --sleep=3 --tries=2 --max-time=60")
             ->everyMinute();
+        $schedule->command("broadcast:process")->everyMinute();
     }
 
     protected function commands()

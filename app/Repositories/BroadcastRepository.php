@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Broadcast;
+use App\Utils\ScheduleDate;
 
 class BroadcastRepository
 {
@@ -62,5 +63,14 @@ class BroadcastRepository
     {
         $broadcast = Broadcast::findOrFail($id);
         return $broadcast->messages()->paginate();
+    }
+
+    public function getAllReadyToProcess()
+    {
+        return Broadcast::where(
+            "scheduled_at",
+            "=",
+            ScheduleDate::now()
+        )->get();
     }
 }
