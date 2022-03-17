@@ -30,14 +30,16 @@ class Twillio
 
     public static function sendMessage($phone, $body)
     {
-        $options = [
-            "from" => env("TWILLIO_PHONE_NUMBER"),
-            "body" => $body,
-        ];
-        $message = self::client()->messages->create($phone, $options);
-        return [
-            "error" => "Error messaging to {$phone}: {$message->error_message}",
-            "id" => $message->sid,
-        ];
+        try {
+            $options = [
+                "from" => env("TWILLIO_PHONE_NUMBER"),
+                "body" => $body,
+            ];
+            $message = self::client()->messages->create($phone, $options);
+            return [null, $message->sid];
+        } catch (Throwable $e) {
+            Log::warning($e);
+            return ["Error messaging to ${phone}", null];
+        }
     }
 }
