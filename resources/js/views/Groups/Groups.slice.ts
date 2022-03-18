@@ -12,11 +12,13 @@ export interface State {
   groups: Group[];
 }
 
+const initialState: State = {
+  groups: [],
+};
+
 export const counterSlice = createSlice({
   name: "groups",
-  initialState: {
-    groups: [],
-  },
+  initialState,
   reducers: {
     replaceGroups: (state: State, action: PayloadAction<Group[]>) => {
       state.groups = action.payload;
