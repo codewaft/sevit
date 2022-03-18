@@ -17,7 +17,7 @@ const initialState: State = {
   groups: [],
 };
 
-export const counterSlice = createSlice({
+export const slice = createSlice({
   name: "groups",
   initialState,
   reducers: {
@@ -27,8 +27,8 @@ export const counterSlice = createSlice({
   },
 });
 
-export const { replaceGroups } = counterSlice.actions;
-export default counterSlice.reducer;
+export const { replaceGroups } = slice.actions;
+export default slice.reducer;
 
 export const paginateGroups = async (dispatch: RootDispatch) => {
   // TODO: update api
