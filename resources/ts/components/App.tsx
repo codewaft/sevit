@@ -10,6 +10,7 @@ import Templates from "../views/Templates";
 import Contacts from "../views/Contacts";
 import Groups from "../views/Groups/Groups";
 import Alert from "./Alert/Alert";
+import ProgressBar from "./ProgressBar/ProgressBar";
 
 interface Props extends StateProps {}
 
@@ -36,6 +37,7 @@ class App extends Component<Props> {
           </Route>
         </Routes>
         {this.alert}
+        <ProgressBar />
       </Router>
     );
   }
