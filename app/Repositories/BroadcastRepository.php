@@ -3,29 +3,31 @@
 namespace App\Repositories;
 
 use App\Models\Broadcast;
+use App\Models\Contact;
 use App\Utils\ScheduleDate;
 
 class BroadcastRepository
 {
-    protected function getContactIdsFromBroadcast($broadcast)
+    protected function getContactsFromBroadcast($broadcast)
     {
-        return $broadcast
-            ->groups()
-            ->with("contacts")
-            ->get()
-            ->pluck("contacts")
-            ->flatten()
-            ->pluck("id")
-            ->unique();
+        return $broadcast->groups()->exists()
+            ? $broadcast
+                ->groups()
+                ->with("contacts")
+                ->get()
+                ->pluck("contacts")
+                ->flatten()
+                ->unique("id")
+            : Contact::all();
     }
 
-    public function createOne($data, $groupIds)
+    public function createOne($data, $groupIds = [])
     {
         $broadcast = Broadcast::create($data);
         $broadcast->groups()->sync($groupIds);
-        $contactIds = $this->getContactIdsFromBroadcast($broadcast);
-        $messageBuilder = fn($contact_id) => compact("contact_id");
-        $messages = $contactIds->map($messageBuilder);
+        $contacts = $this->getContactsFromBroadcast($broadcast);
+        $messageBuilder = fn($contact) => ["contact_id" => $contact->id];
+        $messages = $contacts->map($messageBuilder);
         $broadcast->messages()->createMany($messages);
         return $broadcast->fresh();
     }
@@ -35,13 +37,14 @@ class BroadcastRepository
         return Broadcast::findOrFail($id);
     }
 
-    public function editOne($id, $data, $groupIds)
+    public function editOne($id, $data, $groupIds = [])
     {
         $broadcast = Broadcast::findOrFail($id);
+        $broadcast->update($data);
         $broadcast->groups()->sync($groupIds);
-        $contactIds = $this->getContactIdsFromBroadcast($broadcast);
-        $messageBuilder = fn($contact_id) => compact("contact_id");
-        $messages = $contactIds->map($messageBuilder);
+        $contacts = $this->getContactsFromBroadcast($broadcast);
+        $messageBuilder = fn($contact) => ["contact_id" => $contact->id];
+        $messages = $contacts->map($messageBuilder);
         $broadcast->messages()->delete();
         $broadcast->messages()->createMany($messages);
         return $broadcast->fresh();
