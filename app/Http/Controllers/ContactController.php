@@ -28,7 +28,7 @@ class ContactController extends Controller
         $rule = [
             "phone" => "required|string|unique:contacts,phone|max:255",
             "groups" => "required|array",
-            "groups.*" => "required|string|max:255",
+            "groups.*" => "required|integer|exists:groups,id",
         ];
         $error = Validation::validate($request, $rule);
         if ($error) {
@@ -53,7 +53,7 @@ class ContactController extends Controller
     {
         $rule = [
             "groups" => "required|array",
-            "groups.*" => "required|string|max:255",
+            "groups.*" => "required|integer|exists:groups,id",
         ];
         $error = Validation::validate($request, $rule);
         if ($error) {
