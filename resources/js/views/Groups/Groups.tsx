@@ -1,7 +1,7 @@
-import React, { Component, PureComponent } from "react";
+import React, { PureComponent } from "react";
 import { connect } from "react-redux";
-import { RootState } from "../../store";
-import { replaceGroups } from "./Groups.slice";
+import { RootDispatch, RootState } from "../../store";
+import { paginateGroups } from "./Groups.slice";
 import Actions, { Name as ActionName } from "../../components/Actions";
 import Button from "../../components/Button";
 import Date from "../../components/Date";
@@ -11,7 +11,7 @@ import TableRow from "../../components/TableRow";
 
 interface Props extends StateProps, DispatchProps {}
 
-class Groups extends Component<Props> {
+class Groups extends PureComponent<Props> {
   constructor(props: Props) {
     super(props);
     this.handleCreateClick = this.handleCreateClick.bind(this);
@@ -56,16 +56,7 @@ class Groups extends Component<Props> {
   handleCreateClick() {}
 
   componentDidMount() {
-    const groups = [
-      {
-        id: 1,
-        title: "Summer offer",
-        deleted_at: null,
-        created_at: "2022-09-13T03:20:34.091-04:00",
-        updated_at: "2022-09-12T03:20:34.091-04:00",
-      },
-    ];
-    this.props.replaceGroups(groups);
+    this.props.paginateGroups();
   }
 
   render() {
@@ -87,11 +78,11 @@ const mapStateToProps = (state: RootState) => ({
   groups: state.groups.groups,
 });
 
-const mapDispatchToProps = {
-  replaceGroups,
-};
+const mapDispatchToProps = (dispatch: RootDispatch) => ({
+  paginateGroups: () => paginateGroups(dispatch),
+});
 
 type StateProps = ReturnType<typeof mapStateToProps>;
-type DispatchProps = typeof mapDispatchToProps;
+type DispatchProps = ReturnType<typeof mapDispatchToProps>;
 
 export default connect(mapStateToProps, mapDispatchToProps)(Groups);

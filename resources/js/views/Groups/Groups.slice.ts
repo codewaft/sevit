@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootDispatch } from "../../store";
 
 interface Group {
   id: number;
@@ -28,3 +29,10 @@ export const counterSlice = createSlice({
 
 export const { replaceGroups } = counterSlice.actions;
 export default counterSlice.reducer;
+
+export const paginateGroups = async (dispatch: RootDispatch) => {
+  // TODO: update api
+  const response = await fetch("https://api.sampleapis.com/wines/reds");
+  const groups = (await response.json()) as Group[];
+  dispatch(replaceGroups(groups));
+};
