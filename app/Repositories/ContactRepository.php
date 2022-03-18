@@ -3,18 +3,13 @@
 namespace App\Repositories;
 
 use App\Models\Contact;
-use App\Models\Group;
 
 class ContactRepository
 {
-    public function createOne($data, $groupTitles)
+    public function createOne($data, $groupIds)
     {
         $contact = Contact::create($data);
-        collect($groupTitles)->each(function ($title) use ($contact) {
-            $groupData = ["title" => $title];
-            $group = Group::firstOrCreate($groupData);
-            $group->contacts()->attach($contact);
-        });
+        $contact->groups()->sync($groupIds);
         return Contact::findOrFail($contact->id);
     }
 
@@ -23,15 +18,10 @@ class ContactRepository
         return Contact::findOrFail($id);
     }
 
-    public function editOne($id, $groupTitles)
+    public function editOne($id, $groupIds)
     {
         $contact = Contact::findOrFail($id);
-        $contact->groups()->detach();
-        collect($groupTitles)->each(function ($title) use ($contact) {
-            $groupData = ["title" => $title];
-            $group = Group::firstOrCreate($groupData);
-            $group->contacts()->attach($contact);
-        });
+        $contact->groups()->sync($groupIds);
         return Contact::findOrFail($contact->id);
     }
 
