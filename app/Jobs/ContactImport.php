@@ -15,7 +15,7 @@ use App\Services\Twillio;
 use App\Services\Validation;
 use App\Repositories\ContactRepository;
 
-class ImportContact implements ShouldQueue
+class ContactImport implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
