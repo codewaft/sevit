@@ -6,7 +6,7 @@ import SignIn from "../views/SignIn";
 import Broadcasts from "../views/Broadcasts";
 import Templates from "../views/Templates";
 import Contacts from "../views/Contacts";
-import Groups from "../views/Groups";
+import Groups from "../views/Groups/Groups";
 
 export default class App extends Component {
   get authRoutes() {
