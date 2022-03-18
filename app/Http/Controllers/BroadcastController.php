@@ -21,7 +21,8 @@ class BroadcastController extends Controller
         $rule = [
             "title" => "required|string|max:255",
             "template" => "required|integer|exists:templates,id",
-            "groups" => "required|array",
+            "target" => "required|in:all,groups",
+            "groups" => "required_if:target,groups|array",
             "groups.*" => "required|integer|exists:groups,id",
             "schedule" => "required|date|after:now",
         ];
@@ -49,7 +50,8 @@ class BroadcastController extends Controller
         $rule = [
             "title" => "required|string|max:255",
             "template" => "required|integer|exists:templates,id",
-            "groups" => "required|array",
+            "target" => "required|in:all,groups",
+            "groups" => "required_if:target,groups|array",
             "groups.*" => "required|integer|exists:groups,id",
             "schedule" => "required|date|after:now",
         ];

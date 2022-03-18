@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Jobs\ImportContact;
+use App\Jobs\ContactImport;
 use App\Services\Response;
 use App\Services\Validation;
 use App\Services\Twillio;
@@ -109,7 +109,7 @@ class ContactController extends Controller
             $groups = collect(explode(",", $groupStr))
                 ->map($trim)
                 ->toArray();
-            ImportContact::dispatch($phone, $groups);
+            ContactImport::dispatch($phone, $groups);
         };
         $contacts->each($queueDispatcher);
         return Response::ok($contacts);
