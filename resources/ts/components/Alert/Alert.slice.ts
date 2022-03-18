@@ -31,9 +31,11 @@ export const slice = createSlice({
 export const { replaceAlert, removeAlert } = slice.actions;
 export default slice.reducer;
 
-export function* autoRemoveAlert() {
-  yield takeLatest(replaceAlert, function* () {
-    yield delay(4000);
-    yield put(removeAlert());
-  });
+function* autoRemoveAlert() {
+  yield delay(4000);
+  yield put(removeAlert());
+}
+
+export function* onAlertReplace() {
+  yield takeLatest(replaceAlert, autoRemoveAlert);
 }
