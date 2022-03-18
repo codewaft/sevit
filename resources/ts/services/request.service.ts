@@ -44,21 +44,21 @@ export default {
     });
     const request = {
       success(config: AxiosRequestConfig) {
-        progressBar.add();
+        progressBar.start();
         return config;
       },
       error(error: any) {
-        progressBar.remove();
+        progressBar.stop();
         return Promise.reject(error);
       },
     };
     const response = {
       success(response: AxiosResponse) {
-        progressBar.remove();
+        progressBar.stop();
         return response;
       },
       error(error: any) {
-        progressBar.remove();
+        progressBar.stop();
         return Promise.reject(error);
       },
     };
