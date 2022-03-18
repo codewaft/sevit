@@ -19,7 +19,7 @@ export default class Alert extends PureComponent<Props> {
   get className() {
     const { type } = this.props;
     const base =
-      "inline-flex items-center py-2 gap-2.5 px-5 rounded-lg cursor-pointer drop-shadow-md bg-white";
+      "inline-flex items-center py-2 gap-2.5 px-5 rounded-lg cursor-pointer drop-shadow-md bg-white absolute mx-auto bottom-10 inset-x-0 w-fit";
     return `${base} ${this.typeClasses[type]}`;
   }
 
