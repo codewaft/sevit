@@ -1,8 +1,8 @@
 import api, { ResponseCallback } from "../services/request.service";
 
 export interface SignInRequest {
-  username?: string;
-  password?: string;
+  username: string;
+  password: string;
 }
 
 interface SignInResponse {

@@ -1,34 +1,34 @@
+import routeUtil from "../utils/route.util";
 import api, {
   PaginateRequest,
   ResponseCallback,
   PaginateResponse,
 } from "../services/request.service";
-import { Data as GroupData } from "./group.api";
-import routeUtil from "../utils/route.util";
+import { Group } from "./group.api";
 
-export interface Data {
+export interface Contact {
   id: number;
   phone: string;
-  groups?: GroupData;
-  created_at?: string;
-  updated_at?: string;
-  deleted_at?: string;
+  groups: Group[];
+  created_at: string;
+  updated_at: string;
+  deleted_at: string;
 }
 
 export interface CreateRequest {
-  phone?: string;
-  groups?: string[];
+  phone: string;
+  groups: number[];
 }
 
 export interface EditRequest {
-  groups?: string[];
+  groups: number[];
 }
 
 export interface ImportRequest {
-  contacts?: File;
+  contacts: File;
 }
 
-type ContactPaginateResponse = PaginateResponse<Data[]>;
+type ContactPaginateResponse = PaginateResponse<Contact[]>;
 
 const routes = {
   create: "/contacts",
@@ -41,21 +41,21 @@ const routes = {
 };
 
 export default {
-  create(payload: CreateRequest, callback: ResponseCallback<Data>) {
+  create(payload: CreateRequest, callback: ResponseCallback<Contact>) {
     api.post(routes.create, payload, callback);
   },
 
-  read(id: number, callback: ResponseCallback<Data>) {
+  read(id: number, callback: ResponseCallback<Contact>) {
     const url = routeUtil.replaceParams(routes.read, { id });
     api.get(url, {}, callback);
   },
 
-  edit(id: number, payload: EditRequest, callback: ResponseCallback<Data>) {
+  edit(id: number, payload: EditRequest, callback: ResponseCallback<Contact>) {
     const url = routeUtil.replaceParams(routes.edit, { id });
     api.patch(url, payload, callback);
   },
 
-  delete(id: number, callback: ResponseCallback<Data>) {
+  delete(id: number, callback: ResponseCallback<Contact>) {
     const url = routeUtil.replaceParams(routes.delete, { id });
     api.delete(url, {}, callback);
   },
@@ -67,7 +67,7 @@ export default {
     api.get(routes.paginate, params, callback);
   },
 
-  import(payload: ImportRequest, callback: ResponseCallback<Data[]>) {
+  import(payload: ImportRequest, callback: ResponseCallback<Contact[]>) {
     api.postForm(routes.import, payload, callback);
   },
 
