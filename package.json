@@ -16,6 +16,7 @@
         "@types/lodash": "^4.14.179",
         "@types/react": "^17.0.39",
         "@types/react-dom": "^17.0.13",
+        "@types/store": "^2.0.2",
         "autoprefixer": "^10.4.2",
         "axios": "^0.25",
         "laravel-mix": "^6.0.6",
@@ -32,6 +33,7 @@
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
         "react-router-dom": "^6.2.2",
-        "remixicon": "^2.5.0"
+        "remixicon": "^2.5.0",
+        "store": "^2.0.12"
     }
 }
