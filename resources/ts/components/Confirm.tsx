@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-import Alert, { Type as AlertType } from "./Alert";
+import Alert, { Type as AlertType } from "./Alert/Alert";
 
 interface Props {
   type: AlertType;

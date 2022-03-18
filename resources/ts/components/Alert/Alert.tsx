@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
-import Icon from "./Icon";
+import Icon from "../Icon";
 
-export type Type = "primary" | "success" | "warning" | "danger";
+export type Type = "info" | "success" | "warning" | "error";
 type TypeClasses = Record<Type, string>;
 
 interface Props {
@@ -10,10 +10,10 @@ interface Props {
 
 export default class Alert extends PureComponent<Props> {
   typeClasses: TypeClasses = {
-    primary: "text-cyan-300",
+    info: "text-cyan-300",
     success: "text-green-500",
     warning: "text-yellow-400",
-    danger: "text-red-500",
+    error: "text-red-500",
   };
 
   get className() {
