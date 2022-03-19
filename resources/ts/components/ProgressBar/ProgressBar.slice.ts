@@ -16,7 +16,7 @@ export const slice = createSlice({
       state.progress = 10;
     },
     incrementProgress: (state: State) => {
-      state.progress += 10;
+      if (state.progress !== 0) state.progress += 20;
     },
     stopProgress: (state: State) => {
       state.progress = 0;
