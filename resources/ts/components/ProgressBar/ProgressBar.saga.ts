@@ -1,5 +1,5 @@
 import { delay, put, select, takeLatest } from "redux-saga/effects";
-import { RootState } from "../../store";
+import { RootState } from "../../store/store";
 import { incrementProgress, startProgress } from "./ProgressBar.slice";
 
 function* autoIncrementProgress() {

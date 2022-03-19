@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
-import { RootDispatch, RootState } from "../../store";
+import { RootDispatch, RootState } from "../../store/store";
 import { paginateGroups } from "./Groups.thunk";
 import Actions, { Name as ActionName } from "../../components/Actions";
 import Button from "../../components/Button";

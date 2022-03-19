@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { connect } from "react-redux";
 import routes from "../routes";
-import { RootState } from "../store";
+import { RootState } from "../store/store";
 import Panel from "./Panel";
 import SignIn from "../views/SignIn";
 import Broadcasts from "../views/Broadcasts";
