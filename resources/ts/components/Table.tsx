@@ -8,7 +8,7 @@ interface Props {
   name: string;
   headers: string[];
   paginate: PaginateResponse<unknown> | null;
-  onPaginate: (url: string | null) => void;
+  onPaginate: (url: string) => void;
 }
 
 export default class Table extends PureComponent<Props> {
@@ -73,12 +73,12 @@ export default class Table extends PureComponent<Props> {
 
   handlePrevClick() {
     const { paginate } = this.props;
-    if (paginate) this.props.onPaginate(paginate.prev_page_url);
+    if (paginate && paginate.prev_page_url) this.props.onPaginate(paginate.prev_page_url);
   }
 
   handleNextClick() {
     const { paginate } = this.props;
-    if (paginate) this.props.onPaginate(paginate.next_page_url);
+    if (paginate && paginate.next_page_url) this.props.onPaginate(paginate.next_page_url);
   }
 
   render() {
