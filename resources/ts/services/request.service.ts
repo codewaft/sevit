@@ -17,7 +17,6 @@ export interface PaginateResponse<PaginateData> {
   from: number;
   to: number;
   total: number;
-  per_page: number;
   data: PaginateData;
 }
 

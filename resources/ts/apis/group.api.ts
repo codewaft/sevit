@@ -51,7 +51,8 @@ export default {
     return api.get(routes.list);
   },
 
-  paginate() {
-    return api.get<PaginateResponse<Group[]>>(routes.paginate);
+  paginate(url?: string) {
+    const route = url || routes.paginate;
+    return api.get<PaginateResponse<Group[]>>(route);
   },
 };

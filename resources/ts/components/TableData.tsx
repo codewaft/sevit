@@ -14,7 +14,7 @@ export default class TableData extends PureComponent<Props> {
   render() {
     return (
       <td className="px-1 first:pl-8 last:pr-8 py-3">
-        <p className={this.className}>{this.props.children}</p>
+        <div className={this.className}>{this.props.children}</div>
       </td>
     );
   }

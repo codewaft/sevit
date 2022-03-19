@@ -27,10 +27,11 @@ export default class Table extends PureComponent<Props> {
   get details() {
     const { name, paginate } = this.props;
     if (!paginate) return;
-    const { from, to, total, per_page } = paginate;
+    const { from, to, total } = paginate;
+    const count = to - from + 1;
     return (
       <p className="-mb-1 text-[15px] text-slate-600">
-        {`Showing ${per_page} ${name} from ${from} to ${to} out of ${total}`}
+        {`Showing ${count} ${name}, from ${from} to ${to} out of ${total}`}
       </p>
     );
   }

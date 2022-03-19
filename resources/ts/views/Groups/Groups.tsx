@@ -19,6 +19,7 @@ class Groups extends PureComponent<Props> {
     super(props);
     this.handleCreateClick = this.handleCreateClick.bind(this);
     this.handleActionClick = this.handleActionClick.bind(this);
+    this.handlePaginate = this.handlePaginate.bind(this);
   }
 
   tableRow(group: any) {
@@ -47,6 +48,10 @@ class Groups extends PureComponent<Props> {
 
   handleCreateClick() {}
 
+  handlePaginate(url: string) {
+    this.props.paginateGroups(url);
+  }
+
   componentDidMount() {
     this.props.paginateGroups();
   }
@@ -64,7 +69,7 @@ class Groups extends PureComponent<Props> {
           name="groups"
           headers={this.tableHeaders}
           paginate={this.props.groups}
-          onPaginate={() => {}}
+          onPaginate={this.handlePaginate}
         >
           {this.tableData}
         </Table>
@@ -78,7 +83,7 @@ const mapStateToProps = (state: RootState) => ({
 });
 
 const mapDispatchToProps = (dispatch: RootDispatch) => ({
-  paginateGroups: () => paginateGroups(dispatch),
+  paginateGroups: (url?: string) => paginateGroups(dispatch)(url),
 });
 
 type StateProps = ReturnType<typeof mapStateToProps>;
