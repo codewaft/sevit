@@ -4,6 +4,7 @@ import routes from "../routes";
 import storageService from "./storage.service";
 import progressBar from "./progressBar.service";
 import alertService from "./alert.service";
+import autoNavigateService from "./autoNavigate.service";
 
 type ContentType = "json" | "form";
 type ContentMimes = Record<ContentType, string>;
@@ -68,7 +69,7 @@ export default {
     alertService.error(message);
     if (unauthorized) {
       storageService.remove("authToken");
-      window.location.href = routes.signIn;
+      autoNavigateService.push(routes.signIn);
     }
     console.error(error);
   },

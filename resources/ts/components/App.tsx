@@ -11,6 +11,7 @@ import Contacts from "../views/Contacts";
 import Groups from "../views/Groups/Groups";
 import Alert from "./Alert/Alert";
 import ProgressBar from "./ProgressBar/ProgressBar";
+import AutoNavigate from "./AutoNavigate/AutoNavigate";
 
 interface Props extends StateProps {}
 
@@ -38,6 +39,7 @@ class App extends Component<Props> {
         </Routes>
         {this.alert}
         <ProgressBar />
+        <AutoNavigate />
       </Router>
     );
   }
