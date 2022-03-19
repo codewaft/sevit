@@ -1,18 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import createSagaMiddleware from "redux-saga";
+import reducers from "./reducers";
 import saga from "./saga";
-import groupsReducer from "./views/Groups/Groups.slice";
-import alertReducer from "./components/Alert/Alert.slice";
-import progressBarReducer from "./components/ProgressBar/ProgressBar.slice";
 
 const sagaMiddleware = createSagaMiddleware();
 
 const store = configureStore({
-  reducer: {
-    groups: groupsReducer,
-    alert: alertReducer,
-    progressBar: progressBarReducer,
-  },
+  reducer: reducers,
   middleware: (middleware) => {
     return middleware().concat(sagaMiddleware);
   },

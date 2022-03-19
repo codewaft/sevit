@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { RootDispatch, RootState } from "../../store";
-import { paginateGroups } from "./Groups.slice";
+import { paginateGroups } from "./Groups.thunk";
 import Actions, { Name as ActionName } from "../../components/Actions";
 import Button from "../../components/Button";
 import Date from "../../components/Date";
@@ -37,18 +37,14 @@ class Groups extends PureComponent<Props> {
           <Date date={group.updatedAt} />
         </TableData>
         <TableData>
-          <Actions
-            id={group.id}
-            actions={this.tableActions}
-            onClick={this.handleActionClick}
-          />
+          <Actions id={group.id} actions={this.tableActions} onClick={this.handleActionClick} />
         </TableData>
       </TableRow>
     );
   }
 
   get groups() {
-    return this.props.groups.map((group) => this.tableRow(group));
+    return this.props.groups ? this.props.groups.data.map((group) => this.tableRow(group)) : null;
   }
 
   handleActionClick(id: number, action: ActionName) {}
@@ -75,7 +71,7 @@ class Groups extends PureComponent<Props> {
 }
 
 const mapStateToProps = (state: RootState) => ({
-  groups: state.groups.groups,
+  groups: state.groups.paginate,
 });
 
 const mapDispatchToProps = (dispatch: RootDispatch) => ({

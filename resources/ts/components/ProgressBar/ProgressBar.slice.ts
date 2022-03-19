@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { call, delay, put, select, takeLatest } from "redux-saga/effects";
+import { createSlice } from "@reduxjs/toolkit";
+import { delay, put, select, takeLatest } from "redux-saga/effects";
 import { RootState } from "../../store";
 
 export interface State {

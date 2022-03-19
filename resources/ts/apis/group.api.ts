@@ -1,9 +1,6 @@
+import type { PaginateResponse } from "../services/request.service";
 import routeUtil from "../utils/route.util";
-import api, {
-  PaginateRequest,
-  ResponseCallback,
-  PaginateResponse,
-} from "../services/request.service";
+import api from "../services/request.service";
 
 export interface Group {
   id: number;
@@ -21,8 +18,6 @@ export interface EditRequest {
   title: string;
 }
 
-type GroupPaginateResponse = PaginateResponse<Group[]>;
-
 const routes = {
   create: "/groups",
   read: "/groups/{id}",
@@ -33,33 +28,30 @@ const routes = {
 };
 
 export default {
-  create(payload: CreateRequest, callback: ResponseCallback<Group>) {
-    api.post(routes.create, payload, callback);
+  create(payload: CreateRequest) {
+    return api.post(routes.create, payload);
   },
 
-  read(id: number, callback: ResponseCallback<Group>) {
+  read(id: number) {
     const url = routeUtil.replaceParams(routes.read, { id });
-    api.get(url, {}, callback);
+    return api.get(url);
   },
 
-  edit(id: number, payload: EditRequest, callback: ResponseCallback<Group>) {
+  edit(id: number, payload: EditRequest) {
     const url = routeUtil.replaceParams(routes.edit, { id });
-    api.patch(url, payload, callback);
+    return api.patch(url, payload);
   },
 
-  delete(id: number, callback: ResponseCallback<Group>) {
+  delete(id: number) {
     const url = routeUtil.replaceParams(routes.delete, { id });
-    api.delete(url, {}, callback);
+    return api.delete(url);
   },
 
-  list(callback: ResponseCallback<Group[]>) {
-    api.get(routes.list, {}, callback);
+  list() {
+    return api.get(routes.list);
   },
 
-  paginate(
-    params: PaginateRequest,
-    callback: ResponseCallback<GroupPaginateResponse>
-  ) {
-    api.get(routes.paginate, params, callback);
+  paginate() {
+    return api.get<PaginateResponse<Group[]>>(routes.paginate);
   },
 };

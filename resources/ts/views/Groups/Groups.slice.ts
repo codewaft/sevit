@@ -1,38 +1,24 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootDispatch } from "../../store";
-
-interface Group {
-  id: number;
-  title: string;
-  deleted_at: string | null;
-  created_at: string;
-  updated_at: string;
-}
+import { Group } from "../../apis/group.api";
+import { PaginateResponse } from "../../services/request.service";
 
 export interface State {
-  groups: Group[];
+  paginate: PaginateResponse<Group[]> | null;
 }
 
 const initialState: State = {
-  groups: [],
+  paginate: null,
 };
 
 export const slice = createSlice({
   name: "groups",
   initialState,
   reducers: {
-    replaceGroups: (state: State, action: PayloadAction<Group[]>) => {
-      state.groups = action.payload;
+    replacePaginate: (state: State, action: PayloadAction<State["paginate"]>) => {
+      state.paginate = action.payload;
     },
   },
 });
 
-export const { replaceGroups } = slice.actions;
+export const { replacePaginate } = slice.actions;
 export default slice.reducer;
-
-export const paginateGroups = async (dispatch: RootDispatch) => {
-  // TODO: update api
-  const response = await fetch("https://api.sampleapis.com/wines/reds");
-  const groups = (await response.json()) as Group[];
-  dispatch(replaceGroups(groups));
-};

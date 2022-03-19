@@ -10,18 +10,9 @@ type ContentMimes = Record<ContentType, string>;
 
 type ReqReturn<ResponseData> = Promise<ResponseData | null>;
 
-export interface PaginateRequest {
-  page: number;
-  limit: number;
-  search?: string;
-}
-
 export interface PaginateResponse<PaginateData> {
-  total: number;
-  from: number | null;
-  to: number | null;
-  currentPage: number;
-  lastPage: number;
+  next_page_url: string | null;
+  prev_page_url: string | null;
   data: PaginateData;
 }
 
@@ -34,7 +25,7 @@ export default {
   client(contentType: ContentType = "json") {
     const token = storageService.get("authToken");
     const client = axios.create({
-      baseURL: `${process.env.REACT_APP_API_URL}`,
+      baseURL: `/api`,
       headers: {
         Authorization: `Bearer ${token}`,
         ContentType: contentMimes[contentType],
@@ -78,7 +69,7 @@ export default {
     console.error(error);
   },
 
-  get<Resp>(url: string, params: object): ReqReturn<Resp> {
+  get<Resp>(url: string, params: object = {}): ReqReturn<Resp> {
     return new Promise((resolve) => {
       this.client()
         .get<Resp>(url, { params })
@@ -90,7 +81,7 @@ export default {
     });
   },
 
-  post<Req, Resp>(url: string, payload: Req): ReqReturn<Resp> {
+  post<Resp>(url: string, payload: object): ReqReturn<Resp> {
     return new Promise((resolve) => {
       this.client()
         .post<Resp>(url, payload)
@@ -102,7 +93,7 @@ export default {
     });
   },
 
-  postForm<Req, Resp>(url: string, payload: Req): ReqReturn<Resp> {
+  postForm<Resp>(url: string, payload: object): ReqReturn<Resp> {
     return new Promise((resolve) => {
       const fields = payload as unknown as object;
       const formData = new FormData();
@@ -117,7 +108,7 @@ export default {
     });
   },
 
-  patch<Req, Resp>(url: string, payload: Req): ReqReturn<Resp> {
+  patch<Resp>(url: string, payload: object): ReqReturn<Resp> {
     return new Promise((resolve) => {
       this.client()
         .patch<Resp>(url, payload)
@@ -129,7 +120,7 @@ export default {
     });
   },
 
-  delete<Req, Resp>(url: string, payload: Req): ReqReturn<Resp> {
+  delete<Resp>(url: string, payload: object = {}): ReqReturn<Resp> {
     return new Promise((resolve) => {
       const config = { data: payload };
       this.client()
