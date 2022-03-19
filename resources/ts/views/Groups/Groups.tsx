@@ -12,18 +12,13 @@ import TableRow from "../../components/TableRow";
 interface Props extends StateProps, DispatchProps {}
 
 class Groups extends PureComponent<Props> {
+  tableHeaders = ["Title", "Created at", "Updated at", "Actions"];
+  tableActions: ActionName[] = ["edit", "delete"];
+
   constructor(props: Props) {
     super(props);
     this.handleCreateClick = this.handleCreateClick.bind(this);
     this.handleActionClick = this.handleActionClick.bind(this);
-  }
-
-  get tableActions(): ActionName[] {
-    return ["edit", "delete"];
-  }
-
-  get tableHeaders() {
-    return ["Title", "Created at", "Updated at", "Actions"];
   }
 
   tableRow(group: any) {
