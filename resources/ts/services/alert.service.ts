@@ -1,4 +1,4 @@
-import store from "../store";
+import store from "../store/store";
 import { replaceAlert, removeAlert } from "../components/Alert/Alert.slice";
 import { Type } from "../components/Alert/Alert";
 

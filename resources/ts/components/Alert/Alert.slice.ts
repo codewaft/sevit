@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { delay, put, takeLatest } from "redux-saga/effects";
 import { Type } from "./Alert";
 
 interface Alert {
@@ -30,12 +29,3 @@ export const slice = createSlice({
 
 export const { replaceAlert, removeAlert } = slice.actions;
 export default slice.reducer;
-
-function* autoRemoveAlert() {
-  yield delay(4000);
-  yield put(removeAlert());
-}
-
-export function* onAlertReplace() {
-  yield takeLatest(replaceAlert, autoRemoveAlert);
-}

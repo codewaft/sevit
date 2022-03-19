@@ -1,6 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { delay, put, select, takeLatest } from "redux-saga/effects";
-import { RootState } from "../../store";
 
 export interface State {
   progress: number;
@@ -28,19 +26,3 @@ export const slice = createSlice({
 
 export const { startProgress, incrementProgress, stopProgress } = slice.actions;
 export default slice.reducer;
-
-function* autoIncrementProgress() {
-  const getProgress = (store: RootState) => store.progressBar.progress;
-  const canProgress = function* () {
-    const progress: number = yield select(getProgress);
-    return progress && progress < 90;
-  };
-  while ((yield canProgress()) as boolean) {
-    yield delay(100);
-    yield put(incrementProgress());
-  }
-}
-
-export function* onProgressBarStartProgress() {
-  yield takeLatest(startProgress, autoIncrementProgress);
-}
