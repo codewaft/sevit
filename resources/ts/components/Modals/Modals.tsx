@@ -1,36 +1,28 @@
 import React, { PureComponent } from "react";
-import Modal from "./Modal";
-import BroadcastCreate from "./BroadcastCreate";
-import Broadcast from "./Broadcast";
-import BroadcastEdit from "./BroadcastEdit";
-import BroadcastMessages from "./BroadcastMessages";
-import TemplateCreate from "./TemplateCreate";
-import TemplateEdit from "./TemplateEdit";
-import ContactCreate from "./ContactCreate";
-import ContactEdit from "./ContactEdit";
-import GroupCreate from "./GroupCreate";
-import GroupEdit from "./GroupEdit";
+import { connect } from "react-redux";
+import { RootState } from "../../store/store";
+import { ModalName } from "./Modals.slice";
+import Modal from "../Modal";
+import BroadcastCreate from "../BroadcastCreate";
+import Broadcast from "../Broadcast";
+import BroadcastEdit from "../BroadcastEdit";
+import BroadcastMessages from "../BroadcastMessages";
+import TemplateCreate from "../TemplateCreate";
+import TemplateEdit from "../TemplateEdit";
+import ContactCreate from "../ContactCreate";
+import ContactEdit from "../ContactEdit";
+import GroupCreate from "../GroupCreate";
+import GroupEdit from "../GroupEdit";
 
-type ModalName =
-  | "broadcastCreate"
-  | "broadcast"
-  | "broadcastmessages"
-  | "broadcastEdit"
-  | "teimplateCreate"
-  | "teimplateEdit"
-  | "contactCreate"
-  | "contactEdit"
-  | "groupCreate"
-  | "groupEdit";
+interface Props extends StateProps, DispatchProps {}
 
-export default class Modals extends PureComponent {
+class Modals extends PureComponent<Props> {
   get activeModal(): ModalName {
     return "groupEdit";
   }
 
   modal() {
-    const activeModal = this.activeModal;
-    switch (activeModal) {
+    switch (this.props.active) {
       case "broadcastCreate":
         return (
           <Modal size="full" heading="Create broadcast">
@@ -91,6 +83,8 @@ export default class Modals extends PureComponent {
             <GroupEdit />
           </Modal>
         );
+      default:
+        return null;
     }
   }
 
@@ -98,3 +92,14 @@ export default class Modals extends PureComponent {
     return this.modal();
   }
 }
+
+const mapStateToProps = (state: RootState) => ({
+  active: state.modals.active,
+});
+
+const mapDispatchToProps = () => ({});
+
+type StateProps = ReturnType<typeof mapStateToProps>;
+type DispatchProps = ReturnType<typeof mapDispatchToProps>;
+
+export default connect(mapStateToProps, mapDispatchToProps)(Modals);

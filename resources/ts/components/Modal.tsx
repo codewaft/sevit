@@ -37,15 +37,11 @@ export default class Modal extends PureComponent<Props> {
 
   render() {
     return (
-      <div className="fixed h-screen w-screen z-50 bg-slate-600/[.15]">
+      <div className="fixed h-screen w-screen z-50 bg-slate-600/[.15] top-0">
         <div className="container mx-auto flex justify-center items-center h-full">
           <Card color="gray" className={this.className}>
             <div className="flex justify-end px-3 pt-2 -mb-2">
-              <Icon
-                size="regular"
-                name="ri-close-line"
-                onClick={this.handleCloseClick}
-              />
+              <Icon size="regular" name="ri-close-line" onClick={this.handleCloseClick} />
             </div>
             {this.heading}
             {this.props.children}

@@ -8,6 +8,10 @@ import Date from "../../components/Date";
 import Table from "../../components/Table";
 import TableData from "../../components/TableData";
 import TableRow from "../../components/TableRow";
+import {
+  ModalName,
+  replaceActive as replaceModalActive,
+} from "../../components/Modals/Modals.slice";
 
 interface Props extends StateProps, DispatchProps {}
 
@@ -44,9 +48,13 @@ class Groups extends PureComponent<Props> {
     return groups && groups.data.map((group) => this.tableRow(group));
   }
 
-  handleActionClick(id: number, action: ActionName) {}
+  handleActionClick(id: number, action: ActionName) {
+    if (action === "edit") this.props.replaceModalActive("groupEdit");
+  }
 
-  handleCreateClick() {}
+  handleCreateClick() {
+    this.props.replaceModalActive("groupCreate");
+  }
 
   handlePaginate(url: string) {
     this.props.paginateGroups(url);
@@ -84,6 +92,7 @@ const mapStateToProps = (state: RootState) => ({
 
 const mapDispatchToProps = (dispatch: RootDispatch) => ({
   paginateGroups: (url?: string) => paginateGroups(dispatch)(url),
+  replaceModalActive: (name: ModalName) => dispatch(replaceModalActive(name)),
 });
 
 type StateProps = ReturnType<typeof mapStateToProps>;

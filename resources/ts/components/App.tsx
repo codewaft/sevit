@@ -12,6 +12,7 @@ import Groups from "../views/Groups/Groups";
 import Alert from "./Alert/Alert";
 import ProgressBar from "./ProgressBar/ProgressBar";
 import AutoNavigate from "./AutoNavigate/AutoNavigate";
+import Modals from "./Modals/Modals";
 
 interface Props extends StateProps {}
 
@@ -37,6 +38,7 @@ class App extends Component<Props> {
             <Route path={routes.groups} element={<Groups />} />
           </Route>
         </Routes>
+        <Modals />
         {this.alert}
         <ProgressBar />
         <AutoNavigate />
