@@ -40,11 +40,7 @@ export default class Broadcasts extends PureComponent<Props, State> {
           <Status name={broadcast.status} />
         </TableData>
         <TableData>
-          <Actions
-            id={broadcast.id}
-            actions={this.tableActions}
-            onClick={this.handleActionClick}
-          />
+          <Actions id={broadcast.id} actions={this.tableActions} onClick={this.handleActionClick} />
         </TableData>
       </TableRow>
     );
@@ -77,7 +73,9 @@ export default class Broadcasts extends PureComponent<Props, State> {
           icon="ri-add-circle-line"
           onClick={this.handleCreateClick}
         />
-        <Table headers={this.tableHeaders}>{this.broadcasts}</Table>
+        <Table name="broadcasts" headers={this.tableHeaders} paginate={null} onPaginate={() => {}}>
+          {this.broadcasts}
+        </Table>
       </div>
     );
   }

@@ -40,11 +40,7 @@ export default class Contacts extends PureComponent<Props, State> {
           <Date date={contact.updatedAt} />
         </TableData>
         <TableData>
-          <Actions
-            id={contact.id}
-            actions={this.tableActions}
-            onClick={this.handleActionClick}
-          />
+          <Actions id={contact.id} actions={this.tableActions} onClick={this.handleActionClick} />
         </TableData>
       </TableRow>
     );
@@ -92,7 +88,9 @@ export default class Contacts extends PureComponent<Props, State> {
             onClick={this.handleExportClick}
           />
         </div>
-        <Table headers={this.tableHeaders}>{this.contacts}</Table>
+        <Table name="contacts" headers={this.tableHeaders} paginate={null} onPaginate={() => {}}>
+          {this.contacts}
+        </Table>
       </div>
     );
   }

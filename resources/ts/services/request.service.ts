@@ -13,6 +13,10 @@ type ReqReturn<ResponseData> = Promise<ResponseData | null>;
 export interface PaginateResponse<PaginateData> {
   next_page_url: string | null;
   prev_page_url: string | null;
+  from: number;
+  to: number;
+  total: number;
+  per_page: number;
   data: PaginateData;
 }
 

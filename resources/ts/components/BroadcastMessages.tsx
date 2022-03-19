@@ -56,7 +56,9 @@ export default class BroadcastMessages extends PureComponent<Props, State> {
           <Heading size="regular" text="Summer offer" />
           <Label type="success" text="completed (185/190)" />
         </div>
-        <Table headers={this.tableHeaders}>{this.messages}</Table>
+        <Table name="messages" headers={this.tableHeaders} paginate={null} onPaginate={() => {}}>
+          {this.messages}
+        </Table>
       </div>
     );
   }

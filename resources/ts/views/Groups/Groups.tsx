@@ -64,7 +64,14 @@ class Groups extends PureComponent<Props> {
           icon="ri-add-circle-line"
           onClick={this.handleCreateClick}
         />
-        <Table headers={this.tableHeaders}>{this.groups}</Table>
+        <Table
+          name="groups"
+          headers={this.tableHeaders}
+          paginate={this.props.groups}
+          onPaginate={() => {}}
+        >
+          {this.groups}
+        </Table>
       </div>
     );
   }

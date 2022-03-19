@@ -38,11 +38,7 @@ export default class Templates extends PureComponent<Props, State> {
           <Date date={template.updatedAt} />
         </TableData>
         <TableData>
-          <Actions
-            id={template.id}
-            actions={this.tableActions}
-            onClick={this.handleActionClick}
-          />
+          <Actions id={template.id} actions={this.tableActions} onClick={this.handleActionClick} />
         </TableData>
       </TableRow>
     );
@@ -74,7 +70,9 @@ export default class Templates extends PureComponent<Props, State> {
           icon="ri-add-circle-line"
           onClick={this.handleCreateClick}
         />
-        <Table headers={this.tableHeaders}>{this.templates}</Table>
+        <Table name="templates" headers={this.tableHeaders} paginate={null} onPaginate={() => {}}>
+          {this.templates}
+        </Table>
       </div>
     );
   }
