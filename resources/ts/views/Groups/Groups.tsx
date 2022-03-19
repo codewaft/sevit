@@ -38,8 +38,9 @@ class Groups extends PureComponent<Props> {
     );
   }
 
-  get groups() {
-    return this.props.groups ? this.props.groups.data.map((group) => this.tableRow(group)) : null;
+  get tableData() {
+    const { groups } = this.props;
+    return groups && groups.data.map((group) => this.tableRow(group));
   }
 
   handleActionClick(id: number, action: ActionName) {}
@@ -65,7 +66,7 @@ class Groups extends PureComponent<Props> {
           paginate={this.props.groups}
           onPaginate={() => {}}
         >
-          {this.groups}
+          {this.tableData}
         </Table>
       </div>
     );
