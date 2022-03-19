@@ -31,10 +31,10 @@ class Groups extends PureComponent<Props> {
       <TableRow key={group.id}>
         <TableData>{group.title}</TableData>
         <TableData>
-          <Date date={group.createdAt} />
+          <Date date={group.created_at} />
         </TableData>
         <TableData>
-          <Date date={group.updatedAt} />
+          <Date date={group.updated_at} />
         </TableData>
         <TableData>
           <Actions id={group.id} actions={this.tableActions} onClick={this.handleActionClick} />
