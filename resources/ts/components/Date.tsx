@@ -12,6 +12,6 @@ export default class Date extends PureComponent<Props> {
   }
 
   render() {
-    return <span>{this.date}</span>;
+    return <span className="text-base">{this.date}</span>;
   }
 }
