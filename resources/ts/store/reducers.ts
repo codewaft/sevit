@@ -4,6 +4,7 @@ import progressBarReducer from "../components/ProgressBar/ProgressBar.slice";
 import autoNavigateReducer from "../components/AutoNavigate/AutoNavigate.slice";
 import modalsReducer from "../components/Modals/Modals.slice";
 import confirmReducer from "../components/Confirm/Confirm.slice";
+import groupCreateReducer from "../components/GroupCreate/GroupCreate.slice";
 
 export default {
   groups: groupsReducer,
@@ -12,4 +13,5 @@ export default {
   autoNavigate: autoNavigateReducer,
   modals: modalsReducer,
   confirm: confirmReducer,
+  groupCreate: groupCreateReducer,
 };

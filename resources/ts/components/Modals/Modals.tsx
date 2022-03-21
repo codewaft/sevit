@@ -11,7 +11,7 @@ import TemplateCreate from "../TemplateCreate";
 import TemplateEdit from "../TemplateEdit";
 import ContactCreate from "../ContactCreate";
 import ContactEdit from "../ContactEdit";
-import GroupCreate from "../GroupCreate";
+import GroupCreate from "../GroupCreate/GroupCreate";
 import GroupEdit from "../GroupEdit";
 
 interface Props extends StateProps, DispatchProps {}
