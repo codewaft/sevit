@@ -7,7 +7,7 @@ interface Props {
 export default class TableData extends PureComponent<Props> {
   get className() {
     const base = "truncate overflow-hidden inline-block m-0";
-    const width = this.props.truncate && "w-72";
+    const width = this.props.truncate && "w-52";
     return `${base} ${width}`;
   }
 

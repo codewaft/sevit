@@ -6,7 +6,7 @@ import { RootState } from "../store/store";
 import Panel from "./Panel";
 import SignIn from "../views/SignIn";
 import Broadcasts from "../views/Broadcasts";
-import Templates from "../views/Templates";
+import Templates from "../views/Templates/Templates";
 import Contacts from "../views/Contacts/Contacts";
 import Groups from "../views/Groups/Groups";
 import Alert from "./Alert/Alert";
