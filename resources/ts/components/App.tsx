@@ -21,11 +21,6 @@ class App extends Component<Props> {
     return [routes.broadcasts];
   }
 
-  get alert() {
-    const { alert } = this.props;
-    return alert && <Alert type={alert.type}>{alert.message}</Alert>;
-  }
-
   render() {
     return (
       <Router>
@@ -39,7 +34,7 @@ class App extends Component<Props> {
           </Route>
         </Routes>
         <Modals />
-        {this.alert}
+        <Alert />
         <ProgressBar />
         <AutoNavigate />
       </Router>

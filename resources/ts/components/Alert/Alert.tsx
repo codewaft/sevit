@@ -1,34 +1,24 @@
 import React, { PureComponent } from "react";
-import Icon from "../Icon";
+import { connect } from "react-redux";
+import { RootDispatch, RootState } from "../../store/store";
+import Notify from "../Notify";
 
-export type Type = "info" | "success" | "warning" | "error";
-type TypeClasses = Record<Type, string>;
+interface Props extends StateProps, DispatchProps {}
 
-interface Props {
-  type: Type;
-}
-
-export default class Alert extends PureComponent<Props> {
-  typeClasses: TypeClasses = {
-    info: "text-cyan-300",
-    success: "text-green-500",
-    warning: "text-yellow-400",
-    error: "text-red-500",
-  };
-
-  get className() {
-    const { type } = this.props;
-    const base =
-      "inline-flex items-center py-2 gap-2.5 px-5 rounded-lg drop-shadow-md bg-white absolute mx-auto bottom-10 inset-x-0 w-fit";
-    return `${base} ${this.typeClasses[type]}`;
-  }
-
+class Alert extends PureComponent<Props> {
   render() {
-    return (
-      <div className={this.className}>
-        <Icon size="large" name="ri-error-warning-line" />
-        <div className="text-md text-slate-600">{this.props.children}</div>
-      </div>
-    );
+    const { alert } = this.props;
+    return alert && <Notify type={alert.type}>{alert.message}</Notify>;
   }
 }
+
+const mapStateToProps = (state: RootState) => ({
+  alert: state.alert.alert,
+});
+
+const mapDisptachToProps = (dispatch: RootDispatch) => ({});
+
+type StateProps = ReturnType<typeof mapStateToProps>;
+type DispatchProps = ReturnType<typeof mapDisptachToProps>;
+
+export default connect(mapStateToProps, mapDisptachToProps)(Alert);

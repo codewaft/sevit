@@ -1,8 +1,8 @@
 import store from "../store/store";
 import { replaceAlert, removeAlert } from "../components/Alert/Alert.slice";
-import { Type } from "../components/Alert/Alert";
+import { Type as NotifyType } from "../components/Notify";
 
-function push(type: Type, message: string) {
+function push(type: NotifyType, message: string) {
   const alert = { type, message };
   store.dispatch(replaceAlert(alert));
 }

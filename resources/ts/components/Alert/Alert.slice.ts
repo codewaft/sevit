@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Type } from "./Alert";
+import { Type as NotifyType } from "../Notify";
 
-interface Alert {
-  type: Type;
+export interface Alert {
+  type: NotifyType;
   message: string;
 }
 
