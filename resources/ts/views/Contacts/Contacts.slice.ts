@@ -17,8 +17,13 @@ export const slice = createSlice({
     replacePaginate: (state: State, action: PayloadAction<State["paginate"]>) => {
       state.paginate = action.payload;
     },
+    addPaginateContact: (state: State, action: PayloadAction<Contact>) => {
+      if (state.paginate) {
+        state.paginate.data.unshift(action.payload);
+      }
+    },
   },
 });
 
-export const { replacePaginate } = slice.actions;
+export const { replacePaginate, addPaginateContact } = slice.actions;
 export default slice.reducer;

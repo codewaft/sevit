@@ -51,10 +51,10 @@ export default class BroadcastEdit extends PureComponent<Props, State> {
     }
   }
 
-  handleMultiSelectChange(options: SelectOption[]) {
+  handleMultiSelectChange(name: string, options: string[]) {
     const selectedGroups = compact(
       map(options, (option) => {
-        const id = Number(option.value);
+        const id = Number(option);
         return find(this.state.groups, ["id", id]);
       })
     );
@@ -83,10 +83,7 @@ export default class BroadcastEdit extends PureComponent<Props, State> {
   }
 
   get templateMessage() {
-    const template = find(this.state.templates, [
-      "id",
-      Number(this.state.templateId),
-    ]);
+    const template = find(this.state.templates, ["id", Number(this.state.templateId)]);
     if (!template) return "";
     return template.content;
   }

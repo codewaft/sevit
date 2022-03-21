@@ -9,6 +9,7 @@ import modalsReducer from "../components/Modals/Modals.slice";
 import confirmReducer from "../components/Confirm/Confirm.slice";
 import groupCreateReducer from "../components/GroupCreate/GroupCreate.slice";
 import groupEditReducer from "../components/GroupEdit/GroupEdit.slice";
+import contactCreateReducer from "../components/ContactCreate/ContactCreate.slice";
 
 export default {
   groups: groupsReducer,
@@ -22,4 +23,5 @@ export default {
   confirm: confirmReducer,
   groupCreate: groupCreateReducer,
   groupEdit: groupEditReducer,
+  contactCreate: contactCreateReducer,
 };
