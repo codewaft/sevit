@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { RootDispatch, RootState } from "../../store/store";
-import { paginateTemplates } from "./Templates.thunk";
+import { deleteTemplatePrompt, paginateTemplates } from "./Templates.thunk";
 import { Template } from "../../apis/template.api";
 import Actions, { Name as ActionName } from "../../components/Actions";
 import Button from "../../components/Button";
@@ -50,7 +50,12 @@ class Templates extends PureComponent<Props> {
     this.props.paginateTemplates(url);
   }
 
-  handleActionClick(id: number, action: ActionName) {}
+  handleActionClick(id: number, action: ActionName) {
+    switch (action) {
+      case "delete":
+        return this.props.deleteTemplatePrompt(id);
+    }
+  }
 
   handleCreateClick() {}
 
@@ -86,6 +91,7 @@ const mapStateToProps = (state: RootState) => ({
 
 const mapDispatchToProps = (dispatch: RootDispatch) => ({
   paginateTemplates: (url?: string) => dispatch(paginateTemplates(url)),
+  deleteTemplatePrompt: (id: number) => dispatch(deleteTemplatePrompt(id)),
 });
 
 type StateProps = ReturnType<typeof mapStateToProps>;

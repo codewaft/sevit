@@ -29,7 +29,6 @@ class Groups extends PureComponent<Props> {
     this.handlePaginate = this.handlePaginate.bind(this);
     this.handleCreateClick = this.handleCreateClick.bind(this);
     this.handleActionClick = this.handleActionClick.bind(this);
-    this.handleDeletePrompt = this.handleDeletePrompt.bind(this);
   }
 
   tableRow(group: Group) {
@@ -71,10 +70,6 @@ class Groups extends PureComponent<Props> {
       case "delete":
         return this.props.deleteGroupPrompt(id);
     }
-  }
-
-  handleDeletePrompt(id: number) {
-    this.props.deleteGroupPrompt(id);
   }
 
   componentDidMount() {
