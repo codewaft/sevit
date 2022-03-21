@@ -1,7 +1,8 @@
 import React, { PureComponent } from "react";
+import { MessageStatus, Status as BroadcastStatus } from "../apis/broadcast.api";
 import Label, { Type as LabelType } from "./Label";
 
-type Name = "scheduled" | "processing" | "completed" | "processed" | "failed";
+type Name = BroadcastStatus | MessageStatus;
 type LabelTypes = Record<Name, LabelType>;
 
 interface Props {
@@ -18,8 +19,6 @@ export default class Status extends PureComponent<Props> {
   };
 
   render() {
-    return (
-      <Label type={this.labelTypes[this.props.name]} text={this.props.name} />
-    );
+    return <Label type={this.labelTypes[this.props.name]} text={this.props.name} />;
   }
 }
