@@ -1,14 +1,14 @@
 import React, { Component } from "react";
-import { find, findIndex, isEmpty, reject } from "lodash";
+import { find, findIndex, reject, map } from "lodash";
 import Select, { Option as SelectOption } from "./Select";
-import Label from "./Label";
+import MultiSelectedLabels from "./MultiSelectedLabels";
 
 interface Props {
   name: string;
   label: string;
   placeholder: string;
   options: SelectOption[];
-  onChange: (options: SelectOption[]) => void;
+  onChange: (name: string, selectedVales: string[]) => void;
 }
 
 interface State {
@@ -24,57 +24,31 @@ export default class MultiSelect extends Component<Props, State> {
       selectedOptions: [],
     };
     this.handleSelectChange = this.handleSelectChange.bind(this);
-    this.handleOptionRemoveClick = this.handleOptionRemoveClick.bind(this);
+    this.handleRemoveClick = this.handleRemoveClick.bind(this);
   }
 
-  handleOptionRemoveClick(option: SelectOption) {
-    this.setState((state: State) => {
-      const selectedOptions = reject(state.selectedOptions, option);
-      this.props.onChange(selectedOptions);
-      return { selectedOptions };
-    });
+  handleChange(selectedOptions: SelectOption[]) {
+    const selectedValues = map(selectedOptions, (option) => option.value);
+    this.props.onChange(this.props.name, selectedValues);
   }
 
-  selectedOption(option: SelectOption) {
-    return (
-      <Label
-        type="secondary"
-        text={option.name}
-        onClose={() => this.handleOptionRemoveClick(option)}
-        key={option.name}
-      />
-    );
-  }
-
-  get selectedOptions() {
-    const { selectedOptions } = this.state;
-    return (
-      !isEmpty(selectedOptions) && (
-        <div className="flex flex-wrap gap-2.5 mb-3">
-          {selectedOptions.map((option) => this.selectedOption(option))}
-        </div>
-      )
-    );
-  }
-
-  pushOption(option: SelectOption) {
-    const isExisting =
-      findIndex(this.state.selectedOptions, {
-        value: option.value,
-      }) !== -1;
-    if (!isExisting) {
-      this.setState((state: State) => {
-        const selectedOptions = state.selectedOptions;
-        selectedOptions.push(option);
-        this.props.onChange(selectedOptions);
-        return { selectedOptions };
-      });
-    }
+  handleRemoveClick(value: string) {
+    const selectedOptions = reject(this.state.selectedOptions, { value });
+    this.handleChange(selectedOptions);
+    this.setState({ selectedOptions });
   }
 
   handleSelectChange(name: string, value: string) {
     const option = find(this.props.options, { value });
-    if (option) this.pushOption(option);
+    if (option) {
+      const isSelected = findIndex(this.state.selectedOptions, { value }) !== -1;
+      if (!isSelected) {
+        const selectedOptions = this.state.selectedOptions;
+        selectedOptions.push(option);
+        this.handleChange(selectedOptions);
+        this.setState({ selectedOptions });
+      }
+    }
   }
 
   render() {
@@ -87,7 +61,10 @@ export default class MultiSelect extends Component<Props, State> {
         placeholder={this.props.placeholder}
         onChange={this.handleSelectChange}
       >
-        {this.selectedOptions}
+        <MultiSelectedLabels
+          selectedOptions={this.state.selectedOptions}
+          onRemove={this.handleRemoveClick}
+        />
       </Select>
     );
   }

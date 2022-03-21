@@ -23,10 +23,10 @@ export default class ContactEdit extends PureComponent<Props, State> {
     this.handleEditClick = this.handleEditClick.bind(this);
   }
 
-  handleMultiSelectChange(options: SelectOption[]) {
+  handleMultiSelectChange(name: string, options: string[]) {
     const selectedGroups = compact(
       map(options, (option) => {
-        const id = Number(option.value);
+        const id = Number(option);
         return find(this.state.groups, ["id", id]);
       })
     );
