@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { join, map } from "lodash";
 import { RootDispatch, RootState } from "../../store/store";
-import { paginateBroadcasts } from "./Broadcasts.thunk";
+import { deleteBroadcastPrompt, paginateBroadcasts } from "./Broadcasts.thunk";
 import { Broadcast } from "../../apis/broadcast.api";
 import { Group } from "../../apis/group.api";
 import Actions, { Name as ActionName } from "../../components/Actions";
@@ -59,7 +59,12 @@ class Broadcasts extends PureComponent<Props> {
     this.props.paginateBroadcasts(url);
   }
 
-  handleActionClick(id: number, action: ActionName) {}
+  handleActionClick(id: number, action: ActionName) {
+    switch (action) {
+      case "delete":
+        return this.props.deleteBroadcastPrompt(id);
+    }
+  }
 
   handleCreateClick() {}
 
@@ -95,6 +100,7 @@ const mapStateToProps = (state: RootState) => ({
 
 const mapDispatchToProps = (dispatch: RootDispatch) => ({
   paginateBroadcasts: (url?: string) => dispatch(paginateBroadcasts(url)),
+  deleteBroadcastPrompt: (id: number) => dispatch(deleteBroadcastPrompt(id)),
 });
 
 type StateProps = ReturnType<typeof mapStateToProps>;
