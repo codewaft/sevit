@@ -20,6 +20,7 @@ class Contacts extends PureComponent<Props> {
 
   constructor(props: Props) {
     super(props);
+    this.handlePaginate = this.handlePaginate.bind(this);
     this.handleCreateClick = this.handleCreateClick.bind(this);
     this.handleImportClick = this.handleImportClick.bind(this);
     this.handleExportClick = this.handleExportClick.bind(this);
@@ -51,6 +52,10 @@ class Contacts extends PureComponent<Props> {
   get tableData() {
     const { contacts } = this.props;
     return contacts && contacts.data.map((contact) => this.tableRow(contact));
+  }
+
+  handlePaginate(url: string) {
+    this.props.paginateContacts(url);
   }
 
   handleActionClick(id: number, action: ActionName) {}
@@ -90,7 +95,7 @@ class Contacts extends PureComponent<Props> {
           name="contacts"
           headers={this.tableHeaders}
           paginate={this.props.contacts}
-          onPaginate={() => {}}
+          onPaginate={this.handlePaginate}
         >
           {this.tableData}
         </Table>
