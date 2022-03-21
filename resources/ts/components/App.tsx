@@ -34,10 +34,10 @@ class App extends Component<Props> {
             <Route path={routes.groups} element={<Groups />} />
           </Route>
         </Routes>
-        <Modals />
+        <ProgressBar />
         <Alert />
         <Confirm />
-        <ProgressBar />
+        <Modals />
         <AutoNavigate />
       </Router>
     );

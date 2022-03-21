@@ -6,7 +6,7 @@ interface Props extends StateProps, DispatchProps {}
 
 class ProgressBar extends Component<Props> {
   get className() {
-    return "bg-primary h-1 transition-width ease-linear absolute inset-x-0 top-0 duration-100 bg-sky-500";
+    return "bg-primary h-1 transition-width ease-linear absolute inset-x-0 top-0 duration-100 bg-sky-500 z-30";
   }
 
   get style() {
