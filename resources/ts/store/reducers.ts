@@ -6,6 +6,7 @@ import autoNavigateReducer from "../components/AutoNavigate/AutoNavigate.slice";
 import modalsReducer from "../components/Modals/Modals.slice";
 import confirmReducer from "../components/Confirm/Confirm.slice";
 import groupCreateReducer from "../components/GroupCreate/GroupCreate.slice";
+import groupEditReducer from "../components/GroupEdit/GroupEdit.slice";
 
 export default {
   groups: groupsReducer,
@@ -16,4 +17,5 @@ export default {
   modals: modalsReducer,
   confirm: confirmReducer,
   groupCreate: groupCreateReducer,
+  groupEdit: groupEditReducer,
 };
