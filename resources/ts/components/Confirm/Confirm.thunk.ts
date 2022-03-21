@@ -7,7 +7,7 @@ export function handleConfirm() {
     if (confirm) {
       switch (confirm.action) {
         case "groupDelete":
-          dispatch(deleteGroupConfirm());
+          return dispatch(deleteGroupConfirm());
       }
     }
   };
