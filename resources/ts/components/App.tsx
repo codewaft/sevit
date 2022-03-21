@@ -13,6 +13,7 @@ import Alert from "./Alert/Alert";
 import ProgressBar from "./ProgressBar/ProgressBar";
 import AutoNavigate from "./AutoNavigate/AutoNavigate";
 import Modals from "./Modals/Modals";
+import Confirm from "./Confirm/Confirm";
 
 interface Props extends StateProps {}
 
@@ -35,6 +36,7 @@ class App extends Component<Props> {
         </Routes>
         <Modals />
         <Alert />
+        <Confirm />
         <ProgressBar />
         <AutoNavigate />
       </Router>

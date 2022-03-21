@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { RootDispatch, RootState } from "../../store/store";
-import { paginateGroups } from "./Groups.thunk";
+import { deleteGroupPrompt, paginateGroups } from "./Groups.thunk";
 import Actions, { Name as ActionName } from "../../components/Actions";
 import Button from "../../components/Button";
 import Date from "../../components/Date";
@@ -21,9 +21,10 @@ class Groups extends PureComponent<Props> {
 
   constructor(props: Props) {
     super(props);
+    this.handlePaginate = this.handlePaginate.bind(this);
     this.handleCreateClick = this.handleCreateClick.bind(this);
     this.handleActionClick = this.handleActionClick.bind(this);
-    this.handlePaginate = this.handlePaginate.bind(this);
+    this.handleDeletePrompt = this.handleDeletePrompt.bind(this);
   }
 
   tableRow(group: any) {
@@ -48,16 +49,25 @@ class Groups extends PureComponent<Props> {
     return groups && groups.data.map((group) => this.tableRow(group));
   }
 
-  handleActionClick(id: number, action: ActionName) {
-    if (action === "edit") this.props.replaceModalActive("groupEdit");
+  handlePaginate(url: string) {
+    this.props.paginateGroups(url);
   }
 
   handleCreateClick() {
     this.props.replaceModalActive("groupCreate");
   }
 
-  handlePaginate(url: string) {
-    this.props.paginateGroups(url);
+  handleActionClick(id: number, action: ActionName) {
+    switch (action) {
+      case "edit":
+        this.props.replaceModalActive("groupEdit");
+      case "delete":
+        this.props.deleteGroupPrompt(id);
+    }
+  }
+
+  handleDeletePrompt(id: number) {
+    this.props.deleteGroupPrompt(id);
   }
 
   componentDidMount() {
@@ -91,8 +101,9 @@ const mapStateToProps = (state: RootState) => ({
 });
 
 const mapDispatchToProps = (dispatch: RootDispatch) => ({
-  paginateGroups: (url?: string) => paginateGroups(dispatch)(url),
+  paginateGroups: (url?: string) => dispatch(paginateGroups(url)),
   replaceModalActive: (name: ModalName) => dispatch(replaceModalActive(name)),
+  deleteGroupPrompt: (id: number) => dispatch(deleteGroupPrompt(id)),
 });
 
 type StateProps = ReturnType<typeof mapStateToProps>;

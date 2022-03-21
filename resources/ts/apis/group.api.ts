@@ -29,26 +29,26 @@ const routes = {
 
 export default {
   create(payload: CreateRequest) {
-    return api.post(routes.create, payload);
+    return api.post<Group>(routes.create, payload);
   },
 
   read(id: number) {
     const url = routeUtil.replaceParams(routes.read, { id });
-    return api.get(url);
+    return api.get<Group>(url);
   },
 
   edit(id: number, payload: EditRequest) {
     const url = routeUtil.replaceParams(routes.edit, { id });
-    return api.patch(url, payload);
+    return api.patch<Group>(url, payload);
   },
 
   delete(id: number) {
     const url = routeUtil.replaceParams(routes.delete, { id });
-    return api.delete(url);
+    return api.delete<Group>(url);
   },
 
   list() {
-    return api.get(routes.list);
+    return api.get<Group[]>(routes.list);
   },
 
   paginate(url?: string) {

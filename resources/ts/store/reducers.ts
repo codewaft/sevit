@@ -3,6 +3,7 @@ import alertReducer from "../components/Alert/Alert.slice";
 import progressBarReducer from "../components/ProgressBar/ProgressBar.slice";
 import autoNavigateReducer from "../components/AutoNavigate/AutoNavigate.slice";
 import modalsReducer from "../components/Modals/Modals.slice";
+import confirmReducer from "../components/Confirm/Confirm.slice";
 
 export default {
   groups: groupsReducer,
@@ -10,4 +11,5 @@ export default {
   progressBar: progressBarReducer,
   autoNavigate: autoNavigateReducer,
   modals: modalsReducer,
+  confirm: confirmReducer,
 };
