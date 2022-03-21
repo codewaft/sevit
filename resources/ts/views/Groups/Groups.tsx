@@ -1,17 +1,22 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { RootDispatch, RootState } from "../../store/store";
+import { Group } from "../../apis/group.api";
 import { deleteGroupPrompt, paginateGroups } from "./Groups.thunk";
+import {
+  ModalName,
+  replaceActive as replaceModalActive,
+} from "../../components/Modals/Modals.slice";
+import {
+  replaceId as replaceGroupEditId,
+  resetState as resetGroupEditState,
+} from "../../components/GroupEdit/GroupEdit.slice";
 import Actions, { Name as ActionName } from "../../components/Actions";
 import Button from "../../components/Button";
 import Date from "../../components/Date";
 import Table from "../../components/Table";
 import TableData from "../../components/TableData";
 import TableRow from "../../components/TableRow";
-import {
-  ModalName,
-  replaceActive as replaceModalActive,
-} from "../../components/Modals/Modals.slice";
 
 interface Props extends StateProps, DispatchProps {}
 
@@ -27,7 +32,7 @@ class Groups extends PureComponent<Props> {
     this.handleDeletePrompt = this.handleDeletePrompt.bind(this);
   }
 
-  tableRow(group: any) {
+  tableRow(group: Group) {
     return (
       <TableRow key={group.id}>
         <TableData truncate={true}>{group.title}</TableData>
@@ -60,6 +65,8 @@ class Groups extends PureComponent<Props> {
   handleActionClick(id: number, action: ActionName) {
     switch (action) {
       case "edit":
+        this.props.resetGroupEditState();
+        this.props.replaceGroupEditId(id);
         return this.props.replaceModalActive("groupEdit");
       case "delete":
         return this.props.deleteGroupPrompt(id);
@@ -102,6 +109,8 @@ const mapStateToProps = (state: RootState) => ({
 
 const mapDispatchToProps = (dispatch: RootDispatch) => ({
   paginateGroups: (url?: string) => dispatch(paginateGroups(url)),
+  resetGroupEditState: () => dispatch(resetGroupEditState()),
+  replaceGroupEditId: (id: number) => dispatch(replaceGroupEditId(id)),
   replaceModalActive: (name: ModalName) => dispatch(replaceModalActive(name)),
   deleteGroupPrompt: (id: number) => dispatch(deleteGroupPrompt(id)),
 });
