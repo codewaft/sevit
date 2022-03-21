@@ -1,4 +1,7 @@
 import React, { PureComponent } from "react";
+import { connect } from "react-redux";
+import { RootDispatch, RootState } from "../store/store";
+import { resetActive as resetModalActive } from "./Modals/Modals.slice";
 import Card from "./Card";
 import Heading from "./Heading";
 import Icon from "./Icon";
@@ -6,12 +9,18 @@ import Icon from "./Icon";
 type Size = "half" | "full";
 type SizeClasses = Record<Size, string>;
 
-interface Props {
+interface Props extends StateProps, DispatchProps {
   size: Size;
   heading?: string;
+  children: JSX.Element;
 }
 
-export default class Modal extends PureComponent<Props> {
+class Modal extends PureComponent<Props> {
+  constructor(props: Props) {
+    super(props);
+    this.handleCloseClick = this.handleCloseClick.bind(this);
+  }
+
   sizeClasses: SizeClasses = {
     half: "w-1/3",
     full: "w-7/12",
@@ -33,7 +42,9 @@ export default class Modal extends PureComponent<Props> {
     );
   }
 
-  handleCloseClick() {}
+  handleCloseClick() {
+    this.props.resetModalActive();
+  }
 
   render() {
     return (
@@ -51,3 +62,14 @@ export default class Modal extends PureComponent<Props> {
     );
   }
 }
+
+const mapStateToProps = (state: RootState) => ({});
+
+const mapDispatchToProps = (dispatch: RootDispatch) => ({
+  resetModalActive: () => dispatch(resetModalActive()),
+});
+
+type StateProps = ReturnType<typeof mapStateToProps>;
+type DispatchProps = ReturnType<typeof mapDispatchToProps>;
+
+export default connect(mapStateToProps, mapDispatchToProps)(Modal);
