@@ -9,6 +9,10 @@ import {
   ModalName,
   replaceActive as replaceModalActive,
 } from "../../components/Modals/Modals.slice";
+import {
+  replaceId as replaceContactEditId,
+  resetState as resetContactEditState,
+} from "../../components/ContactEdit/ContactEdit.slice";
 import Actions, { Name as ActionName } from "../../components/Actions";
 import Button from "../../components/Button";
 import Date from "../../components/Date";
@@ -69,7 +73,13 @@ class Contacts extends PureComponent<Props> {
   handleImportClick() {}
   handleExportClick() {}
 
-  handleActionClick(id: number, action: ActionName) {}
+  handleActionClick(id: number, action: ActionName) {
+    if (action === "edit") {
+      this.props.resetContactEditState();
+      this.props.replaceContactEditId(id);
+      this.props.replaceModalActive("contactEdit");
+    }
+  }
 
   componentDidMount() {
     this.props.paginateContacts();
@@ -117,6 +127,8 @@ const mapStateToProps = (state: RootState) => ({
 
 const mapDispatchToProps = (dispatch: RootDispatch) => ({
   paginateContacts: (url?: string) => dispatch(paginateContacts(url)),
+  resetContactEditState: () => dispatch(resetContactEditState()),
+  replaceContactEditId: (id: number) => dispatch(replaceContactEditId(id)),
   replaceModalActive: (name: ModalName) => dispatch(replaceModalActive(name)),
 });
 

@@ -13,6 +13,7 @@ export function listGroups() {
     }
   };
 }
+
 export function createContact() {
   return async (dispatch: RootDispatch, getState: GetStateFunc) => {
     const { form: data } = getState().contactCreate;

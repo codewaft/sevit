@@ -10,7 +10,7 @@ import BroadcastMessages from "../BroadcastMessages";
 import TemplateCreate from "../TemplateCreate/TemplateCreate";
 import TemplateEdit from "../TemplateEdit";
 import ContactCreate from "../ContactCreate/ContactCreate";
-import ContactEdit from "../ContactEdit";
+import ContactEdit from "../ContactEdit/ContactEdit";
 import GroupCreate from "../GroupCreate/GroupCreate";
 import GroupEdit from "../GroupEdit/GroupEdit";
 
