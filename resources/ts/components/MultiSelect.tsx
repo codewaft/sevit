@@ -8,12 +8,12 @@ interface Props {
   label: string;
   placeholder: string;
   options: SelectOption[];
-  onChange: (name: string, selectedVales: string[]) => void;
+  selectedOptions: SelectOption[];
+  onChange: (name: string, selectedOptions: SelectOption[]) => void;
 }
 
 interface State {
   value: string;
-  selectedOptions: SelectOption[];
 }
 
 export default class MultiSelect extends Component<Props, State> {
@@ -21,32 +21,24 @@ export default class MultiSelect extends Component<Props, State> {
     super(props);
     this.state = {
       value: "",
-      selectedOptions: [],
     };
     this.handleSelectChange = this.handleSelectChange.bind(this);
     this.handleRemoveClick = this.handleRemoveClick.bind(this);
   }
 
-  handleChange(selectedOptions: SelectOption[]) {
-    const selectedValues = map(selectedOptions, (option) => option.value);
-    this.props.onChange(this.props.name, selectedValues);
-  }
-
   handleRemoveClick(value: string) {
-    const selectedOptions = reject(this.state.selectedOptions, { value });
-    this.handleChange(selectedOptions);
-    this.setState({ selectedOptions });
+    const selectedOptions = reject(this.props.selectedOptions, { value });
+    this.props.onChange(this.props.name, selectedOptions);
   }
 
   handleSelectChange(name: string, value: string) {
     const option = find(this.props.options, { value });
     if (option) {
-      const isSelected = findIndex(this.state.selectedOptions, { value }) !== -1;
+      const isSelected = findIndex(this.props.selectedOptions, { value }) !== -1;
       if (!isSelected) {
-        const selectedOptions = this.state.selectedOptions;
+        const selectedOptions = this.props.selectedOptions;
         selectedOptions.push(option);
-        this.handleChange(selectedOptions);
-        this.setState({ selectedOptions });
+        this.props.onChange(this.props.name, selectedOptions);
       }
     }
   }
@@ -62,7 +54,7 @@ export default class MultiSelect extends Component<Props, State> {
         onChange={this.handleSelectChange}
       >
         <MultiSelectedLabels
-          selectedOptions={this.state.selectedOptions}
+          selectedOptions={this.props.selectedOptions}
           onRemove={this.handleRemoveClick}
         />
       </Select>
