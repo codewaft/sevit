@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { join, map } from "lodash";
 import { RootDispatch, RootState } from "../../store/store";
-import { paginateContacts } from "./Contacts.thunk";
+import { deleteContactPrompt, paginateContacts } from "./Contacts.thunk";
 import { Contact } from "../../apis/contact.api";
 import { Group } from "../../apis/group.api";
 import {
@@ -74,10 +74,14 @@ class Contacts extends PureComponent<Props> {
   handleExportClick() {}
 
   handleActionClick(id: number, action: ActionName) {
-    if (action === "edit") {
-      this.props.resetContactEditState();
-      this.props.replaceContactEditId(id);
-      this.props.replaceModalActive("contactEdit");
+    switch (action) {
+      case "edit":
+        this.props.resetContactEditState();
+        this.props.replaceContactEditId(id);
+        this.props.replaceModalActive("contactEdit");
+        break;
+      case "delete":
+        return this.props.deleteContactPrompt(id);
     }
   }
 
@@ -130,6 +134,7 @@ const mapDispatchToProps = (dispatch: RootDispatch) => ({
   resetContactEditState: () => dispatch(resetContactEditState()),
   replaceContactEditId: (id: number) => dispatch(replaceContactEditId(id)),
   replaceModalActive: (name: ModalName) => dispatch(replaceModalActive(name)),
+  deleteContactPrompt: (id: number) => dispatch(deleteContactPrompt(id)),
 });
 
 type StateProps = ReturnType<typeof mapStateToProps>;

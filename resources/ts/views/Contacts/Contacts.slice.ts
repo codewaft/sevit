@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { findIndex } from "lodash";
+import { findIndex, reject } from "lodash";
 import { Contact } from "../../apis/contact.api";
 import { PaginateResponse } from "../../services/request.service";
 
@@ -31,8 +31,15 @@ export const slice = createSlice({
         }
       }
     },
+    removePaginateContact: (state: State, action: PayloadAction<number>) => {
+      if (state.paginate) {
+        const data = reject(state.paginate.data, (contact) => contact.id === action.payload);
+        state.paginate.data = data;
+      }
+    },
   },
 });
 
-export const { replacePaginate, addPaginateContact, updatePaginateContact } = slice.actions;
+export const { replacePaginate, addPaginateContact, updatePaginateContact, removePaginateContact } =
+  slice.actions;
 export default slice.reducer;
