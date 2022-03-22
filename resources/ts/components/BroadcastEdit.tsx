@@ -51,7 +51,7 @@ export default class BroadcastEdit extends PureComponent<Props, State> {
     }
   }
 
-  handleMultiSelectChange(name: string, options: string[]) {
+  handleMultiSelectChange(name: string, options: SelectOption[]) {
     const selectedGroups = compact(
       map(options, (option) => {
         const id = Number(option);
@@ -94,6 +94,7 @@ export default class BroadcastEdit extends PureComponent<Props, State> {
       canShow && (
         <MultiSelect
           options={this.groupsSelectOptions}
+          selectedOptions={[]}
           name="selectedGroups"
           label="Groups"
           placeholder="Select group"

@@ -4,6 +4,7 @@ import { map } from "lodash";
 import { RootDispatch, RootState } from "../../store/store";
 import { replaceFormGroups, replaceFormPhone } from "./ContactCreate.slice";
 import { createContact, listGroups } from "./ContactCreate.thunk";
+import { groupOptions, selectedGroupOptions } from "./ContactCreate.select";
 import { Option as SelectOption } from "../Select";
 import Button from "../Button";
 import Input from "../Input";
@@ -29,8 +30,8 @@ class ContactCreate extends PureComponent<Props> {
     if (name === "phone") this.props.replaceFormPhone(value);
   }
 
-  handleGroupsSelect(name: string, values: string[]) {
-    const groups = map(values, (id: string) => Number(id));
+  handleGroupsSelect(name: string, option: SelectOption[]) {
+    const groups = map(option, (option: SelectOption) => Number(option.value));
     this.props.replaceFormGroups(groups);
   }
 
@@ -54,7 +55,8 @@ class ContactCreate extends PureComponent<Props> {
           onChange={this.handleFieldChange}
         />
         <MultiSelect
-          options={this.groupsSelectOptions}
+          options={this.props.groupOptions}
+          selectedOptions={this.props.selectedGroupOptions}
           name="selectedGroups"
           label="Groups"
           placeholder="Select group"
@@ -74,6 +76,8 @@ class ContactCreate extends PureComponent<Props> {
 const mapStateToProps = (state: RootState) => ({
   groups: state.contactCreate.groups,
   form: state.contactCreate.form,
+  groupOptions: groupOptions(state),
+  selectedGroupOptions: selectedGroupOptions(state),
 });
 
 const mapDispatchToProps = (dispatch: RootDispatch) => ({
