@@ -7,6 +7,7 @@ import progressBarReducer from "../components/ProgressBar/ProgressBar.slice";
 import autoNavigateReducer from "../components/AutoNavigate/AutoNavigate.slice";
 import modalsReducer from "../components/Modals/Modals.slice";
 import confirmReducer from "../components/Confirm/Confirm.slice";
+import templateCreateReducer from "../components/TemplateCreate/TemplateCreate.slice";
 import groupCreateReducer from "../components/GroupCreate/GroupCreate.slice";
 import groupEditReducer from "../components/GroupEdit/GroupEdit.slice";
 import contactCreateReducer from "../components/ContactCreate/ContactCreate.slice";
@@ -21,6 +22,7 @@ export default {
   autoNavigate: autoNavigateReducer,
   modals: modalsReducer,
   confirm: confirmReducer,
+  templateCreate: templateCreateReducer,
   groupCreate: groupCreateReducer,
   groupEdit: groupEditReducer,
   contactCreate: contactCreateReducer,

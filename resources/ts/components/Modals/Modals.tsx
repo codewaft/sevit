@@ -7,7 +7,7 @@ import BroadcastCreate from "../BroadcastCreate";
 import Broadcast from "../Broadcast";
 import BroadcastEdit from "../BroadcastEdit";
 import BroadcastMessages from "../BroadcastMessages";
-import TemplateCreate from "../TemplateCreate";
+import TemplateCreate from "../TemplateCreate/TemplateCreate";
 import TemplateEdit from "../TemplateEdit";
 import ContactCreate from "../ContactCreate/ContactCreate";
 import ContactEdit from "../ContactEdit";

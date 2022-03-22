@@ -18,6 +18,11 @@ export const slice = createSlice({
     replacePaginate: (state: State, action: PayloadAction<State["paginate"]>) => {
       state.paginate = action.payload;
     },
+    addPaginateTemplate: (state: State, action: PayloadAction<Template>) => {
+      if (state.paginate) {
+        state.paginate.data.unshift(action.payload);
+      }
+    },
     removePaginateTemplate: (state: State, action: PayloadAction<number>) => {
       if (state.paginate) {
         const data = reject(state.paginate.data, (template) => template.id === action.payload);
@@ -27,5 +32,5 @@ export const slice = createSlice({
   },
 });
 
-export const { replacePaginate, removePaginateTemplate } = slice.actions;
+export const { replacePaginate, addPaginateTemplate, removePaginateTemplate } = slice.actions;
 export default slice.reducer;
