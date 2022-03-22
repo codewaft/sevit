@@ -2,6 +2,10 @@ import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { RootDispatch, RootState } from "../../store/store";
 import { deleteTemplatePrompt, paginateTemplates } from "./Templates.thunk";
+import {
+  ModalName,
+  replaceActive as replaceModalActive,
+} from "../../components/Modals/Modals.slice";
 import { Template } from "../../apis/template.api";
 import Actions, { Name as ActionName } from "../../components/Actions";
 import Button from "../../components/Button";
@@ -52,12 +56,16 @@ class Templates extends PureComponent<Props> {
 
   handleActionClick(id: number, action: ActionName) {
     switch (action) {
+      case "edit":
+        return this.props.replaceModalActive("templateEdit");
       case "delete":
         return this.props.deleteTemplatePrompt(id);
     }
   }
 
-  handleCreateClick() {}
+  handleCreateClick() {
+    this.props.replaceModalActive("templateCreate");
+  }
 
   componentDidMount() {
     this.props.paginateTemplates();
@@ -91,6 +99,7 @@ const mapStateToProps = (state: RootState) => ({
 
 const mapDispatchToProps = (dispatch: RootDispatch) => ({
   paginateTemplates: (url?: string) => dispatch(paginateTemplates(url)),
+  replaceModalActive: (name: ModalName) => dispatch(replaceModalActive(name)),
   deleteTemplatePrompt: (id: number) => dispatch(deleteTemplatePrompt(id)),
 });
 

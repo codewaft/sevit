@@ -47,13 +47,13 @@ class Modals extends PureComponent<Props> {
             <BroadcastEdit />
           </Modal>
         );
-      case "teimplateCreate":
+      case "templateCreate":
         return (
           <Modal size="full" heading="Create template">
             <TemplateCreate />
           </Modal>
         );
-      case "teimplateEdit":
+      case "templateEdit":
         return (
           <Modal size="full" heading="Edit template">
             <TemplateEdit />
