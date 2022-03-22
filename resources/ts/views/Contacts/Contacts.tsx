@@ -2,13 +2,17 @@ import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { join, map } from "lodash";
 import { RootDispatch, RootState } from "../../store/store";
-import { paginateContacts } from "./Contacts.thunk";
+import { deleteContactPrompt, paginateContacts } from "./Contacts.thunk";
 import { Contact } from "../../apis/contact.api";
 import { Group } from "../../apis/group.api";
 import {
   ModalName,
   replaceActive as replaceModalActive,
 } from "../../components/Modals/Modals.slice";
+import {
+  replaceId as replaceContactEditId,
+  resetState as resetContactEditState,
+} from "../../components/ContactEdit/ContactEdit.slice";
 import Actions, { Name as ActionName } from "../../components/Actions";
 import Button from "../../components/Button";
 import Date from "../../components/Date";
@@ -69,7 +73,17 @@ class Contacts extends PureComponent<Props> {
   handleImportClick() {}
   handleExportClick() {}
 
-  handleActionClick(id: number, action: ActionName) {}
+  handleActionClick(id: number, action: ActionName) {
+    switch (action) {
+      case "edit":
+        this.props.resetContactEditState();
+        this.props.replaceContactEditId(id);
+        this.props.replaceModalActive("contactEdit");
+        break;
+      case "delete":
+        return this.props.deleteContactPrompt(id);
+    }
+  }
 
   componentDidMount() {
     this.props.paginateContacts();
@@ -117,7 +131,10 @@ const mapStateToProps = (state: RootState) => ({
 
 const mapDispatchToProps = (dispatch: RootDispatch) => ({
   paginateContacts: (url?: string) => dispatch(paginateContacts(url)),
+  resetContactEditState: () => dispatch(resetContactEditState()),
+  replaceContactEditId: (id: number) => dispatch(replaceContactEditId(id)),
   replaceModalActive: (name: ModalName) => dispatch(replaceModalActive(name)),
+  deleteContactPrompt: (id: number) => dispatch(deleteContactPrompt(id)),
 });
 
 type StateProps = ReturnType<typeof mapStateToProps>;

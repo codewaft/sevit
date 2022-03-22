@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Type as NotifyType } from "../Notify";
 
-type Action = "groupDelete" | "templateDelete" | "broadcastDelete";
+type Action = "groupDelete" | "templateDelete" | "broadcastDelete" | "contactDelete";
 
 export interface Confirm {
   id: number;
