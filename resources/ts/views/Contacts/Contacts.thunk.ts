@@ -1,4 +1,5 @@
 import { GetStateFunc, RootDispatch } from "../../store/store";
+import downloadService from "../../services/download.service";
 import contactApi from "../../apis/contact.api";
 import { removePaginateContact, replacePaginate } from "./Contacts.slice";
 import { Confirm, removeConfirm, replaceConfirm } from "../../components/Confirm/Confirm.slice";
@@ -35,6 +36,15 @@ export function deleteContactPrompt(id: number) {
         message: `Are you sure to delete ${contact.phone} contact?`,
       };
       dispatch(replaceConfirm(confirm));
+    }
+  };
+}
+
+export function exportContacts() {
+  return async () => {
+    const contacts = await contactApi.export();
+    if (contacts) {
+      downloadService.download(contacts, "contacts.csv");
     }
   };
 }

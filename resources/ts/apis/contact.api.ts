@@ -65,6 +65,6 @@ export default {
   },
 
   export() {
-    return api.get<File>(routes.export);
+    return api.get<string>(routes.export);
   },
 };
