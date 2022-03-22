@@ -2,7 +2,11 @@ import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { join, map } from "lodash";
 import { RootDispatch, RootState } from "../../store/store";
-import { paginateBroadcasts } from "./Broadcasts.thunk";
+import { deleteBroadcastPrompt, paginateBroadcasts } from "./Broadcasts.thunk";
+import {
+  ModalName,
+  replaceActive as replaceModalActive,
+} from "../../components/Modals/Modals.slice";
 import { Broadcast } from "../../apis/broadcast.api";
 import { Group } from "../../apis/group.api";
 import Actions, { Name as ActionName } from "../../components/Actions";
@@ -59,9 +63,22 @@ class Broadcasts extends PureComponent<Props> {
     this.props.paginateBroadcasts(url);
   }
 
-  handleActionClick(id: number, action: ActionName) {}
+  handleActionClick(id: number, action: ActionName) {
+    switch (action) {
+      case "view":
+        return this.props.replaceModalActive("broadcast");
+      case "messages":
+        return this.props.replaceModalActive("broadcastmessages");
+      case "edit":
+        return this.props.replaceModalActive("broadcastEdit");
+      case "delete":
+        return this.props.deleteBroadcastPrompt(id);
+    }
+  }
 
-  handleCreateClick() {}
+  handleCreateClick() {
+    this.props.replaceModalActive("broadcastCreate");
+  }
 
   componentDidMount() {
     this.props.paginateBroadcasts();
@@ -95,6 +112,8 @@ const mapStateToProps = (state: RootState) => ({
 
 const mapDispatchToProps = (dispatch: RootDispatch) => ({
   paginateBroadcasts: (url?: string) => dispatch(paginateBroadcasts(url)),
+  replaceModalActive: (name: ModalName) => dispatch(replaceModalActive(name)),
+  deleteBroadcastPrompt: (id: number) => dispatch(deleteBroadcastPrompt(id)),
 });
 
 type StateProps = ReturnType<typeof mapStateToProps>;
