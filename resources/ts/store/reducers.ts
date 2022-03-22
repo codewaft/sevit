@@ -8,6 +8,7 @@ import autoNavigateReducer from "../components/AutoNavigate/AutoNavigate.slice";
 import modalsReducer from "../components/Modals/Modals.slice";
 import confirmReducer from "../components/Confirm/Confirm.slice";
 import templateCreateReducer from "../components/TemplateCreate/TemplateCreate.slice";
+import templateEditReducer from "../components/TemplateEdit/TemplateEdit.slice";
 import groupCreateReducer from "../components/GroupCreate/GroupCreate.slice";
 import groupEditReducer from "../components/GroupEdit/GroupEdit.slice";
 import contactCreateReducer from "../components/ContactCreate/ContactCreate.slice";
@@ -23,6 +24,7 @@ export default {
   modals: modalsReducer,
   confirm: confirmReducer,
   templateCreate: templateCreateReducer,
+  templateEdit: templateEditReducer,
   groupCreate: groupCreateReducer,
   groupEdit: groupEditReducer,
   contactCreate: contactCreateReducer,

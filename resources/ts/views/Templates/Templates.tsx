@@ -6,6 +6,10 @@ import {
   ModalName,
   replaceActive as replaceModalActive,
 } from "../../components/Modals/Modals.slice";
+import {
+  replaceId as replaceTemplateEditId,
+  resetState as resetTemplateEditState,
+} from "../../components/TemplateEdit/TemplateEdit.slice";
 import { Template } from "../../apis/template.api";
 import Actions, { Name as ActionName } from "../../components/Actions";
 import Button from "../../components/Button";
@@ -57,6 +61,8 @@ class Templates extends PureComponent<Props> {
   handleActionClick(id: number, action: ActionName) {
     switch (action) {
       case "edit":
+        this.props.resetTemplateEditState();
+        this.props.replaceTemplateEditId(id);
         return this.props.replaceModalActive("templateEdit");
       case "delete":
         return this.props.deleteTemplatePrompt(id);
@@ -99,6 +105,8 @@ const mapStateToProps = (state: RootState) => ({
 
 const mapDispatchToProps = (dispatch: RootDispatch) => ({
   paginateTemplates: (url?: string) => dispatch(paginateTemplates(url)),
+  resetTemplateEditState: () => dispatch(resetTemplateEditState()),
+  replaceTemplateEditId: (id: number) => dispatch(replaceTemplateEditId(id)),
   replaceModalActive: (name: ModalName) => dispatch(replaceModalActive(name)),
   deleteTemplatePrompt: (id: number) => dispatch(deleteTemplatePrompt(id)),
 });
