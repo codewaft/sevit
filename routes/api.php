@@ -7,7 +7,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\BroadcastController;
 
-Route::get("/sign-in", [UserController::class, "signIn"]);
+Route::post("/users/sign-in", [UserController::class, "signIn"]);
 
 Route::middleware("auth:sanctum")->group(function () {
     Route::prefix("/groups")->group(function () {
@@ -41,9 +41,6 @@ Route::middleware("auth:sanctum")->group(function () {
         Route::patch("/{id}", [BroadcastController::class, "edit"]);
         Route::delete("/{id}", [BroadcastController::class, "delete"]);
         Route::get("/paginate", [BroadcastController::class, "paginate"]);
-        Route::get("/{id}/messages/paginate", [
-            BroadcastController::class,
-            "paginateMessages",
-        ]);
+        Route::get("/{id}/messages/paginate", [BroadcastController::class, "paginateMessages"]);
     });
 });

@@ -1,3 +1,4 @@
+import signInReducer from "../views/SignIn/SignIn.slice";
 import headerReducer from "../components/Header/Header.slice";
 import groupsReducer from "../views/Groups/Groups.slice";
 import contactsReducer from "../views/Contacts/Contacts.slice";
@@ -19,6 +20,7 @@ import contactEditReducer from "../components/ContactEdit/ContactEdit.slice";
 import contactsImportReducer from "../components/ContactsImport/ContactsImport.slice";
 
 export default {
+  signIn: signInReducer,
   header: headerReducer,
   groups: groupsReducer,
   contacts: contactsReducer,

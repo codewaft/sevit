@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import routes from "../routes";
 import { RootState } from "../store/store";
 import Panel from "./Panel";
-import SignIn from "../views/SignIn";
+import SignIn from "../views/SignIn/SignIn";
 import Broadcasts from "../views/Broadcasts/Broadcasts";
 import Templates from "../views/Templates/Templates";
 import Contacts from "../views/Contacts/Contacts";
