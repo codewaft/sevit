@@ -10,7 +10,8 @@ export type ModalName =
   | "contactCreate"
   | "contactEdit"
   | "groupCreate"
-  | "groupEdit";
+  | "groupEdit"
+  | "contactsImport";
 
 export interface State {
   active: ModalName | null;

@@ -13,6 +13,7 @@ import ContactCreate from "../ContactCreate/ContactCreate";
 import ContactEdit from "../ContactEdit/ContactEdit";
 import GroupCreate from "../GroupCreate/GroupCreate";
 import GroupEdit from "../GroupEdit/GroupEdit";
+import ContactsImport from "../ContactsImport";
 
 interface Props extends StateProps, DispatchProps {}
 
@@ -81,6 +82,12 @@ class Modals extends PureComponent<Props> {
         return (
           <Modal size="half" heading="Edit group">
             <GroupEdit />
+          </Modal>
+        );
+      case "contactsImport":
+        return (
+          <Modal size="half" heading="Import contacts">
+            <ContactsImport />
           </Modal>
         );
       default:

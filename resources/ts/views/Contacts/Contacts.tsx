@@ -70,7 +70,9 @@ class Contacts extends PureComponent<Props> {
     this.props.replaceModalActive("contactCreate");
   }
 
-  handleImportClick() {}
+  handleImportClick() {
+    this.props.replaceModalActive("contactsImport");
+  }
 
   handleExportClick() {
     this.props.exportContacts();

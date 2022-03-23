@@ -56,7 +56,7 @@ export default class FileUpload extends PureComponent<Props, State> {
         >
           <div className="flex justify-between items-center">
             <span className={this.filenameClass}>{this.filename}</span>
-            <Icon className="text-slate-400" size="medium" name="ri-upload-cloud-2-line" />
+            <Icon className="text-slate-400" size="medium" name="ri-file-line" />
           </div>
           <input
             className="hidden"
