@@ -6,7 +6,7 @@ import Modal from "../Modal";
 import BroadcastCreate from "../BroadcastCreate";
 import Broadcast from "../Broadcast/Broadcast";
 import BroadcastEdit from "../BroadcastEdit";
-import BroadcastMessages from "../BroadcastMessages";
+import BroadcastMessages from "../BroadcastMessages/BroadcastMessages";
 import TemplateCreate from "../TemplateCreate/TemplateCreate";
 import TemplateEdit from "../TemplateEdit/TemplateEdit";
 import ContactCreate from "../ContactCreate/ContactCreate";
@@ -36,7 +36,7 @@ class Modals extends PureComponent<Props> {
             <Broadcast />
           </Modal>
         );
-      case "broadcastmessages":
+      case "broadcastMessages":
         return (
           <Modal size="full">
             <BroadcastMessages />

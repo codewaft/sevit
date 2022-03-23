@@ -11,6 +11,10 @@ import {
   replaceId as replaceBroadcastId,
   resetState as resetBroadcastState,
 } from "../../components/Broadcast/Broadcast.slice";
+import {
+  replaceId as replaceBroadcastMessagesId,
+  resetState as resetBroadcastMessagesState,
+} from "../../components/BroadcastMessages/BroadcastMessages.slice";
 import { Broadcast } from "../../apis/broadcast.api";
 import { Group } from "../../apis/group.api";
 import Actions, { Name as ActionName } from "../../components/Actions";
@@ -74,7 +78,9 @@ class Broadcasts extends PureComponent<Props> {
         this.props.replaceBroadcastId(id);
         return this.props.replaceModalActive("broadcast");
       case "messages":
-        return this.props.replaceModalActive("broadcastmessages");
+        this.props.resetBroadcastMessagesState();
+        this.props.replaceBroadcastMessagesId(id);
+        return this.props.replaceModalActive("broadcastMessages");
       case "edit":
         return this.props.replaceModalActive("broadcastEdit");
       case "delete":
@@ -120,6 +126,8 @@ const mapDispatchToProps = (dispatch: RootDispatch) => ({
   paginateBroadcasts: (url?: string) => dispatch(paginateBroadcasts(url)),
   resetBroadcastState: () => dispatch(resetBroadcastState()),
   replaceBroadcastId: (id: number) => dispatch(replaceBroadcastId(id)),
+  resetBroadcastMessagesState: () => dispatch(resetBroadcastMessagesState()),
+  replaceBroadcastMessagesId: (id: number) => dispatch(replaceBroadcastMessagesId(id)),
   replaceModalActive: (name: ModalName) => dispatch(replaceModalActive(name)),
   deleteBroadcastPrompt: (id: number) => dispatch(deleteBroadcastPrompt(id)),
 });
