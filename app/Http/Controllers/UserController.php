@@ -17,6 +17,12 @@ class UserController extends Controller
         $this->user = $user;
     }
 
+    public function read()
+    {
+        $user = $this->user->get();
+        return Response::ok($user);
+    }
+
     public function signIn(Request $request)
     {
         $rule = [
@@ -35,9 +41,12 @@ class UserController extends Controller
         return Response::ok($response);
     }
 
-    public function read()
+    public function signOut(Request $request)
     {
-        $user = $this->user->get();
-        return Response::ok($user);
+        $signOut = $request
+            ->user()
+            ->currentAccessToken()
+            ->delete();
+        return Response::ok($signOut);
     }
 }
