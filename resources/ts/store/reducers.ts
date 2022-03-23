@@ -1,3 +1,4 @@
+import headerReducer from "../components/Header/Header.slice";
 import groupsReducer from "../views/Groups/Groups.slice";
 import contactsReducer from "../views/Contacts/Contacts.slice";
 import templatesReducer from "../views/Templates/Templates.slice";
@@ -18,6 +19,7 @@ import contactEditReducer from "../components/ContactEdit/ContactEdit.slice";
 import contactsImportReducer from "../components/ContactsImport/ContactsImport.slice";
 
 export default {
+  header: headerReducer,
   groups: groupsReducer,
   contacts: contactsReducer,
   templates: templatesReducer,

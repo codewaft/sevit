@@ -10,6 +10,7 @@ import {
   replaceId as replaceTemplateEditId,
   resetState as resetTemplateEditState,
 } from "../../components/TemplateEdit/TemplateEdit.slice";
+import { replaceHeading as replaceHeaderHeading } from "../../components/Header/Header.slice";
 import { Template } from "../../apis/template.api";
 import Actions, { Name as ActionName } from "../../components/Actions";
 import Button from "../../components/Button";
@@ -74,6 +75,7 @@ class Templates extends PureComponent<Props> {
   }
 
   componentDidMount() {
+    this.props.replaceHeaderHeading("Templates");
     this.props.paginateTemplates();
   }
 
@@ -109,6 +111,7 @@ const mapDispatchToProps = (dispatch: RootDispatch) => ({
   replaceTemplateEditId: (id: number) => dispatch(replaceTemplateEditId(id)),
   replaceModalActive: (name: ModalName) => dispatch(replaceModalActive(name)),
   deleteTemplatePrompt: (id: number) => dispatch(deleteTemplatePrompt(id)),
+  replaceHeaderHeading: (heading: string) => dispatch(replaceHeaderHeading(heading)),
 });
 
 type StateProps = ReturnType<typeof mapStateToProps>;

@@ -15,6 +15,7 @@ import {
   replaceId as replaceBroadcastMessagesId,
   resetState as resetBroadcastMessagesState,
 } from "../../components/BroadcastMessages/BroadcastMessages.slice";
+import { replaceHeading as replaceHeaderHeading } from "../../components/Header/Header.slice";
 import { Broadcast } from "../../apis/broadcast.api";
 import { Group } from "../../apis/group.api";
 import Actions, { Name as ActionName } from "../../components/Actions";
@@ -93,6 +94,7 @@ class Broadcasts extends PureComponent<Props> {
   }
 
   componentDidMount() {
+    this.props.replaceHeaderHeading("Broadcasts");
     this.props.paginateBroadcasts();
   }
 
@@ -130,6 +132,7 @@ const mapDispatchToProps = (dispatch: RootDispatch) => ({
   replaceBroadcastMessagesId: (id: number) => dispatch(replaceBroadcastMessagesId(id)),
   replaceModalActive: (name: ModalName) => dispatch(replaceModalActive(name)),
   deleteBroadcastPrompt: (id: number) => dispatch(deleteBroadcastPrompt(id)),
+  replaceHeaderHeading: (heading: string) => dispatch(replaceHeaderHeading(heading)),
 });
 
 type StateProps = ReturnType<typeof mapStateToProps>;

@@ -13,6 +13,7 @@ import {
   replaceId as replaceContactEditId,
   resetState as resetContactEditState,
 } from "../../components/ContactEdit/ContactEdit.slice";
+import { replaceHeading as replaceHeaderHeading } from "../../components/Header/Header.slice";
 import Actions, { Name as ActionName } from "../../components/Actions";
 import Button from "../../components/Button";
 import Date from "../../components/Date";
@@ -91,6 +92,7 @@ class Contacts extends PureComponent<Props> {
   }
 
   componentDidMount() {
+    this.props.replaceHeaderHeading("Contacts");
     this.props.paginateContacts();
   }
 
@@ -141,6 +143,7 @@ const mapDispatchToProps = (dispatch: RootDispatch) => ({
   replaceModalActive: (name: ModalName) => dispatch(replaceModalActive(name)),
   deleteContactPrompt: (id: number) => dispatch(deleteContactPrompt(id)),
   exportContacts: () => dispatch(exportContacts()),
+  replaceHeaderHeading: (heading: string) => dispatch(replaceHeaderHeading(heading)),
 });
 
 type StateProps = ReturnType<typeof mapStateToProps>;

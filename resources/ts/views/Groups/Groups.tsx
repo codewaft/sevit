@@ -11,6 +11,7 @@ import {
   replaceId as replaceGroupEditId,
   resetState as resetGroupEditState,
 } from "../../components/GroupEdit/GroupEdit.slice";
+import { replaceHeading as replaceHeaderHeading } from "../../components/Header/Header.slice";
 import Actions, { Name as ActionName } from "../../components/Actions";
 import Button from "../../components/Button";
 import Date from "../../components/Date";
@@ -73,6 +74,7 @@ class Groups extends PureComponent<Props> {
   }
 
   componentDidMount() {
+    this.props.replaceHeaderHeading("Groups");
     this.props.paginateGroups();
   }
 
@@ -108,6 +110,7 @@ const mapDispatchToProps = (dispatch: RootDispatch) => ({
   replaceGroupEditId: (id: number) => dispatch(replaceGroupEditId(id)),
   replaceModalActive: (name: ModalName) => dispatch(replaceModalActive(name)),
   deleteGroupPrompt: (id: number) => dispatch(deleteGroupPrompt(id)),
+  replaceHeaderHeading: (heading: string) => dispatch(replaceHeaderHeading(heading)),
 });
 
 type StateProps = ReturnType<typeof mapStateToProps>;
