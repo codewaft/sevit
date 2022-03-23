@@ -3,6 +3,7 @@ import routeUtil from "../utils/route.util";
 import api from "../services/request.service";
 import { Group } from "./group.api";
 import { Template } from "./template.api";
+import { Contact } from "./contact.api";
 
 export interface Broadcast {
   id: number;
@@ -21,12 +22,13 @@ type Target = "all" | "groups";
 export type MessageStatus = "scheduled" | "processed" | "failed";
 export type Status = "scheduled" | "processing" | "completed";
 
-interface Message {
+export interface Message {
   id: number;
   broadcast_id: number;
   contact_id: number;
   reference_id: string;
   status: MessageStatus;
+  contact: Contact;
   processed_at: string;
 }
 
