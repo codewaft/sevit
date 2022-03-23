@@ -1,5 +1,5 @@
-const { DateTime } = require("luxon");
 import React, { PureComponent } from "react";
+import dateUtil from "../utils/date.util";
 
 interface Props {
   date: string;
@@ -7,8 +7,7 @@ interface Props {
 
 export default class Date extends PureComponent<Props> {
   get date() {
-    const date = DateTime.fromISO(this.props.date);
-    return date.toFormat("DD h:m a");
+    return dateUtil.format(this.props.date);
   }
 
   render() {

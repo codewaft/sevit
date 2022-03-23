@@ -4,7 +4,7 @@ import { RootState } from "../../store/store";
 import { ModalName } from "./Modals.slice";
 import Modal from "../Modal";
 import BroadcastCreate from "../BroadcastCreate";
-import Broadcast from "../Broadcast";
+import Broadcast from "../Broadcast/Broadcast";
 import BroadcastEdit from "../BroadcastEdit";
 import BroadcastMessages from "../BroadcastMessages";
 import TemplateCreate from "../TemplateCreate/TemplateCreate";

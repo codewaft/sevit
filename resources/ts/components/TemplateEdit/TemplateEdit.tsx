@@ -26,8 +26,6 @@ class TemplateEdit extends PureComponent<Props> {
     this.props.editTemplate();
   }
 
-  readTemplate() {}
-
   componentDidMount() {
     this.props.readTemplate();
   }
