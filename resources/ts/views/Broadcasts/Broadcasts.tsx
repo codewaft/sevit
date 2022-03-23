@@ -7,6 +7,10 @@ import {
   ModalName,
   replaceActive as replaceModalActive,
 } from "../../components/Modals/Modals.slice";
+import {
+  replaceId as replaceBroadcastId,
+  resetState as resetBroadcastState,
+} from "../../components/Broadcast/Broadcast.slice";
 import { Broadcast } from "../../apis/broadcast.api";
 import { Group } from "../../apis/group.api";
 import Actions, { Name as ActionName } from "../../components/Actions";
@@ -66,6 +70,8 @@ class Broadcasts extends PureComponent<Props> {
   handleActionClick(id: number, action: ActionName) {
     switch (action) {
       case "view":
+        this.props.resetBroadcastState();
+        this.props.replaceBroadcastId(id);
         return this.props.replaceModalActive("broadcast");
       case "messages":
         return this.props.replaceModalActive("broadcastmessages");
@@ -112,6 +118,8 @@ const mapStateToProps = (state: RootState) => ({
 
 const mapDispatchToProps = (dispatch: RootDispatch) => ({
   paginateBroadcasts: (url?: string) => dispatch(paginateBroadcasts(url)),
+  resetBroadcastState: () => dispatch(resetBroadcastState()),
+  replaceBroadcastId: (id: number) => dispatch(replaceBroadcastId(id)),
   replaceModalActive: (name: ModalName) => dispatch(replaceModalActive(name)),
   deleteBroadcastPrompt: (id: number) => dispatch(deleteBroadcastPrompt(id)),
 });

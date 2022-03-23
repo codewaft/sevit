@@ -1,4 +1,5 @@
 import React, { PureComponent } from "react";
+import { join } from "lodash";
 import { MessageStatus, Status as BroadcastStatus } from "../apis/broadcast.api";
 import Label, { Type as LabelType } from "./Label";
 
@@ -7,6 +8,7 @@ type LabelTypes = Record<Name, LabelType>;
 
 interface Props {
   name: Name;
+  append?: string;
 }
 
 export default class Status extends PureComponent<Props> {
@@ -18,7 +20,12 @@ export default class Status extends PureComponent<Props> {
     failed: "danger",
   };
 
+  get text() {
+    const { name, append } = this.props;
+    return join([name, append], " ");
+  }
+
   render() {
-    return <Label type={this.labelTypes[this.props.name]} text={this.props.name} />;
+    return <Label type={this.labelTypes[this.props.name]} text={this.text} />;
   }
 }

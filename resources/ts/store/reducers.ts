@@ -2,6 +2,7 @@ import groupsReducer from "../views/Groups/Groups.slice";
 import contactsReducer from "../views/Contacts/Contacts.slice";
 import templatesReducer from "../views/Templates/Templates.slice";
 import broadcastsReducer from "../views/Broadcasts/Broadcasts.slice";
+import broadcastReducer from "../components/Broadcast/Broadcast.slice";
 import alertReducer from "../components/Alert/Alert.slice";
 import progressBarReducer from "../components/ProgressBar/ProgressBar.slice";
 import autoNavigateReducer from "../components/AutoNavigate/AutoNavigate.slice";
@@ -19,6 +20,7 @@ export default {
   contacts: contactsReducer,
   templates: templatesReducer,
   broadcasts: broadcastsReducer,
+  broadcast: broadcastReducer,
   alert: alertReducer,
   progressBar: progressBarReducer,
   autoNavigate: autoNavigateReducer,
