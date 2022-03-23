@@ -10,6 +10,7 @@ use App\Http\Controllers\BroadcastController;
 Route::post("/users/sign-in", [UserController::class, "signIn"]);
 
 Route::middleware("auth:sanctum")->group(function () {
+    Route::get("/users", [UserController::class, "read"]);
     Route::prefix("/groups")->group(function () {
         Route::post("/", [GroupController::class, "create"]);
         Route::get("/{id}", [GroupController::class, "read"]);

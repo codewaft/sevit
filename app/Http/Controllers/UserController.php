@@ -34,4 +34,10 @@ class UserController extends Controller
         $response = ["token" => $user->createToken("auth")->plainTextToken];
         return Response::ok($response);
     }
+
+    public function read()
+    {
+        $user = $this->user->get();
+        return Response::ok($user);
+    }
 }
