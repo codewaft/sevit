@@ -1,6 +1,7 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { RootDispatch, RootState } from "../../store/store";
+import { readUser } from "./Header.thunk";
 import Heading from "../Heading";
 import Logo from "../Logo";
 import User from "../User";
@@ -8,6 +9,15 @@ import User from "../User";
 interface Props extends StateProps, DispatchProps {}
 
 class Header extends PureComponent<Props> {
+  get username() {
+    const { user } = this.props;
+    return user ? user.username : "Howdy";
+  }
+
+  componentDidMount() {
+    this.props.readUser();
+  }
+
   render() {
     return (
       <div className="drop-shadow-md bg-white">
@@ -18,7 +28,7 @@ class Header extends PureComponent<Props> {
             </div>
             <div className="col-span-9 flex justify-between items-center">
               <Heading size="medium" text={this.props.heading} />
-              <User username="johnsmith" />
+              <User username={this.username} />
             </div>
           </div>
         </div>
@@ -29,9 +39,12 @@ class Header extends PureComponent<Props> {
 
 const mapStateToProps = (state: RootState) => ({
   heading: state.header.heading,
+  user: state.header.user,
 });
 
-const mapDispatchToProps = (dispatch: RootDispatch) => ({});
+const mapDispatchToProps = (dispatch: RootDispatch) => ({
+  readUser: () => dispatch(readUser()),
+});
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = ReturnType<typeof mapDispatchToProps>;
