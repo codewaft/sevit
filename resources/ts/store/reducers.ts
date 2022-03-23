@@ -14,6 +14,7 @@ import groupCreateReducer from "../components/GroupCreate/GroupCreate.slice";
 import groupEditReducer from "../components/GroupEdit/GroupEdit.slice";
 import contactCreateReducer from "../components/ContactCreate/ContactCreate.slice";
 import contactEditReducer from "../components/ContactEdit/ContactEdit.slice";
+import contactsImportReducer from "../components/ContactsImport/ContactsImport.slice";
 
 export default {
   groups: groupsReducer,
@@ -32,4 +33,5 @@ export default {
   groupEdit: groupEditReducer,
   contactCreate: contactCreateReducer,
   contactEdit: contactEditReducer,
+  contactsImport: contactsImportReducer,
 };

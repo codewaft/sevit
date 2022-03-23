@@ -13,7 +13,7 @@ import ContactCreate from "../ContactCreate/ContactCreate";
 import ContactEdit from "../ContactEdit/ContactEdit";
 import GroupCreate from "../GroupCreate/GroupCreate";
 import GroupEdit from "../GroupEdit/GroupEdit";
-import ContactsImport from "../ContactsImport";
+import ContactsImport from "../ContactsImport/ContactsImport";
 
 interface Props extends StateProps, DispatchProps {}
 

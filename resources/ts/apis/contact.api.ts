@@ -22,7 +22,7 @@ export interface EditRequest {
 }
 
 export interface ImportRequest {
-  contacts: File;
+  contacts: File | null;
 }
 
 const routes = {
