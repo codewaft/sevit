@@ -21,10 +21,16 @@ class Broadcast extends PureComponent<Props> {
     return `(${185}/${190})`;
   }
 
-  get status() {
+  get header() {
     const { broadcast } = this.props;
-    if (!broadcast) return null;
-    return <Status name={broadcast.status} append={this.completed} />;
+    return (
+      broadcast && (
+        <div>
+          <Heading size="regular" text={broadcast.title} />
+          <Status name={broadcast.status} append={this.completed} />
+        </div>
+      )
+    );
   }
 
   get template() {
@@ -81,8 +87,7 @@ class Broadcast extends PureComponent<Props> {
   render() {
     return (
       <div className="px-10 pb-10">
-        <Heading size="regular" text="Summer offer" />
-        {this.status}
+        {this.header}
         {this.template}
         {this.groups}
         {this.dates}

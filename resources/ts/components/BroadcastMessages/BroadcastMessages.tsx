@@ -1,9 +1,9 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { RootDispatch, RootState } from "../../store/store";
-import { Broadcast } from "../../apis/broadcast.api";
+import { Broadcast, Message } from "../../apis/broadcast.api";
 import { replaceBroadcast } from "./BroadcastMessages.slice";
-import { readBroadcast } from "./BroadcastMessages.thunk";
+import { readBroadcast, paginateBroadcastMessages } from "./BroadcastMessages.thunk";
 import Heading from "../Heading";
 import Date from "../Date";
 import Status from "../Status";
@@ -16,55 +16,66 @@ interface Props extends StateProps, DispatchProps {}
 class BroadcastMessages extends PureComponent<Props> {
   tableHeaders = ["ID", "Phone", "Status", "Processed at"];
 
+  constructor(props: Props) {
+    super(props);
+    this.handlePaginate = this.handlePaginate.bind(this);
+  }
+
   get completed() {
     return `(${185}/${190})`;
   }
 
-  get status() {
+  get header() {
     const { broadcast } = this.props;
-    if (!broadcast) return null;
-    return <Status name={broadcast.status} append={this.completed} />;
+    return (
+      broadcast && (
+        <div className="flex gap-3 items-center">
+          <Heading size="regular" text={broadcast.title} />
+          <Status name={broadcast.status} append={this.completed} />
+        </div>
+      )
+    );
   }
 
-  tableRow(message: any) {
+  handlePaginate(url: string) {
+    this.props.paginateBroadcastMessages(url);
+  }
+
+  tableRow(message: Message) {
     return (
       <TableRow key={message.id}>
-        <TableData>{message.id}</TableData>
-        <TableData>{message.phone}</TableData>
+        <TableData>{message.reference_id}</TableData>
+        <TableData>{message.contact.phone}</TableData>
         <TableData>
           <Status name={message.status} />
         </TableData>
         <TableData>
-          <Date date={message.processedAt} />
+          <Date date={message.processed_at} />
         </TableData>
       </TableRow>
     );
   }
 
   get messages() {
-    const messages = [
-      {
-        id: "hf0343jfdfk",
-        phone: "+1 983 8534",
-        status: "failed",
-        processedAt: "2022-09-12T03:20:34.091-04:00",
-      },
-    ];
-    return messages.map((message) => this.tableRow(message));
+    const { broadcastMessages } = this.props;
+    return broadcastMessages && broadcastMessages.data.map((message) => this.tableRow(message));
   }
 
   componentDidMount() {
     this.props.readBroadcast();
+    this.props.paginateBroadcastMessages();
   }
 
   render() {
     return (
       <div className="px-10 pb-10">
-        <div className="flex gap-3 items-center">
-          <Heading size="regular" text="Summer offer" />
-          {this.status}
-        </div>
-        <Table name="messages" headers={this.tableHeaders} paginate={null} onPaginate={() => {}}>
+        {this.header}
+        <Table
+          name="messages"
+          headers={this.tableHeaders}
+          paginate={this.props.broadcastMessages}
+          onPaginate={this.handlePaginate}
+        >
           {this.messages}
         </Table>
       </div>
@@ -74,9 +85,11 @@ class BroadcastMessages extends PureComponent<Props> {
 
 const mapStateToProps = (state: RootState) => ({
   broadcast: state.broadcastMessages.broadcast,
+  broadcastMessages: state.broadcastMessages.messagePaginate,
 });
 
 const mapDispatchToProps = (dispatch: RootDispatch) => ({
+  paginateBroadcastMessages: (url?: string) => dispatch(paginateBroadcastMessages(url)),
   replaceBroadcast: (broadcast: Broadcast) => dispatch(replaceBroadcast(broadcast)),
   readBroadcast: () => dispatch(readBroadcast()),
 });
