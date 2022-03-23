@@ -6,6 +6,7 @@ type SizeClasses = Record<Size, string>;
 interface Props {
   size: Size;
   name: string;
+  className?: string;
   onClick?: () => void;
 }
 
@@ -20,7 +21,7 @@ export default class Icon extends PureComponent<Props> {
   get className() {
     const { size, name, onClick } = this.props;
     const cursor = onClick ? "cursor-pointer" : "";
-    return `${this.sizeClasses[size]} ${name} ${cursor}`;
+    return `${this.props.className} ${this.sizeClasses[size]} ${name} ${cursor}`;
   }
 
   render() {
