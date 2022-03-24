@@ -22,8 +22,8 @@ class Modal extends PureComponent<Props> {
   }
 
   sizeClasses: SizeClasses = {
-    half: "w-1/3",
-    full: "w-7/12",
+    half: "lg:w-4/12 md:w-5/12 sm:w-6/12 w-11/12",
+    full: "xl:w-7/12 lg:w-8/12 w-11/12",
   };
 
   get className() {
