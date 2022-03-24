@@ -4,7 +4,7 @@ import { RootDispatch, RootState } from "../../store/store";
 import { readUser } from "./Header.thunk";
 import Heading from "../Heading";
 import Logo from "../Logo";
-import User from "../User";
+import User from "../User/User";
 
 interface Props extends StateProps, DispatchProps {}
 
