@@ -1,12 +1,13 @@
 import React, { PureComponent } from "react";
 import { compact, find, map } from "lodash";
+import { Group } from "../apis/group.api";
+import { Template } from "../apis/template.api";
 import Button from "./Button";
 import DateTime from "./DateTime";
 import Input from "./Input";
 import MessagePreview from "./MessagePreview";
 import MultiSelect from "./MultiSelect";
 import Select, { Option as SelectOption } from "./Select";
-import { Group, Template } from "./BroadcastCreate";
 
 interface Props {}
 
@@ -106,34 +107,9 @@ export default class BroadcastEdit extends PureComponent<Props, State> {
 
   readBroadcast() {}
 
-  listTemplates() {
-    this.setState({
-      templates: [
-        {
-          id: 1,
-          title: "Summer offer",
-          content:
-            "New line, who dis? Excited to launch our product and you’re the first to know. Check it out now. Text STOP to opt-out.",
-        },
-        {
-          id: 2,
-          title: "Winter offer",
-          content:
-            "Check it out now. Text STOP to opt-out. New line, who dis? Excited to launch our product and you’re the first to know.",
-        },
-      ],
-    });
-  }
+  listTemplates() {}
 
-  listGroups() {
-    this.setState({
-      groups: [
-        { id: 1, title: "VIP" },
-        { id: 2, title: "Student" },
-        { id: 3, title: "Employee" },
-      ],
-    });
-  }
+  listGroups() {}
 
   componentDidMount() {
     this.readBroadcast();

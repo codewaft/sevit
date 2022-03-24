@@ -18,7 +18,6 @@ export interface Broadcast {
   deleted_at: string;
 }
 
-type Target = "all" | "groups";
 export type MessageStatus = "scheduled" | "processed" | "failed";
 export type Status = "scheduled" | "processing" | "completed";
 
@@ -35,7 +34,7 @@ export interface Message {
 export interface CreateRequest {
   title: string;
   template: string;
-  target: Target;
+  target: string;
   groups: number[];
   schedule: string;
 }
@@ -43,7 +42,7 @@ export interface CreateRequest {
 export interface EditRequest {
   title: string;
   template: string;
-  target: Target;
+  target: string;
   groups: number[];
   schedule: string;
 }
