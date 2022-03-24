@@ -5,7 +5,7 @@ import { ModalName } from "./Modals.slice";
 import Modal from "../Modal";
 import BroadcastCreate from "../BroadcastCreate/BroadcastCreate";
 import Broadcast from "../Broadcast/Broadcast";
-import BroadcastEdit from "../BroadcastEdit";
+import BroadcastEdit from "../BroadcastEdit/BroadcastEdit";
 import BroadcastMessages from "../BroadcastMessages/BroadcastMessages";
 import TemplateCreate from "../TemplateCreate/TemplateCreate";
 import TemplateEdit from "../TemplateEdit/TemplateEdit";
