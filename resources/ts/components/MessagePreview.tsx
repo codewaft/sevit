@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
 
 interface Props {
-  text: string;
+  text: string | null;
 }
 
 export default class MessagePreview extends PureComponent<Props> {

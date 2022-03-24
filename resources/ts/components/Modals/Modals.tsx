@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { RootState } from "../../store/store";
 import { ModalName } from "./Modals.slice";
 import Modal from "../Modal";
-import BroadcastCreate from "../BroadcastCreate";
+import BroadcastCreate from "../BroadcastCreate/BroadcastCreate";
 import Broadcast from "../Broadcast/Broadcast";
 import BroadcastEdit from "../BroadcastEdit";
 import BroadcastMessages from "../BroadcastMessages/BroadcastMessages";
