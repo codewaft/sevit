@@ -17,16 +17,21 @@ interface SignInResponse {
 }
 
 const routes = {
-  signIn: "/users/sign-in",
   read: "/users",
+  signIn: "/users/sign-in",
+  signOut: "/users/sign-out",
 };
 
 export default {
+  read() {
+    return api.get<User>(routes.read);
+  },
+
   signIn(payload: SignInRequest) {
     return api.post<SignInResponse>(routes.signIn, payload);
   },
 
-  read() {
-    return api.get<User>(routes.read);
+  signOut() {
+    return api.get<true>(routes.signOut);
   },
 };
