@@ -47,9 +47,9 @@ class Broadcasts extends PureComponent<Props> {
   tableRow(broadcast: Broadcast) {
     return (
       <TableRow key={broadcast.id}>
-        <TableData truncate={true}>{broadcast.title}</TableData>
-        <TableData truncate={true}>{broadcast.template.title}</TableData>
-        <TableData truncate={true}>{this.target(broadcast.groups)}</TableData>
+        <TableData truncate="small">{broadcast.title}</TableData>
+        <TableData truncate="small">{broadcast.template.title}</TableData>
+        <TableData truncate="small">{this.target(broadcast.groups)}</TableData>
         <TableData>
           <Date date={broadcast.scheduled_at} />
         </TableData>

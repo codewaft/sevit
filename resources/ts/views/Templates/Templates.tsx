@@ -35,8 +35,8 @@ class Templates extends PureComponent<Props> {
   tableRow(template: Template) {
     return (
       <TableRow key={template.id}>
-        <TableData truncate={true}>{template.title}</TableData>
-        <TableData truncate={true}>{template.content}</TableData>
+        <TableData truncate="medium">{template.title}</TableData>
+        <TableData truncate="medium">{template.content}</TableData>
         <TableData>
           <Date date={template.created_at} />
         </TableData>

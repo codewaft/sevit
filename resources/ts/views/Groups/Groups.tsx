@@ -35,7 +35,7 @@ class Groups extends PureComponent<Props> {
   tableRow(group: Group) {
     return (
       <TableRow key={group.id}>
-        <TableData truncate={true}>{group.title}</TableData>
+        <TableData truncate="large">{group.title}</TableData>
         <TableData>
           <Date date={group.created_at} />
         </TableData>

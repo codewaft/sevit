@@ -44,7 +44,7 @@ class Contacts extends PureComponent<Props> {
     return (
       <TableRow key={contact.id}>
         <TableData>{contact.phone}</TableData>
-        <TableData truncate={true}>{this.groups(contact.groups)}</TableData>
+        <TableData truncate="large">{this.groups(contact.groups)}</TableData>
         <TableData>
           <Date date={contact.created_at} />
         </TableData>

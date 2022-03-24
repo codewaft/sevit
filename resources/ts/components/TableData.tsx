@@ -1,13 +1,23 @@
 import React, { PureComponent } from "react";
 
+type Truncate = "small" | "medium" | "large";
+type TruncateClasses = Record<Truncate, string>;
+
 interface Props {
-  truncate?: boolean;
+  truncate?: Truncate;
 }
 
 export default class TableData extends PureComponent<Props> {
+  truncateClasses: TruncateClasses = {
+    small: "w-40",
+    medium: "w-52",
+    large: "w-80",
+  };
+
   get className() {
+    const { truncate } = this.props;
     const base = "truncate overflow-hidden inline-block m-0";
-    const width = this.props.truncate && "w-52";
+    const width = truncate && this.truncateClasses[truncate];
     return `${base} ${width}`;
   }
 
