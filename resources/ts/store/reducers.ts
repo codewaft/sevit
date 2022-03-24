@@ -19,6 +19,7 @@ import contactCreateReducer from "../components/ContactCreate/ContactCreate.slic
 import contactEditReducer from "../components/ContactEdit/ContactEdit.slice";
 import contactsImportReducer from "../components/ContactsImport/ContactsImport.slice";
 import broadcastCreateReducer from "../components/BroadcastCreate/BroadcastCreate.slice";
+import broadcastEditReducer from "../components/BroadcastEdit/BroadcastEdit.slice";
 
 export default {
   signIn: signInReducer,
@@ -42,4 +43,5 @@ export default {
   contactEdit: contactEditReducer,
   contactsImport: contactsImportReducer,
   broadcastCreate: broadcastCreateReducer,
+  broadcastEdit: broadcastEditReducer,
 };
