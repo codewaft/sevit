@@ -99,7 +99,7 @@ class Contacts extends PureComponent<Props> {
   render() {
     return (
       <div>
-        <div className="flex flex-wrap gap-5">
+        <div className="flex flex-wrap gap-5 mb-3 lg:mb-0">
           <Button
             size="small"
             text="Create contact"
