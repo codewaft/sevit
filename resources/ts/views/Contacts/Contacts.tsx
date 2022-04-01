@@ -37,7 +37,10 @@ class Contacts extends PureComponent<Props> {
   }
 
   groups(groups: Group[]) {
-    return join(map(groups, (group) => group.title));
+    return join(
+      map(groups, (group) => group.title),
+      ", "
+    );
   }
 
   tableRow(contact: Contact) {
