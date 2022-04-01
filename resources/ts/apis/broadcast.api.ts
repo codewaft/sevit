@@ -1,6 +1,6 @@
-import type { PaginateResponse } from "../services/request.service";
+import type { PaginateResponse } from "../services/api.service";
 import routeUtil from "../utils/route.util";
-import api from "../services/request.service";
+import api from "../services/api.service";
 import { Group } from "./group.api";
 import { Template } from "./template.api";
 import { Contact } from "./contact.api";

@@ -1,4 +1,4 @@
-import api from "../services/request.service";
+import api from "../services/api.service";
 
 export interface User {
   id: number;

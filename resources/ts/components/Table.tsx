@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import { isEmpty } from "lodash";
-import { PaginateResponse } from "../services/request.service";
+import { PaginateResponse } from "../services/api.service";
 import Card from "./Card";
 import Icon from "./Icon";
 

@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { findIndex, reject } from "lodash";
 import { Broadcast } from "../../apis/broadcast.api";
-import { PaginateResponse } from "../../services/request.service";
+import { PaginateResponse } from "../../services/api.service";
 
 export interface State {
   paginate: PaginateResponse<Broadcast[]> | null;
