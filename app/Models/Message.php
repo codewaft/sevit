@@ -12,14 +12,10 @@ class Message extends Model
 
     public static $status = ["scheduled", "processed", "failed"];
 
-    protected $fillable = [
-        "contact_id",
-        "reference_id",
-        "status",
-        "processed_at",
-    ];
+    protected $fillable = ["contact_id", "reference_id", "status", "processed_at"];
     protected $with = ["contact"];
     public $timestamps = false;
+    protected $casts = ["processed_at" => "datetime"];
 
     protected function processedAt()
     {
