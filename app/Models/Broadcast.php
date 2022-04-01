@@ -13,7 +13,7 @@ class Broadcast extends Model
 
     protected $fillable = ["template_id", "title", "scheduled_at"];
     protected $with = ["template", "groups"];
-    protected $appends = ["status"];
+    protected $appends = ["status", "messagesCount", "completedMessagesCount"];
     protected $casts = ["scheduled_at" => "datetime"];
 
     public function status(): Attribute
@@ -31,6 +31,18 @@ class Broadcast extends Model
         } else {
             return $attribute("scheduled");
         }
+    }
+
+    public function getMessagesCountAttribute()
+    {
+        return $this->messages()->count();
+    }
+
+    public function getCompletedMessagesCountAttribute()
+    {
+        return $this->messages()
+            ->whereIn("status", ["processed", "failed"])
+            ->count();
     }
 
     public function template()

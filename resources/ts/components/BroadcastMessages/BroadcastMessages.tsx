@@ -4,6 +4,7 @@ import { RootDispatch, RootState } from "../../store/store";
 import { Broadcast, Message } from "../../apis/broadcast.api";
 import { replaceBroadcast } from "./BroadcastMessages.slice";
 import { readBroadcast, paginateBroadcastMessages } from "./BroadcastMessages.thunk";
+import { selectBroadcastCountStatus } from "./BroadcastMesages.select";
 import Heading from "../Heading";
 import Date from "../Date";
 import Status from "../Status";
@@ -21,17 +22,13 @@ class BroadcastMessages extends PureComponent<Props> {
     this.handlePaginate = this.handlePaginate.bind(this);
   }
 
-  get completed() {
-    return `(${185}/${190})`;
-  }
-
   get header() {
     const { broadcast } = this.props;
     return (
       broadcast && (
         <div className="flex gap-3 items-center">
           <Heading size="regular" text={broadcast.title} />
-          <Status name={broadcast.status} append={this.completed} />
+          <Status name={broadcast.status} append={this.props.countStatus} />
         </div>
       )
     );
@@ -86,6 +83,7 @@ class BroadcastMessages extends PureComponent<Props> {
 const mapStateToProps = (state: RootState) => ({
   broadcast: state.broadcastMessages.broadcast,
   broadcastMessages: state.broadcastMessages.messagePaginate,
+  countStatus: selectBroadcastCountStatus(state),
 });
 
 const mapDispatchToProps = (dispatch: RootDispatch) => ({
