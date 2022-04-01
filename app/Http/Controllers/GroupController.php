@@ -19,7 +19,7 @@ class GroupController extends Controller
     public function create(Request $request)
     {
         $rule = [
-            "title" => "required|string|max:255",
+            "title" => "required|string|unique:groups,title|max:255",
         ];
         $error = Validation::validate($request, $rule);
         if ($error) {
@@ -39,7 +39,7 @@ class GroupController extends Controller
     public function edit(Request $request, $id)
     {
         $rule = [
-            "title" => "required|string|max:255",
+            "title" => "required|string|unique:groups,title,$id|max:255",
         ];
         $error = Validation::validate($request, $rule);
         if ($error) {
