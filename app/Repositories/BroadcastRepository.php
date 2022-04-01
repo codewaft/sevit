@@ -4,7 +4,6 @@ namespace App\Repositories;
 
 use App\Models\Broadcast;
 use App\Models\Contact;
-use App\Utils\ScheduleDate;
 
 class BroadcastRepository
 {
@@ -70,10 +69,9 @@ class BroadcastRepository
 
     public function getAllReadyToProcess()
     {
-        return Broadcast::where(
-            "scheduled_at",
-            "=",
-            ScheduleDate::now()
-        )->get();
+        $afterOneMinuteFromNow = now()->addMinute();
+        return Broadcast::where("scheduled_at", ">=", now())
+            ->where("scheduled_at", "<", $afterOneMinuteFromNow)
+            ->get();
     }
 }
