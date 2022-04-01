@@ -7,7 +7,7 @@ interface Props {
 
 export default class Date extends PureComponent<Props> {
   get date() {
-    return dateUtil.format(this.props.date);
+    return dateUtil.humanize(this.props.date);
   }
 
   render() {

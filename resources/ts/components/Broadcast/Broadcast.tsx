@@ -52,9 +52,9 @@ class Broadcast extends PureComponent<Props> {
   get dates() {
     const { broadcast } = this.props;
     if (!broadcast) return null;
-    const scheduledAt = dateUtil.format(broadcast.scheduled_at);
-    const createdAt = dateUtil.format(broadcast.created_at);
-    const updatedAt = dateUtil.format(broadcast.updated_at);
+    const scheduledAt = dateUtil.humanize(broadcast.scheduled_at);
+    const createdAt = dateUtil.humanize(broadcast.created_at);
+    const updatedAt = dateUtil.humanize(broadcast.updated_at);
     return (
       broadcast && (
         <div className="flex gap-3 mt-3">
