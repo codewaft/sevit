@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Broadcast, Message } from "../../apis/broadcast.api";
-import { PaginateResponse } from "../../services/request.service";
+import { PaginateResponse } from "../../services/api.service";
 
 export interface State {
   id: number | null;

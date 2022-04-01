@@ -44,7 +44,10 @@ class Broadcasts extends PureComponent<Props> {
   }
 
   target(groups: Group[]) {
-    const target = join(map(groups, (group) => group.title));
+    const target = join(
+      map(groups, (group) => group.title),
+      ", "
+    );
     return target || "all";
   }
 
