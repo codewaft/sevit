@@ -1,4 +1,5 @@
 import React, { ChangeEvent, PureComponent } from "react";
+import dateUtil from "../utils/date.util";
 import FormLabel from "./FormLabel";
 
 interface Props {
@@ -14,8 +15,13 @@ export default class DateTime extends PureComponent<Props> {
     this.handleChange = this.handleChange.bind(this);
   }
 
+  get local() {
+    return dateUtil.local(this.props.value);
+  }
+
   handleChange(event: ChangeEvent<HTMLInputElement>) {
-    const { name, value } = event.target;
+    const { name } = event.target;
+    const value = dateUtil.utc(event.target.value);
     this.props.onChange(name, value);
   }
 
@@ -28,7 +34,7 @@ export default class DateTime extends PureComponent<Props> {
           className="h-12 w-full px-5 text-md rounded-md drop-shadow-md outline-none text-slate-900 mb-4disabled:text-slate-400 invalid:text-slate-400 mb-4"
           type="datetime-local"
           name={this.props.name}
-          value={this.props.value}
+          value={this.local}
           onInput={this.handleChange}
         />
       </div>
