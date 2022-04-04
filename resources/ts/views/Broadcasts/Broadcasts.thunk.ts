@@ -2,7 +2,7 @@ import { GetStateFunc, RootDispatch } from "../../store/store";
 import broadcastApi from "../../apis/broadcast.api";
 import { removePaginateBroadcast, replacePaginate } from "./Broadcasts.slice";
 import { Confirm, removeConfirm, replaceConfirm } from "../../components/Confirm/Confirm.slice";
-import { selectBroadcast } from "./Broadcasts.selector";
+import { selectBroadcast } from "./Broadcasts.select";
 
 export function paginateBroadcasts(url?: string) {
   return async (dispatch: RootDispatch) => {
