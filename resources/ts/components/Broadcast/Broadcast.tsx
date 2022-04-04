@@ -5,6 +5,7 @@ import { RootDispatch, RootState } from "../../store/store";
 import { Broadcast as BroadcastData } from "../../apis/broadcast.api";
 import { replaceBroadcast } from "./Broadcast.slice";
 import { readBroadcast } from "./Broadcast.thunk";
+import { selectBroadcastCountStatus } from "./Broadcast.select";
 import Label from "../Label";
 import Heading from "../Heading";
 import Icon from "../Icon";
@@ -17,17 +18,13 @@ class Broadcast extends PureComponent<Props> {
     super(props);
   }
 
-  get completed() {
-    return `(${185}/${190})`;
-  }
-
   get header() {
     const { broadcast } = this.props;
     return (
       broadcast && (
         <div>
           <Heading size="regular" text={broadcast.title} />
-          <Status name={broadcast.status} append={this.completed} />
+          <Status name={broadcast.status} append={this.props.countStatus} />
         </div>
       )
     );
@@ -98,6 +95,7 @@ class Broadcast extends PureComponent<Props> {
 
 const mapStateToProps = (state: RootState) => ({
   broadcast: state.broadcast.broadcast,
+  countStatus: selectBroadcastCountStatus(state),
 });
 
 const mapDispatchToProps = (dispatch: RootDispatch) => ({

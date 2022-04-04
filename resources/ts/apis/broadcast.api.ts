@@ -10,12 +10,14 @@ export interface Broadcast {
   template_id: number;
   title: string;
   status: Status;
-  template: Template;
-  groups: Group[];
   scheduled_at: string;
   created_at: string;
   updated_at: string;
   deleted_at: string;
+  messagesCount: number;
+  completedMessagesCount: number;
+  template: Template;
+  groups: Group[];
 }
 
 export type MessageStatus = "scheduled" | "processed" | "failed";
