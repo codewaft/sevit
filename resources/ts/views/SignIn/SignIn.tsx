@@ -23,7 +23,7 @@ class SignIn extends PureComponent<Props> {
         <div className="container mx-auto flex justify-center items-center h-full">
           <Card
             color="gray"
-            className="px-10 pt-8 pb-10 w-1/3 max-h-[calc(100%-2rem)] overflow-y-auto"
+            className="px-5 md:px-10 pt-8 pb-10 lg:w-4/12 md:w-5/12 sm:w-6/12 w-11/12 max-h-[calc(100%-2rem)] overflow-y-auto"
           >
             <Logo />
             <Heading className="mt-8 mb-1" size="large" text="Sign in" />

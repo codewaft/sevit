@@ -1,6 +1,6 @@
 import groupApi from "../../apis/group.api";
 import { GetStateFunc, RootDispatch } from "../../store/store";
-import { selectGroup } from "./Groups.selector";
+import { selectGroup } from "./Groups.select";
 import { removePaginateGroup, replacePaginate } from "./Groups.slice";
 import { Confirm, removeConfirm, replaceConfirm } from "../../components/Confirm/Confirm.slice";
 

@@ -35,7 +35,7 @@ class Modal extends PureComponent<Props> {
     const { heading } = this.props;
     return (
       heading && (
-        <div className="px-10 mb-5">
+        <div className="px-5 md:px-10 mb-5">
           <Heading size="regular" text={heading} />
         </div>
       )

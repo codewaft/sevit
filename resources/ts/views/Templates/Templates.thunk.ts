@@ -2,7 +2,7 @@ import { GetStateFunc, RootDispatch } from "../../store/store";
 import { removePaginateTemplate, replacePaginate } from "./Templates.slice";
 import templateApi from "../../apis/template.api";
 import { Confirm, removeConfirm, replaceConfirm } from "../../components/Confirm/Confirm.slice";
-import { selectTemplate } from "./Templates.selector";
+import { selectTemplate } from "./Templates.select";
 
 export function paginateTemplates(url?: string) {
   return async (dispatch: RootDispatch) => {

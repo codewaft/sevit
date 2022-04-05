@@ -25,7 +25,7 @@ class GroupCreate extends PureComponent<Props> {
 
   render() {
     return (
-      <div className="px-10 pb-10">
+      <div className="px-5 md:px-10 pb-10">
         <Input
           type="text"
           name="title"

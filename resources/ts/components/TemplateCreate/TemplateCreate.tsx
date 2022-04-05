@@ -28,8 +28,8 @@ class TemplateCreate extends PureComponent<Props> {
 
   render() {
     return (
-      <div className="grid grid-cols-2 gap-5 px-10">
-        <div className="pb-10">
+      <div className="grid grid-cols-1 gap-5 px-5 md:px-10 md:grid-cols-2">
+        <div className="md:pb-10">
           <Input
             type="text"
             name="title"

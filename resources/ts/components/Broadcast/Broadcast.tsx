@@ -83,7 +83,7 @@ class Broadcast extends PureComponent<Props> {
 
   render() {
     return (
-      <div className="px-10 pb-10">
+      <div className="px-5 md:px-10 pb-10">
         {this.header}
         {this.template}
         {this.groups}
