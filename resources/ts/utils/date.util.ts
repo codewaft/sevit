@@ -7,13 +7,15 @@ export default {
     return dateObject.toFormat("DD h:m a");
   },
 
-  utc(date: string) {
+  utc(date: string): string {
     const dateObject = DateTime.fromISO(date);
-    return dateObject.toUTC().toISO();
+    const utc = dateObject.toUTC().toISO();
+    return utc || "";
   },
 
-  local(date: string) {
+  local(date: string): string {
     const dateObject = DateTime.fromISO(date);
-    return dateObject.toLocal().toISO({ includeOffset: false });
+    const local = dateObject.toLocal().toISO({ includeOffset: false });
+    return local || "";
   },
 };
