@@ -18,7 +18,7 @@ class BroadcastSeeder extends Seeder
                 $broadcasts = Broadcast::factory()
                     ->count(rand(1, 3))
                     ->make()
-                    ->makeHidden(["status", "messagesCount", "processedMessagesCount"])
+                    ->makeHidden(["status", "messagesCount", "completedMessagesCount"])
                     ->toArray();
                 $template->broadcasts()->createMany($broadcasts);
             });

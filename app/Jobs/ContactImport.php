@@ -11,35 +11,54 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\Middleware\WithoutOverlapping;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 use App\Services\Twillio;
 use App\Services\Validation;
 use App\Repositories\ContactRepository;
+use App\Repositories\GroupRepository;
 
 class ContactImport implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    protected $contact;
+    protected $contactRepo;
+    protected $groupRepo;
     protected $phone;
-    protected $groups;
+    protected $groupTitles;
 
-    public function __construct($phone, $groups)
+    public function __construct($phone, $groupTitles)
     {
-        $this->contact = new ContactRepository();
+        $this->contactRepo = new ContactRepository();
+        $this->groupRepo = new GroupRepository();
         $this->phone = $phone;
-        $this->groups = $groups;
+        $this->groupTitles = $this->sanitizeGroupTitles($groupTitles);
+    }
+
+    protected function sanitizeGroupTitles($groupTitles)
+    {
+        return collect($groupTitles)
+            ->map(fn($title) => Str::of($title)->trim())
+            ->filter(fn($title) => !Str::of($title)->isEmpty())
+            ->unique()
+            ->toArray();
+    }
+
+    protected function getGroupIds()
+    {
+        $groupIds = $this->groupRepo->getFromTitles($this->groupTitles);
+        return $groupIds->pluck("id");
     }
 
     protected function validateData()
     {
         $data = [
             "phone" => $this->phone,
-            "groups" => $this->groups,
+            "groups" => $this->groupTitles,
         ];
         $rule = [
             "phone" => "required|string|unique:contacts,phone|max:255",
             "groups" => "required|array",
-            "groups.*" => "required|string|max:255",
+            "groups.*" => "required|exists:groups,title",
         ];
         return Validation::validate($data, $rule);
     }
@@ -61,7 +80,8 @@ class ContactImport implements ShouldQueue
                 throw new Exception($phoneError);
             }
             $contactData = ["phone" => $this->phone];
-            $this->contact->createOne($contactData, $this->groups);
+            $groupIds = $this->getGroupIds();
+            $this->contactRepo->createOne($contactData, $groupIds);
         } catch (Throwable $e) {
             Log::warning($e);
         }

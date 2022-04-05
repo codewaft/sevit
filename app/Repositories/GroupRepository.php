@@ -16,6 +16,11 @@ class GroupRepository
         return Group::findOrFail($id);
     }
 
+    public function getFromTitles($titles)
+    {
+        return Group::whereIn("title", $titles)->get();
+    }
+
     public function editOne($id, $data)
     {
         $group = Group::findOrFail($id);
