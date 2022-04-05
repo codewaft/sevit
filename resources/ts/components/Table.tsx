@@ -86,8 +86,8 @@ export default class Table extends PureComponent<Props> {
 
   render() {
     return (
-      <div>
-        <div className="flex justify-between mb-3 items-end">
+      <div className="mt-3">
+        <div className="flex justify-between mb-3 items-end gap-x-3">
           {this.details}
           {this.paginateButtons}
         </div>
