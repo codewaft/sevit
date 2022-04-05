@@ -34,7 +34,7 @@ class ContactEdit extends PureComponent<Props> {
 
   render() {
     return (
-      <div className="px-10 pb-10">
+      <div className="px-5 md:px-10 pb-10">
         <MultiSelect
           options={this.props.groupOptions}
           selectedOptions={this.props.selectedGroupOptions}
