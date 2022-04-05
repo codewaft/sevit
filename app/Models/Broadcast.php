@@ -47,12 +47,12 @@ class Broadcast extends Model
 
     public function template()
     {
-        return $this->belongsTo(Template::class);
+        return $this->belongsTo(Template::class)->withTrashed();
     }
 
     public function groups()
     {
-        return $this->belongsToMany(Group::class);
+        return $this->belongsToMany(Group::class)->withTrashed();
     }
 
     public function messages()
