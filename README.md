@@ -1,4 +1,4 @@
-# StackSMS
+# Sevit
 Bulk broadcasting web app for SMS marketing
 
 ### Configuration
