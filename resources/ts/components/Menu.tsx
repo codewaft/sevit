@@ -11,6 +11,6 @@ export default class Menu extends PureComponent {
   }
 
   render() {
-    return <div className="flex justify-between md:block">{this.menuItems}</div>;
+    return <div className="flex md:block">{this.menuItems}</div>;
   }
 }

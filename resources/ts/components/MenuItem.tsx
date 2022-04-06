@@ -35,7 +35,7 @@ export default class MenuItem extends PureComponent<Props> {
   }
 
   get baseClass() {
-    return "flex gap-5 items-center py-3 md:rounded-l-md px-5 md:py-2 cursor-pointer text-[19px]";
+    return "flex gap-5 items-center justify-center w-full py-3 md:rounded-l-md md:justify-start md:px-5 md:py-2 cursor-pointer text-[19px]";
   }
 
   get inactiveClass() {
