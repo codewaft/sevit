@@ -51,9 +51,7 @@ export default class Select extends PureComponent<Props> {
           onChange={this.handleChange}
           required
         >
-          <option value="" disabled>
-            {this.props.placeholder}
-          </option>
+          <option value="">{this.props.placeholder}</option>
           {this.options}
         </select>
       </div>
