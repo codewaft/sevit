@@ -1,7 +1,7 @@
 <img src="https://i.imgur.com/wcSNV8i.png" height="46">
 
 # Sevit
-Free and open-source text message (SMS) bulk broadcast marketing web app.
+Free and open-source web app for text message (SMS) bulk broadcast marketing.
 
 ### Server requirements
 - [Node.js](https://nodejs.org/en/download/) 16.14.2 or later
