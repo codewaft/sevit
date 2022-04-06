@@ -27,9 +27,7 @@ class SignIn extends PureComponent<Props> {
           >
             <Logo />
             <Heading className="mt-8 mb-1" size="large" text="Sign in" />
-            <p className="text-slate-600 text-md mb-6">
-              Please sign in into {process.env.MIX_APP_NAME}
-            </p>
+            <p className="text-slate-600 text-md mb-6">Please sign in into Sevit</p>
             <Input
               type="text"
               name="username"
