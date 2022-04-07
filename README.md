@@ -1,4 +1,4 @@
-<img src="https://i.imgur.com/wcSNV8i.png" height="46">
+![Sevit logo](https://user-images.githubusercontent.com/11629673/162134945-ae7ec507-a24f-4eee-8372-7dc7ea27fa0c.svg)
 
 # Sevit
 Sevit is a free and open-source web application for text message (SMS) marketing. Sevit help to manage contact groups, contacts, message templates and broadcasts. Currently Sevit supports [Twillio](https://www.twilio.com/) SMS gateway. More gateways will be added according to the users' requests.
