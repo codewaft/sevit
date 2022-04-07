@@ -7,4 +7,5 @@ Sevit is a free and open-source web application for text message (SMS) marketing
 - What are the main features and functionalities? [Features and functionalities](https://github.com/codewaft/sevit/wiki/Features-and-functionalities)
 - What are the server requirements? [Server requirements](https://github.com/codewaft/sevit/wiki/Server-requirements)
 - How to install it on a dedicated server? [Installation on dedicated server](https://github.com/codewaft/sevit/wiki/Installation-on-dedicated-server)
+- How to report bugs and request features? [Bug report and request feature](https://github.com/codewaft/sevit/wiki/bug-report-and-request-feature)
 - How can I get an installation service? [Installation service](https://github.com/codewaft/sevit/wiki/Installation-service)
