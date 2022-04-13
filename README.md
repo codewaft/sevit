@@ -11,3 +11,6 @@ Sevit is a free and open-source web application for text message (SMS) marketing
 - How to install it on a cPanel? [Installation on cPanel](https://github.com/codewaft/sevit/wiki/Installation-on-cPanel)
 - How to report bugs and request features? [Bug report and request feature](https://github.com/codewaft/sevit/wiki/bug-report-and-request-feature)
 - How can I get an installation service? [Installation service](https://github.com/codewaft/sevit/wiki/Installation-service)
+
+### Installation service
+The team [Codewaft](https://codewaft.com) is maintaining the Sevit project. They provide installation service to install Sevit on your server for your convenience. Please find more details from [Installation service](https://github.com/codewaft/sevit/wiki/Installation-service).
