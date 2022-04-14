@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { map } from "lodash";
 import { RootDispatch, RootState } from "../../store/store";
-import { editContact, listGroups, readContact } from "./ContactEdit.thunk";
+import { updateContact, listGroups, readContact } from "./ContactEdit.thunk";
 import { groupOptions, selectedGroupOptions } from "./ContactEdit.select";
 import { replaceFormGroups } from "./ContactEdit.slice";
 import Button from "../Button";
@@ -15,16 +15,11 @@ class ContactEdit extends PureComponent<Props> {
   constructor(props: Props) {
     super(props);
     this.handleGroupsChange = this.handleGroupsChange.bind(this);
-    this.handleEditClick = this.handleEditClick.bind(this);
   }
 
   handleGroupsChange(name: string, options: SelectOption[]) {
     const selectedGroups = map(options, (option) => Number(option.value));
     this.props.replaceFormGroups(selectedGroups);
-  }
-
-  handleEditClick() {
-    this.props.editContact();
   }
 
   componentDidMount() {
@@ -45,9 +40,9 @@ class ContactEdit extends PureComponent<Props> {
         />
         <Button
           size="regular"
-          text="Edit contact"
+          text="Update contact"
           icon="ri-pencil-line"
-          onClick={this.handleEditClick}
+          onClick={this.props.updateContact}
         />
       </div>
     );
@@ -65,7 +60,7 @@ const mapDispatchToProps = (dispatch: RootDispatch) => ({
   readContact: () => dispatch(readContact()),
   listGroups: () => dispatch(listGroups()),
   replaceFormGroups: (groups: number[]) => dispatch(replaceFormGroups(groups)),
-  editContact: () => dispatch(editContact()),
+  updateContact: () => dispatch(updateContact()),
 });
 
 type StateProps = ReturnType<typeof mapStateToProps>;

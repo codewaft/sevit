@@ -29,7 +29,7 @@ export function listGroups() {
   };
 }
 
-export function editContact() {
+export function updateContact() {
   return async (dispatch: RootDispatch, getState: GetStateFunc) => {
     const { id, form: data } = getState().contactEdit;
     if (id) {

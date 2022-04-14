@@ -17,7 +17,7 @@ import {
   replaceFormTitle,
   resetFormGroups,
 } from "./BroadcastEdit.slice";
-import { editBroadcast, listGroups, listTemplates, readBroadcast } from "./BroadcastEdit.thunk";
+import { updateBroadcast, listGroups, listTemplates, readBroadcast } from "./BroadcastEdit.thunk";
 import Button from "../Button";
 import DateTime from "../DateTime";
 import Input from "../Input";
@@ -113,9 +113,9 @@ class BroadcastEdit extends PureComponent<Props> {
           />
           <Button
             size="regular"
-            text="Edit broadcast"
+            text="Update broadcast"
             icon="ri-pencil-line"
-            onClick={this.props.editBroadcast}
+            onClick={this.props.updateBroadcast}
           />
         </div>
         <div className="flex items-end justify-center">
@@ -145,7 +145,7 @@ const mapDispatchToProps = (dispatch: RootDispatch) => ({
   replaceFormGroups: (groups: number[]) => dispatch(replaceFormGroups(groups)),
   listTemplates: () => dispatch(listTemplates()),
   listGroups: () => dispatch(listGroups()),
-  editBroadcast: () => dispatch(editBroadcast()),
+  updateBroadcast: () => dispatch(updateBroadcast()),
 });
 
 type StateProps = ReturnType<typeof mapStateToProps>;

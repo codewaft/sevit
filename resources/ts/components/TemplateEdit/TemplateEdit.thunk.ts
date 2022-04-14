@@ -17,7 +17,7 @@ export function readTemplate() {
   };
 }
 
-export function editTemplate() {
+export function updateTemplate() {
   return async (dispatch: RootDispatch, getState: GetStateFunc) => {
     const { id, form: data } = getState().templateEdit;
     if (id) {

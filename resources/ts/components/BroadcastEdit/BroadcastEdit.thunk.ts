@@ -45,7 +45,7 @@ export function listGroups() {
   };
 }
 
-export function editBroadcast() {
+export function updateBroadcast() {
   return async (dispatch: RootDispatch, getState: GetStateFunc) => {
     const { id, form: data } = getState().broadcastEdit;
     if (id) {

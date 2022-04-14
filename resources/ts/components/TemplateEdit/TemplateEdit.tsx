@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { RootDispatch, RootState } from "../../store/store";
 import { replaceContent, replaceTitle } from "./TemplateEdit.slice";
-import { editTemplate, readTemplate } from "./TemplateEdit.thunk";
+import { updateTemplate, readTemplate } from "./TemplateEdit.thunk";
 import Button from "../Button";
 import Input from "../Input";
 import MessagePreview from "../MessagePreview";
@@ -14,16 +14,11 @@ class TemplateEdit extends PureComponent<Props> {
   constructor(props: Props) {
     super(props);
     this.handleFieldChange = this.handleFieldChange.bind(this);
-    this.handleEditClick = this.handleEditClick.bind(this);
   }
 
   handleFieldChange(name: string, value: string) {
     if (name === "title") this.props.replaceTitle(value);
     if (name === "content") this.props.replaceContent(value);
-  }
-
-  handleEditClick() {
-    this.props.editTemplate();
   }
 
   componentDidMount() {
@@ -52,9 +47,9 @@ class TemplateEdit extends PureComponent<Props> {
           />
           <Button
             size="regular"
-            text="Edit template"
+            text="Update template"
             icon="ri-pencil-line"
-            onClick={this.handleEditClick}
+            onClick={this.props.updateTemplate}
           />
         </div>
         <div className="flex items-end justify-center">
@@ -73,7 +68,7 @@ const mapDispatchToProps = (dispatch: RootDispatch) => ({
   replaceTitle: (title: string) => dispatch(replaceTitle(title)),
   replaceContent: (content: string) => dispatch(replaceContent(content)),
   readTemplate: () => dispatch(readTemplate()),
-  editTemplate: () => dispatch(editTemplate()),
+  updateTemplate: () => dispatch(updateTemplate()),
 });
 
 type StateProps = ReturnType<typeof mapStateToProps>;
