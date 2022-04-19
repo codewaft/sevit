@@ -1,7 +1,11 @@
-![Sevit logo](https://user-images.githubusercontent.com/11629673/162134945-ae7ec507-a24f-4eee-8372-7dc7ea27fa0c.svg)
-
-# Sevit
-<img src="https://badgen.net/github/release/codewaft/sevit?color=green&icon=github"> <img src="https://badgen.net/github/contributors/codewaft/sevit?color=green&icon=github"> <img src="https://badgen.net/github/stars/codewaft/sevit?color=green&icon=github"> <img src="https://badgen.net/github/license/codewaft/sevit?color=green&icon=github">
+<p align="center">
+    <img src="https://user-images.githubusercontent.com/11629673/162134945-ae7ec507-a24f-4eee-8372-7dc7ea27fa0c.svg" alt="Sevit logo" />
+</p>
+<h1 align="center">Sevit</h1>
+<h3 align="center">Free and open-source web app for text message (SMS) marketing.</h3>
+<p align="center">
+    <img src="https://badgen.net/github/release/codewaft/sevit?color=green&icon=github"> <img src="https://badgen.net/github/contributors/codewaft/sevit?color=green&icon=github"> <img src="https://badgen.net/github/stars/codewaft/sevit?color=green&icon=github"> <img src="https://badgen.net/github/license/codewaft/sevit?color=green&icon=github">
+</p>
 
 Sevit is a free and open-source web application for text message (SMS) marketing. Sevit helps to manage contact groups, contacts, message templates, and broadcasts. Currently, Sevit supports the [Twillio](https://www.twilio.com/) SMS gateway. More gateways will be added according to the users' requests.
 
