@@ -54,15 +54,14 @@ class BroadcastEdit extends PureComponent<Props> {
   handleInputChange = (name: string, value: string) => {
     const { replaceFormTitle, replaceSchedule } = this.props;
     if (name === "title") replaceFormTitle(value);
-    if (name === "schedule") replaceSchedule(value);
+    else if (name === "schedule") replaceSchedule(value);
   };
 
   handleSelectChange = (name: string, value: string) => {
     const { replaceFormTemplate, resetFormGroups, replaceFormTarget } = this.props;
     if (name === "template") {
       replaceFormTemplate(value);
-    }
-    if (name === "target") {
+    } else if (name === "target") {
       if (value === "all") resetFormGroups();
       replaceFormTarget(value);
     }

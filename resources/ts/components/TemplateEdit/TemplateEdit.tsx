@@ -19,7 +19,7 @@ class TemplateEdit extends PureComponent<Props> {
   handleFieldChange(name: string, value: string) {
     const { replaceTitle, replaceContent } = this.props;
     if (name === "title") replaceTitle(value);
-    if (name === "content") replaceContent(value);
+    else if (name === "content") replaceContent(value);
   }
 
   componentDidMount() {

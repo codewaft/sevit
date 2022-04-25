@@ -14,7 +14,7 @@ interface Props extends StateProps, DispatchProps {}
 class SignIn extends PureComponent<Props> {
   handleInputChange = (name: string, value: string) => {
     if (name === "username") this.props.replaceFormUsername(value);
-    if (name === "password") this.props.replaceFormPassword(value);
+    else if (name === "password") this.props.replaceFormPassword(value);
   };
 
   render() {
