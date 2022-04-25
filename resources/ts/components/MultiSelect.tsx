@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { find, findIndex, reject, map } from "lodash";
+import { find, findIndex, reject } from "lodash";
 import Select, { Option as SelectOption } from "./Select";
 import MultiSelectedLabels from "./MultiSelectedLabels";
 

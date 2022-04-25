@@ -1,7 +1,7 @@
 import React, { PureComponent } from "react";
+import { NavLink } from "react-router-dom";
 import { upperFirst } from "lodash";
 import Icon from "./Icon";
-import { LinkProps, NavLink, NavLinkProps } from "react-router-dom";
 import routes from "../routes";
 
 export const items = ["broadcasts", "templates", "contacts", "groups"] as const;

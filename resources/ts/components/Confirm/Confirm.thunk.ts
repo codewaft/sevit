@@ -1,4 +1,4 @@
-import { GetStateFunc, RootDispatch, RootState } from "../../store/store";
+import { GetStateFunc, RootDispatch } from "../../store/store";
 import { deleteBroadcastConfirm } from "../../views/Broadcasts/Broadcasts.thunk";
 import { deleteContactConfirm } from "../../views/Contacts/Contacts.thunk";
 import { deleteGroupConfirm } from "../../views/Groups/Groups.thunk";
