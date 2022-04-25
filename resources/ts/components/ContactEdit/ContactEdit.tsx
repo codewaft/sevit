@@ -23,8 +23,9 @@ class ContactEdit extends PureComponent<Props> {
   }
 
   componentDidMount() {
-    this.props.readContact();
-    this.props.listGroups();
+    const { readContact, listGroups } = this.props;
+    readContact();
+    listGroups();
   }
 
   render() {

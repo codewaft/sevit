@@ -14,9 +14,9 @@ export default class Card extends PureComponent<Props> {
   };
 
   get className() {
+    const { color, className } = this.props;
     const base = "rounded-xl drop-shadow-lg";
-    const color = this.colorClasses[this.props.color];
-    return `${base} ${color} ${this.props.className}`;
+    return `${base} ${this.colorClasses[color]} ${className}`;
   }
 
   render() {

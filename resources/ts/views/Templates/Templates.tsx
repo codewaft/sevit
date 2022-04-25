@@ -60,13 +60,19 @@ class Templates extends PureComponent<Props> {
   }
 
   handleActionClick(id: number, action: ActionName) {
+    const {
+      resetTemplateEditState,
+      replaceTemplateEditId,
+      replaceModalActive,
+      deleteTemplatePrompt,
+    } = this.props;
     switch (action) {
       case "edit":
-        this.props.resetTemplateEditState();
-        this.props.replaceTemplateEditId(id);
-        return this.props.replaceModalActive("templateEdit");
+        resetTemplateEditState();
+        replaceTemplateEditId(id);
+        return replaceModalActive("templateEdit");
       case "delete":
-        return this.props.deleteTemplatePrompt(id);
+        return deleteTemplatePrompt(id);
     }
   }
 

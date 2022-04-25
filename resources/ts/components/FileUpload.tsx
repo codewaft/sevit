@@ -39,9 +39,10 @@ export default class FileUpload extends PureComponent<Props, State> {
   };
 
   handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { onChange, name } = this.props;
     const { files } = event.target;
     const file = files && files[0];
-    this.props.onChange(this.props.name, file);
+    onChange(name, file);
     const filename = file ? file.name : null;
     this.setState({ filename });
   };

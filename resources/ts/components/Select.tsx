@@ -26,9 +26,10 @@ export default class Select extends PureComponent<Props> {
   }
 
   option(option: Option) {
+    const { name, value } = option;
     return (
-      <option value={option.value} key={option.value}>
-        {option.name}
+      <option value={value} key={value}>
+        {name}
       </option>
     );
   }

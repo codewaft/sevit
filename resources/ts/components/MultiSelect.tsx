@@ -27,18 +27,19 @@ export default class MultiSelect extends Component<Props, State> {
   }
 
   handleRemoveClick(value: string) {
+    const { name, onChange } = this.props;
     const selectedOptions = reject(this.props.selectedOptions, { value });
-    this.props.onChange(this.props.name, selectedOptions);
+    onChange(name, selectedOptions);
   }
 
-  handleSelectChange(name: string, value: string) {
-    const option = find(this.props.options, { value });
+  handleSelectChange(selectName: string, value: string) {
+    const { options, selectedOptions, onChange, name } = this.props;
+    const option = find(options, { value });
     if (option) {
-      const isSelected = findIndex(this.props.selectedOptions, { value }) !== -1;
+      const isSelected = findIndex(selectedOptions, { value }) !== -1;
       if (!isSelected) {
-        const selectedOptions = this.props.selectedOptions;
         selectedOptions.push(option);
-        this.props.onChange(this.props.name, selectedOptions);
+        onChange(name, selectedOptions);
       }
     }
   }
