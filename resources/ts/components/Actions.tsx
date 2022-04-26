@@ -18,25 +18,31 @@ export default class Actions extends PureComponent<Props> {
     delete: "ri-delete-bin-6-line",
   };
 
+  constructor(props: Props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
   get actions() {
     return this.props.actions.map((action) => this.action(action));
   }
 
+  handleClick(action: Name) {
+    this.props.onClick(this.props.id, action);
+  }
+
   action(action: Name) {
-    const handleClick = () => this.props.onClick(this.props.id, action);
     return (
       <Icon
         size="medium"
         name={this.icons[action]}
-        onClick={handleClick}
+        onClick={() => this.handleClick(action)}
         key={action}
       />
     );
   }
 
   render() {
-    return (
-      <div className="inline-flex gap-1 text-slate-600">{this.actions}</div>
-    );
+    return <div className="inline-flex gap-1 text-slate-600">{this.actions}</div>;
   }
 }
