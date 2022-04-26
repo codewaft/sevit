@@ -22,15 +22,16 @@ export default class Textarea extends PureComponent<Props> {
   }
 
   render() {
+    const { label, name, value, placeholder, rows } = this.props;
     return (
       <div className="block w-full">
-        <FormLabel text={this.props.label} />
+        <FormLabel text={label} />
         <textarea
           className="py-3.5 w-full px-5 text-md rounded-md drop-shadow-md outline-none placeholder:text-slate-400 text-slate-900 mb-4"
-          name={this.props.name}
-          value={this.props.value}
-          placeholder={this.props.placeholder}
-          rows={this.props.rows}
+          name={name}
+          value={value}
+          placeholder={placeholder}
+          rows={rows}
           onInput={this.handleChange}
         />
       </div>

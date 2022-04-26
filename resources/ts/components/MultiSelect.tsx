@@ -45,19 +45,17 @@ export default class MultiSelect extends Component<Props, State> {
   }
 
   render() {
+    const { options, name, label, placeholder, selectedOptions } = this.props;
     return (
       <Select
-        options={this.props.options}
-        name={this.props.name}
-        label={this.props.label}
+        options={options}
+        name={name}
+        label={label}
         value={this.state.value}
-        placeholder={this.props.placeholder}
+        placeholder={placeholder}
         onChange={this.handleSelectChange}
       >
-        <MultiSelectedLabels
-          selectedOptions={this.props.selectedOptions}
-          onRemove={this.handleRemoveClick}
-        />
+        <MultiSelectedLabels selectedOptions={selectedOptions} onRemove={this.handleRemoveClick} />
       </Select>
     );
   }
