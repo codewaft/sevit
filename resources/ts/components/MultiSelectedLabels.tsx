@@ -10,13 +10,9 @@ interface Props {
 
 export default class MultiSelectedLabels extends Component<Props> {
   label(option: SelectOption) {
+    const { name, value } = option;
     return (
-      <Label
-        type="secondary"
-        text={option.name}
-        onClose={() => this.props.onRemove(option.value)}
-        key={option.value}
-      />
+      <Label type="secondary" text={name} onClose={() => this.props.onRemove(value)} key={value} />
     );
   }
 

@@ -63,13 +63,15 @@ class Groups extends PureComponent<Props> {
   }
 
   handleActionClick(id: number, action: ActionName) {
+    const { resetGroupEditState, replaceGroupEditId, replaceModalActive, deleteGroupPrompt } =
+      this.props;
     switch (action) {
       case "edit":
-        this.props.resetGroupEditState();
-        this.props.replaceGroupEditId(id);
-        return this.props.replaceModalActive("groupEdit");
+        resetGroupEditState();
+        replaceGroupEditId(id);
+        return replaceModalActive("groupEdit");
       case "delete":
-        return this.props.deleteGroupPrompt(id);
+        return deleteGroupPrompt(id);
     }
   }
 

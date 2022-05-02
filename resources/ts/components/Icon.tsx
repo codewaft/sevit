@@ -19,9 +19,9 @@ export default class Icon extends PureComponent<Props> {
   };
 
   get className() {
-    const { size, name, onClick } = this.props;
+    const { size, name, onClick, className } = this.props;
     const cursor = onClick ? "cursor-pointer" : "";
-    return `${this.props.className} ${this.sizeClasses[size]} ${name} ${cursor}`;
+    return `${className} ${this.sizeClasses[size]} ${name} ${cursor}`;
   }
 
   render() {

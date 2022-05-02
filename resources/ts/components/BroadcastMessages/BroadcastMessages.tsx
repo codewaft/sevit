@@ -23,12 +23,12 @@ class BroadcastMessages extends PureComponent<Props> {
   }
 
   get header() {
-    const { broadcast } = this.props;
+    const { broadcast, countStatus } = this.props;
     return (
       broadcast && (
         <div className="flex gap-3 items-center">
           <Heading size="regular" text={broadcast.title} />
-          <Status name={broadcast.status} append={this.props.countStatus} />
+          <Status name={broadcast.status} append={countStatus} />
         </div>
       )
     );

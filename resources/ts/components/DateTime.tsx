@@ -20,9 +20,9 @@ export default class DateTime extends PureComponent<Props> {
   }
 
   handleChange(event: ChangeEvent<HTMLInputElement>) {
-    const { name } = event.target;
-    const value = dateUtil.utc(event.target.value);
-    this.props.onChange(name, value);
+    const { target } = event;
+    const value = dateUtil.utc(target.value);
+    this.props.onChange(target.name, value);
   }
 
   render() {

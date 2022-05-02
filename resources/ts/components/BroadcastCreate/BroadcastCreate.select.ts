@@ -1,7 +1,7 @@
 import { createSelector } from "@reduxjs/toolkit";
 import { compact, find, map } from "lodash";
 import { RootState } from "../../store/store";
-import templateApi, { Template } from "../../apis/template.api";
+import { Template } from "../../apis/template.api";
 import { CreateRequest } from "../../apis/broadcast.api";
 import { Group } from "../../apis/group.api";
 

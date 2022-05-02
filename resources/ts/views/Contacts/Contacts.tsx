@@ -83,14 +83,16 @@ class Contacts extends PureComponent<Props> {
   }
 
   handleActionClick(id: number, action: ActionName) {
+    const { resetContactEditState, replaceContactEditId, replaceModalActive, deleteContactPrompt } =
+      this.props;
     switch (action) {
       case "edit":
-        this.props.resetContactEditState();
-        this.props.replaceContactEditId(id);
-        this.props.replaceModalActive("contactEdit");
+        resetContactEditState();
+        replaceContactEditId(id);
+        replaceModalActive("contactEdit");
         break;
       case "delete":
-        return this.props.deleteContactPrompt(id);
+        return deleteContactPrompt(id);
     }
   }
 

@@ -36,11 +36,12 @@ class BroadcastEdit extends PureComponent<Props> {
   }
 
   get groupsSelect() {
+    const { canShowGroupsSelect, groupOptions, selectedGroupOptions } = this.props;
     return (
-      this.props.canShowGroupsSelect && (
+      canShowGroupsSelect && (
         <MultiSelect
-          options={this.props.groupOptions}
-          selectedOptions={this.props.selectedGroupOptions}
+          options={groupOptions}
+          selectedOptions={selectedGroupOptions}
           name="selectedGroups"
           label="Groups"
           placeholder="Select group"
@@ -51,17 +52,18 @@ class BroadcastEdit extends PureComponent<Props> {
   }
 
   handleInputChange = (name: string, value: string) => {
-    if (name === "title") this.props.replaceFormTitle(value);
-    if (name === "schedule") this.props.replaceSchedule(value);
+    const { replaceFormTitle, replaceSchedule } = this.props;
+    if (name === "title") replaceFormTitle(value);
+    else if (name === "schedule") replaceSchedule(value);
   };
 
   handleSelectChange = (name: string, value: string) => {
+    const { replaceFormTemplate, resetFormGroups, replaceFormTarget } = this.props;
     if (name === "template") {
-      this.props.replaceFormTemplate(value);
-    }
-    if (name === "target") {
-      if (value === "all") this.props.resetFormGroups();
-      this.props.replaceFormTarget(value);
+      replaceFormTemplate(value);
+    } else if (name === "target") {
+      if (value === "all") resetFormGroups();
+      replaceFormTarget(value);
     }
   };
 
@@ -71,9 +73,10 @@ class BroadcastEdit extends PureComponent<Props> {
   };
 
   componentDidMount() {
-    this.props.readBroadcast();
-    this.props.listTemplates();
-    this.props.listGroups();
+    const { readBroadcast, listTemplates, listGroups } = this.props;
+    readBroadcast();
+    listTemplates();
+    listGroups();
   }
 
   render() {

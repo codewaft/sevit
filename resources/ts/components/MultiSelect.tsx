@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { find, findIndex, reject, map } from "lodash";
+import { find, findIndex, reject } from "lodash";
 import Select, { Option as SelectOption } from "./Select";
 import MultiSelectedLabels from "./MultiSelectedLabels";
 
@@ -27,36 +27,35 @@ export default class MultiSelect extends Component<Props, State> {
   }
 
   handleRemoveClick(value: string) {
+    const { name, onChange } = this.props;
     const selectedOptions = reject(this.props.selectedOptions, { value });
-    this.props.onChange(this.props.name, selectedOptions);
+    onChange(name, selectedOptions);
   }
 
-  handleSelectChange(name: string, value: string) {
-    const option = find(this.props.options, { value });
+  handleSelectChange(selectName: string, value: string) {
+    const { options, selectedOptions, onChange, name } = this.props;
+    const option = find(options, { value });
     if (option) {
-      const isSelected = findIndex(this.props.selectedOptions, { value }) !== -1;
+      const isSelected = findIndex(selectedOptions, { value }) !== -1;
       if (!isSelected) {
-        const selectedOptions = this.props.selectedOptions;
         selectedOptions.push(option);
-        this.props.onChange(this.props.name, selectedOptions);
+        onChange(name, selectedOptions);
       }
     }
   }
 
   render() {
+    const { options, name, label, placeholder, selectedOptions } = this.props;
     return (
       <Select
-        options={this.props.options}
-        name={this.props.name}
-        label={this.props.label}
+        options={options}
+        name={name}
+        label={label}
         value={this.state.value}
-        placeholder={this.props.placeholder}
+        placeholder={placeholder}
         onChange={this.handleSelectChange}
       >
-        <MultiSelectedLabels
-          selectedOptions={this.props.selectedOptions}
-          onRemove={this.handleRemoveClick}
-        />
+        <MultiSelectedLabels selectedOptions={selectedOptions} onRemove={this.handleRemoveClick} />
       </Select>
     );
   }

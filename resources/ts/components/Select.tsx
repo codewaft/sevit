@@ -26,9 +26,10 @@ export default class Select extends PureComponent<Props> {
   }
 
   option(option: Option) {
+    const { name, value } = option;
     return (
-      <option value={option.value} key={option.value}>
-        {option.name}
+      <option value={value} key={value}>
+        {name}
       </option>
     );
   }
@@ -40,18 +41,19 @@ export default class Select extends PureComponent<Props> {
   }
 
   render() {
+    const { label, children, name, value, placeholder } = this.props;
     return (
       <div className="block w-full">
-        <FormLabel text={this.props.label} />
-        {this.props.children}
+        <FormLabel text={label} />
+        {children}
         <select
           className="h-12 w-full px-5 text-md rounded-md drop-shadow-md outline-none disabled:text-slate-400 invalid:text-slate-400 text-slate-900 mb-4 border-r-[20px] border-r-transparent bg-white"
-          name={this.props.name}
-          value={this.props.value}
+          name={name}
+          value={value}
           onChange={this.handleChange}
           required
         >
-          <option value="">{this.props.placeholder}</option>
+          <option value="">{placeholder}</option>
           {this.options}
         </select>
       </div>

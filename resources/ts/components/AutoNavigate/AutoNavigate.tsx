@@ -7,9 +7,9 @@ interface Props extends StateProps, DispatchProps, NavigateProps {}
 
 class AutoNavigate extends Component<Props> {
   componentDidUpdate(prevProps: Props) {
-    const { route } = this.props;
+    const { route, navigate } = this.props;
     if (route && route !== prevProps.route) {
-      this.props.navigate(route);
+      navigate(route);
     }
   }
   render() {
