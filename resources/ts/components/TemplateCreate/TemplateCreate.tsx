@@ -7,6 +7,7 @@ import Button from "../Button";
 import Input from "../Input";
 import MessagePreview from "../MessagePreview";
 import Textarea from "../Textarea";
+import TemplateVariableHelperText from "../TemplateVariableHelperText";
 
 interface Props extends StateProps, DispatchProps {}
 
@@ -45,6 +46,7 @@ class TemplateCreate extends PureComponent<Props> {
             value={this.props.form.content}
             rows={4}
             placeholder="Enter content"
+            helper={<TemplateVariableHelperText />}
             onChange={this.handleFieldChange}
           />
           <Button
