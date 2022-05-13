@@ -4,17 +4,23 @@ import { map } from "lodash";
 import { RootDispatch, RootState } from "../../store/store";
 import { updateContact, listGroups, readContact } from "./ContactEdit.thunk";
 import { groupOptions, selectedGroupOptions } from "./ContactEdit.select";
-import { replaceFormGroups } from "./ContactEdit.slice";
+import { replaceFormGroups, replaceFormName } from "./ContactEdit.slice";
 import Button from "../Button";
 import MultiSelect from "../MultiSelect";
 import { Option as SelectOption } from "../Select";
+import Input from "../Input";
 
 interface Props extends StateProps, DispatchProps {}
 
 class ContactEdit extends PureComponent<Props> {
   constructor(props: Props) {
     super(props);
+    this.handleFieldChange = this.handleFieldChange.bind(this);
     this.handleGroupsChange = this.handleGroupsChange.bind(this);
+  }
+
+  handleFieldChange(name: string, value: string) {
+    if (name === "name") this.props.replaceFormName(value);
   }
 
   handleGroupsChange(name: string, options: SelectOption[]) {
@@ -31,6 +37,14 @@ class ContactEdit extends PureComponent<Props> {
   render() {
     return (
       <div className="px-5 md:px-10 pb-10">
+        <Input
+          type="text"
+          name="name"
+          label="Name"
+          value={this.props.form.name}
+          placeholder="Enter name"
+          onChange={this.handleFieldChange}
+        />
         <MultiSelect
           options={this.props.groupOptions}
           selectedOptions={this.props.selectedGroupOptions}
@@ -60,6 +74,7 @@ const mapStateToProps = (state: RootState) => ({
 const mapDispatchToProps = (dispatch: RootDispatch) => ({
   readContact: () => dispatch(readContact()),
   listGroups: () => dispatch(listGroups()),
+  replaceFormName: (name: string) => dispatch(replaceFormName(name)),
   replaceFormGroups: (groups: number[]) => dispatch(replaceFormGroups(groups)),
   updateContact: () => dispatch(updateContact()),
 });

@@ -12,8 +12,9 @@ export function readContact() {
     if (id) {
       const contact = await contactApi.read(id);
       if (contact) {
-        const groupIds = map(contact.groups, (group) => group.id);
-        const form: Form = { groups: groupIds };
+        const { name, groups } = contact;
+        const groupIds = map(groups, (group) => group.id);
+        const form: Form = { name, groups: groupIds };
         dispatch(replaceForm(form));
       }
     }

@@ -18,9 +18,10 @@ class ContactRepository
         return Contact::findOrFail($id);
     }
 
-    public function editOne($id, $groupIds)
+    public function editOne($id, $data, $groupIds)
     {
         $contact = Contact::findOrFail($id);
+        $contact->update($data);
         $contact->groups()->sync($groupIds);
         return Contact::findOrFail($contact->id);
     }

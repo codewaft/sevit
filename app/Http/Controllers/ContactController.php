@@ -53,6 +53,7 @@ class ContactController extends Controller
     public function edit(Request $request, $id)
     {
         $rule = [
+            "name" => "required|string|max:255",
             "groups" => "required|array",
             "groups.*" => "required|integer|exists:groups,id",
         ];
@@ -60,7 +61,8 @@ class ContactController extends Controller
         if ($error) {
             return Response::unprocessable($error);
         }
-        $contact = $this->contact->editOne($id, $request->groups);
+        $data = ["name" => $request->name];
+        $contact = $this->contact->editOne($id, $data, $request->groups);
         return Response::ok($contact);
     }
 
