@@ -5,6 +5,7 @@ import { Group } from "./group.api";
 
 export interface Contact {
   id: number;
+  name: string;
   phone: string;
   groups: Group[];
   created_at: string;

@@ -26,6 +26,7 @@ class ContactController extends Controller
             "phone" => Str::removeWhitespaces($request->phone),
         ]);
         $rule = [
+            "name" => "required|string|max:255",
             "phone" => "required|string|unique:contacts,phone|max:255",
             "groups" => "required|array",
             "groups.*" => "required|integer|exists:groups,id",
@@ -38,7 +39,7 @@ class ContactController extends Controller
         if ($error) {
             return Response::badRequest($error);
         }
-        $data = ["phone" => $request->phone];
+        $data = ["name" => $request->name, "phone" => $request->phone];
         $contact = $this->contact->createOne($data, $request->groups);
         return Response::ok($contact);
     }
@@ -95,11 +96,7 @@ class ContactController extends Controller
             "groups.required" => "Second coulmn should be 'Groups'",
             "groups.in" => "Second coulmn header should be 'Groups'",
         ];
-        $headerError = Validation::validate(
-            $header,
-            $headerRule,
-            $headerMessages
-        );
+        $headerError = Validation::validate($header, $headerRule, $headerMessages);
         if ($headerError) {
             return Response::unprocessable($headerError);
         }

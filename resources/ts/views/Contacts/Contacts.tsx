@@ -25,7 +25,7 @@ interface Props extends StateProps, DispatchProps {}
 
 class Contacts extends PureComponent<Props> {
   tableActions: ActionName[] = ["edit", "delete"];
-  tableHeaders = ["Phone", "Groups", "Created at", "Updated at", "Actions"];
+  tableHeaders = ["Name", "Phone", "Groups", "Created at", "Updated at", "Actions"];
 
   constructor(props: Props) {
     super(props);
@@ -46,6 +46,7 @@ class Contacts extends PureComponent<Props> {
   tableRow(contact: Contact) {
     return (
       <TableRow key={contact.id}>
+        <TableData>{contact.name}</TableData>
         <TableData>{contact.phone}</TableData>
         <TableData truncate="large">{this.groups(contact.groups)}</TableData>
         <TableData>

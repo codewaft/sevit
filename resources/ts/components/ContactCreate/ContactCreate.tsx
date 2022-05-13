@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { map } from "lodash";
 import { RootDispatch, RootState } from "../../store/store";
-import { replaceFormGroups, replaceFormPhone } from "./ContactCreate.slice";
+import { replaceFormGroups, replaceFormName, replaceFormPhone } from "./ContactCreate.slice";
 import { createContact, listGroups } from "./ContactCreate.thunk";
 import { groupOptions, selectedGroupOptions } from "./ContactCreate.select";
 import { Option as SelectOption } from "../Select";
@@ -27,6 +27,7 @@ class ContactCreate extends PureComponent<Props> {
   }
 
   handleFieldChange(name: string, value: string) {
+    if (name === "name") this.props.replaceFormName(value);
     if (name === "phone") this.props.replaceFormPhone(value);
   }
 
@@ -46,6 +47,14 @@ class ContactCreate extends PureComponent<Props> {
   render() {
     return (
       <div className="px-5 md:px-10 pb-10">
+        <Input
+          type="text"
+          name="name"
+          label="Name"
+          value={this.props.form.name}
+          placeholder="Enter name"
+          onChange={this.handleFieldChange}
+        />
         <Input
           type="text"
           name="phone"
@@ -82,6 +91,7 @@ const mapStateToProps = (state: RootState) => ({
 
 const mapDispatchToProps = (dispatch: RootDispatch) => ({
   listGroups: () => dispatch(listGroups()),
+  replaceFormName: (name: string) => dispatch(replaceFormName(name)),
   replaceFormPhone: (phone: string) => dispatch(replaceFormPhone(phone)),
   replaceFormGroups: (groups: number[]) => dispatch(replaceFormGroups(groups)),
   createContact: () => dispatch(createContact()),
