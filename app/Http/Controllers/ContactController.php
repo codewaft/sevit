@@ -10,6 +10,7 @@ use App\Services\Twillio;
 use App\Services\Csv;
 use App\Utils\Str;
 use App\Repositories\ContactRepository;
+use SebastianBergmann\Environment\Console;
 
 class ContactController extends Controller
 {
@@ -89,26 +90,29 @@ class ContactController extends Controller
         }
         [$header, $contacts] = Csv::parse($request->contacts);
         $headerRule = [
+            "name" => "required|in:Name",
             "phone" => "required|in:Phone",
             "groups" => "required|in:Groups",
         ];
         $headerMessages = [
-            "phone.required" => "First coulmn should be 'Phone'",
-            "phone.in" => "First coulmn header should be 'Phone'",
-            "groups.required" => "Second coulmn should be 'Groups'",
-            "groups.in" => "Second coulmn header should be 'Groups'",
+            "name.required" => "First coulmn should be 'Name'",
+            "name.in" => "First coulmn header should be 'Name'",
+            "phone.required" => "Second coulmn should be 'Phone'",
+            "phone.in" => "Second coulmn header should be 'Phone'",
+            "groups.required" => "Third coulmn should be 'Groups'",
+            "groups.in" => "Third coulmn header should be 'Groups'",
         ];
         $headerError = Validation::validate($header, $headerRule, $headerMessages);
         if ($headerError) {
             return Response::unprocessable($headerError);
         }
         $queueDispatcher = function ($contact) {
-            [$phone, $groupStr] = $contact;
+            [$name, $phone, $groupStr] = $contact;
             $trim = fn($value) => trim($value);
             $groups = collect(explode(",", $groupStr))
                 ->map($trim)
                 ->toArray();
-            ContactImport::dispatch($phone, $groups);
+            ContactImport::dispatch($name, $phone, $groups);
         };
         $contacts->each($queueDispatcher);
         return Response::ok($contacts);
@@ -117,7 +121,7 @@ class ContactController extends Controller
     public function export()
     {
         $contacts = $this->contact->getExport();
-        $headers = ["Phone", "Groups"];
+        $headers = ["Name", "Phone", "Groups"];
         $csv = Csv::build($headers, $contacts);
         return Response::ok($csv);
     }

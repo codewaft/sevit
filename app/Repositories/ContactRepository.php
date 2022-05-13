@@ -41,6 +41,7 @@ class ContactRepository
     public function getExport()
     {
         $exportBuilder = fn($contact) => [
+            "name" => $contact->name,
             "phone" => $contact->phone,
             "groups" => $contact->groups->pluck("title")->implode(","),
         ];

@@ -23,13 +23,15 @@ class ContactImport implements ShouldQueue
 
     protected $contactRepo;
     protected $groupRepo;
+    protected $name;
     protected $phone;
     protected $groupTitles;
 
-    public function __construct($phone, $groupTitles)
+    public function __construct($name, $phone, $groupTitles)
     {
         $this->contactRepo = new ContactRepository();
         $this->groupRepo = new GroupRepository();
+        $this->name = $name;
         $this->phone = $phone;
         $this->groupTitles = $this->sanitizeGroupTitles($groupTitles);
     }
@@ -52,10 +54,12 @@ class ContactImport implements ShouldQueue
     protected function validateData()
     {
         $data = [
+            "name" => $this->name,
             "phone" => $this->phone,
             "groups" => $this->groupTitles,
         ];
         $rule = [
+            "name" => "required|string|max:255",
             "phone" => "required|string|unique:contacts,phone|max:255",
             "groups" => "required|array",
             "groups.*" => "required|exists:groups,title",
@@ -79,7 +83,7 @@ class ContactImport implements ShouldQueue
             if ($phoneError) {
                 throw new Exception($phoneError);
             }
-            $contactData = ["phone" => $this->phone];
+            $contactData = ["name" => $this->name, "phone" => $this->phone];
             $groupIds = $this->getGroupIds();
             $this->contactRepo->createOne($contactData, $groupIds);
         } catch (Throwable $e) {
